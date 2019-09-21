@@ -7,12 +7,14 @@ branches:
   only:
     - master # build master branch only
 script:
+  - hexo clean
   - hexo generate # generate static files
-deploy:
-  provider: pages
-  skip-cleanup: true
-  github-token: $GH_TOKEN
-  keep-history: true
-  on:
-    branch: master
-  local-dir: public
+
+
+
+after_script:
+  - git config user.name "all3n"
+  - git config user.email "wanghch8398@163.com"
+  - sed -i "s#git@github.com#https://${GH_TOKEN}#g" ./_config.yml
+  - cat ./_config.yml
+  - hexo deploy
