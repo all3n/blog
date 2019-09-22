@@ -88,13 +88,13 @@ pig 文件是使用PigLatin语法描述
     [ key#value <, key#value …> ]
     [name#John,phone#5551212]
 
-### 1. 引入包
+###  引入包
 
 ```pig
 REGISTER 'hdfs://hadoop/piglibs/*.jar';
 ```
 
-### 2. 加载数据
+### 加载数据
 pig记载数据通过[Loader](http://pig.apache.org/docs/r0.17.0/func.html#load-store-functions)方式
 
 apache内置多种Loader
@@ -145,17 +145,17 @@ DATA = LOAD '$INPUT'
 INPUT_LOG = LOAD '$XXX_LOG' USING org.apache.parquet.pig.ParquetLoader();
 ```
 
-### 3. 遍历数据
+###  遍历数据
 
 ```
 INPUT_LOG = FOREACH INPUT_LOG GENERATE time, uid;
 ```
 
-### 4. 过滤数据
+###  过滤数据
 ```
 FILTERED_LOG = FILTER INPUT_LOG BY isValid == 1;
 ```
-### 5. join 数据
+###  join 数据
 1. [inner join](http://pig.apache.org/docs/r0.17.0/basic.html#join-inner)
 alias = JOIN alias BY {expression|'('expression [, expression …]')'} (, alias BY {expression|'('expression [, expression …]')'} …) [USING 'replicated' | 'bloom' | 'skewed' | 'merge' | 'merge-sparse'] [PARTITION BY partitioner] [PARALLEL n]; 
 
@@ -211,7 +211,7 @@ grunt> DUMP JOIN_DATA;
 (lily,12,lily,42)
 (,,mike,64)
 ```
-### 7. group 数据
+###  group 数据
 alias = GROUP alias { ALL | BY expression} [, alias ALL | BY expression …] [USING 'collected' | 'merge'] [PARTITION BY partitioner] [PARALLEL n];
 
 1. ALL, group ALL to one group
@@ -240,7 +240,7 @@ B: {group: int, A: {name: chararray,age: int,gpa: float}}
 
 
 
-### 8. [存储](http://pig.apache.org/docs/r0.17.0/basic.html#store)
+###  [存储](http://pig.apache.org/docs/r0.17.0/basic.html#store)
 STORE alias INTO 'directory' [USING function];
 和加载数据类似
 分隔符 tsv: [PigStorage](http://pig.apache.org/docs/r0.17.0/func.html#pigstorage)
@@ -258,7 +258,7 @@ STORE alias INTO 'directory' [USING function];
 
 STORE D INTO 'mysortedcount' USING PigStorage();
 
-### 9. 其他
+### 其他
 1. 查看描述：
     DESCRIBE DATA; 
 1. 打印（只建议在少数据量时候使用，大数据建议先LIMIT再DUMP）
@@ -273,9 +273,9 @@ STORE D INTO 'mysortedcount' USING PigStorage();
     size 0~1
     X = SAMPLE A 0.01;
 
-### 10. [常见函数](http://pig.apache.org/docs/r0.17.0/func.html)
+###  [常见函数](http://pig.apache.org/docs/r0.17.0/func.html)
 
-### 11. UDF 用户自定义函数
+###  UDF 用户自定义函数
 全称 User Defined Functions
 1. 第三方实用 UDF： [DATAFU](http://datafu.apache.org/)
 2. [自定义UDF](http://pig.apache.org/docs/r0.17.0/udf.html)

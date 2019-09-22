@@ -18,6 +18,9 @@ menu:
   th-list:
     text: Categories
     url: /categories
+  book:
+    text: Resource
+    url: /resource
   github:
     url: https://github.com/all3n
     target: _blank
