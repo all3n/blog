@@ -2,7 +2,7 @@
 author: wanghch
 date: 2014-11-18
 title: 使用mutt + msmtp 配置 发送邮件
-tags: mail,msmtp,mutt
+tags: mail
 category: linux
 ---
 

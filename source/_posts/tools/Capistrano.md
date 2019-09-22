@@ -1,7 +1,7 @@
 ---
 date: 2013-11-22
 title: capistrano使用
-tags: capistrano,deploy
+tags: deploy
 category: 
   - tools
 ---
