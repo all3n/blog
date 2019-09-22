@@ -82,3 +82,10 @@ deploy:
   - type: git
     repo:  git@github.com:all3n/all3n.github.io.git
     branch: gh-pages
+
+
+
+sitemap: 
+  path: sitemap.xml
+baidusitemap:
+  path: baidusitemap.xml
