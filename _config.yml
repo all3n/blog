@@ -89,3 +89,10 @@ sitemap:
   path: sitemap.xml
 baidusitemap:
   path: baidusitemap.xml
+
+
+baidu_url_submit:
+  count: 1
+  host: devhc.com
+  token: baidu_token
+  path: baidu_urls.txt

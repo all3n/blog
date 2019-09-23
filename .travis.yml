@@ -16,5 +16,6 @@ after_script:
   - git config user.name "all3n"
   - git config user.email "wanghch8398@163.com"
   - sed -i "s#git@github.com:#https://${GH_TOKEN}@github.com/#g" ./_config.yml
+  - sed -i "s#baidu_token#${BAIDU_TOKEN}#g" ./_config.yml
   - cat ./_config.yml
   - hexo deploy
