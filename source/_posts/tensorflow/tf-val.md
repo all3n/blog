@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Tensorflow Variable 变量
-date: 2018-06-15
+date: 2018-06-14 19:14:13
 tags:
     - tensorflow
 ---

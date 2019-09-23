@@ -1,5 +1,5 @@
 ---
-date: 2014-08-26
+date: 2014-08-26 14:13:00
 title: Shell 实用Tips
 tags: shell
 category: linux

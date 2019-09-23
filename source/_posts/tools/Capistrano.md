@@ -1,5 +1,5 @@
 ---
-date: 2013-11-22
+date: 2013-11-21 12:12:11
 title: capistrano使用
 tags: deploy
 category: 

@@ -1,6 +1,6 @@
 ---
 author: wanghch
-date: 2015-05-08
+date: 2015-05-07 11:12:00
 title: 使用 commons-daemon 管理daemon 服务
 tags: 
 category: java

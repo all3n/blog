@@ -1,7 +1,7 @@
 ---
 layout: post
 title: install kubernetes in china
-date: 2019-09-10
+date: 2019-09-09 10:41:21
 tags:
     - kubernetes
 ---

@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Linux 使用davmail thunderbird 连接 outlook exchange 
-date: 2018-05-31
+date: 2018-05-30 14:01:12
 tags:
     - linux
     - tools

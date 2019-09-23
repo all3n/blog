@@ -1,6 +1,6 @@
 ---
 author: wanghch
-date: 2013-10-24
+date: 2013-10-23 11:08:00
 title: ios 打开其他应用
 tags: ios
 category: ios
