@@ -82,6 +82,7 @@ deploy:
   - type: git
     repo:  git@github.com:all3n/all3n.github.io.git
     branch: gh-pages
+  - type: baidu_url_submitter
 
 
 
@@ -92,7 +93,7 @@ baidusitemap:
 
 
 baidu_url_submit:
-  count: 1
+  count: 100
   host: devhc.com
   token: baidu_token
   path: baidu_urls.txt
