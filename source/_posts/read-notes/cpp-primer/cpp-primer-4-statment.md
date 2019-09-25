@@ -1,7 +1,7 @@
 ---
 layout: post
 title: cpp-primer-4:statement
-date: 2017-04-21 14:01:00
+date: 2017-04-20 14:01:00
 tags:
     - cpp
     - cpp-primer
