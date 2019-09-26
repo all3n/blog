@@ -6,6 +6,9 @@ tags:
     - spark
     - pyspark
     - thrift
+category:
+    - bigdata
+    - spark
 ---
 # PySpark 解析Thrift Lzo 类型数据
 

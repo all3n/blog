@@ -5,6 +5,9 @@ date: 2018-06-25 18:00:11
 tags:
     - cpp
     - socket
+category:
+    - cpp
+    - socket
 ---
 
 # httpd

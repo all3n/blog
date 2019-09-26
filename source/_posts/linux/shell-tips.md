@@ -2,7 +2,9 @@
 date: 2014-08-26 14:13:00
 title: Shell 实用Tips
 tags: shell
-category: linux
+category: 
+    - linux
+    - shell
 ---
 
 1. 获取script所在目录

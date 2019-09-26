@@ -4,6 +4,9 @@ title: Tensorflow Variable 变量
 date: 2018-06-14 19:14:13
 tags:
     - tensorflow
+category:
+    - tensorflow
+    - framework
 ---
 ## Create
 1. tf.get_variable  提供名称 和 shape

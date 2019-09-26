@@ -1,7 +1,9 @@
 ---
 title: tensorflow custom op
 tags: tensorflow
-category: tensorflow
+category: 
+  - tensorflow
+  - op
 date: 2019-09-25 19:07:22
 ---
 # tensorflow op

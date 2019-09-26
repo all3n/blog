@@ -6,6 +6,7 @@ tags:
     - pig
 category:
     - bigdata
+    - pig
 ---
 
 # Pig Basic

@@ -5,6 +5,9 @@ date: 2018-05-30 14:01:12
 tags:
     - linux
     - tools
+category:
+    - linux
+    - tools
 ---
 
 ## davmail 配置

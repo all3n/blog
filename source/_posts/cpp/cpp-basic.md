@@ -4,6 +4,9 @@ title: cpp 常用命令
 date: 2018-04-20 14:22:41
 tags:
     - cpp
+category:
+    - cpp
+    - lang
 ---
 
 # cpp 常用命令

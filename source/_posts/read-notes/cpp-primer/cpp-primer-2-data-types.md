@@ -6,6 +6,10 @@ tags:
     - cpp
     - cpp-primer
     - read-notes
+category:
+    - read-notes
+    - cpp-primer
+
 ---
 
 # 基本数据类型
