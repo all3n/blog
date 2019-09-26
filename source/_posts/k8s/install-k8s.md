@@ -4,6 +4,9 @@ title: install kubernetes in china
 date: 2019-09-09 10:41:21
 tags:
     - kubernetes
+category: 
+    - container
+    - kubernetes
 ---
 # install kubernets in china
 [官方文档](https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/create-cluster-kubeadm/)

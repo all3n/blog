@@ -5,6 +5,9 @@ date: 2018-05-30 12:01:12
 tags:
     - java
     - hotdeploy
+category: 
+    - java
+    - tools
 ---
 # 使用JRebel 对java 应用热部署开发
 

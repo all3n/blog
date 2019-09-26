@@ -3,7 +3,9 @@ author: wanghch
 date: 2014-11-17 14:11:12
 title: 使用mutt + msmtp 配置 发送邮件
 tags: mail
-category: linux
+category: 
+    - linux
+    - tools
 ---
 
 msmtp + mutt 是一个非常好用的命令行发邮件工具

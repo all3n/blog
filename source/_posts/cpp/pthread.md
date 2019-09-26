@@ -4,6 +4,9 @@ title: pthread
 date: 2018-06-25 17:12:01
 tags:
     - cpp
+category:
+    - cpp
+    - thread
 ---
 #pthread
 

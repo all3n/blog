@@ -5,6 +5,9 @@ date: 2018-05-30 14:13:55
 tags:
     - maven
     - compile
+category: 
+    - java
+    - tools
 ---
 # Maven 使用技巧
 

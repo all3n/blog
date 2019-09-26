@@ -5,6 +5,9 @@ date: 2018-07-15 15:11:55
 tags:
     - linux
     - ssh
+category:
+    - linux
+    - ssh
 ---
 
 ## SSH Agent forwarding

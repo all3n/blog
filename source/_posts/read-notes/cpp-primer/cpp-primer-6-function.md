@@ -1,11 +1,14 @@
 ---
 layout: post
 title: cpp-primer-6-function
-date: 2017-04-21
+date: 2017-04-20 14:01:00
 tags:
     - cpp
     - cpp-primer
     - read-notes
+category:
+    - read-notes
+    - cpp-primer
 ---
 
 

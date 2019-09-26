@@ -6,6 +6,9 @@ tags:
     - cpp
     - cpp-primer
     - read-notes
+category:
+    - read-notes
+    - cpp-primer
 ---
 
 # exception 异常处理

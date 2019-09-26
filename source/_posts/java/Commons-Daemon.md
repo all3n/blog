@@ -3,7 +3,9 @@ author: wanghch
 date: 2015-05-07 11:12:00
 title: 使用 commons-daemon 管理daemon 服务
 tags: 
-category: java
+category: 
+    - java
+    - tools
 ---
 
 1. 简单介绍一下 Commons Daemon
