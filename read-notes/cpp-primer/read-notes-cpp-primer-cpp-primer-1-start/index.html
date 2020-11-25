@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+    
+
+    
+
+    
+
+
+
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
+    
+    
+    
+    <meta name="baidu-site-verification" content="O0qt9Gkm8L">
+    
+    
+    
+    <title>cpp-primer-1:cpp quick start | all3n&#39;s blog | coding like r&amp;b</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="cpp,cpp-primer,read-notes">
+    <meta name="description" content="Start第一个C++ 程序 hello-world.cpp">
+<meta name="keywords" content="cpp,cpp-primer,read-notes">
+<meta property="og:type" content="article">
+<meta property="og:title" content="cpp-primer-1:cpp quick start">
+<meta property="og:url" content="http://devhc.com/read-notes/cpp-primer/read-notes-cpp-primer-cpp-primer-1-start/index.html">
+<meta property="og:site_name" content="all3n&#39;s blog">
+<meta property="og:description" content="Start第一个C++ 程序 hello-world.cpp">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2020-11-25T01:25:37.665Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="cpp-primer-1:cpp quick start">
+<meta name="twitter:description" content="Start第一个C++ 程序 hello-world.cpp">
+    
+        <link rel="alternate" type="application/atom+xml" title="all3n&#39;s blog" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head --><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+    
+
+
+</head>
+
+<body>
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">all3n</h5>
+          <a href="mailto:wanghch8398@163.com" title="wanghch8398@163.com" class="mail">wanghch8398@163.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/resource"  >
+                <i class="icon icon-lg icon-book"></i>
+                Resource
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/all3n" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/about"  >
+                <i class="icon icon-lg icon-link"></i>
+                About Me
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">cpp-primer-1:cpp quick start</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">cpp-primer-1:cpp quick start</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2017-04-20T06:01:00.000Z" itemprop="datePublished" class="page-time">
+  2017-04-20
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/read-notes/">read-notes</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/read-notes/cpp-primer/">cpp-primer</a></li></ul></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#Start"><span class="post-toc-number">1.</span> <span class="post-toc-text">Start</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#第一个C-程序"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">第一个C++ 程序</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#编译执行"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">编译执行</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#预处理指示符"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">预处理指示符</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#注释"><span class="post-toc-number">1.4.</span> <span class="post-toc-text">注释</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#输入输出"><span class="post-toc-number">1.5.</span> <span class="post-toc-text">输入输出</span></a></li></ol></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-read-notes-cpp-primer-cpp-primer-1-start"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">cpp-primer-1:cpp quick start</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2017-04-20 14:01:00" datetime="2017-04-20T06:01:00.000Z"  itemprop="datePublished">2017-04-20</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/read-notes/">read-notes</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/read-notes/cpp-primer/">cpp-primer</a></li></ul></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="Start"><a href="#Start" class="headerlink" title="Start"></a>Start</h1><h2 id="第一个C-程序"><a href="#第一个C-程序" class="headerlink" title="第一个C++ 程序"></a>第一个C++ 程序</h2><blockquote>
+<p>hello-world.cpp </p>
+</blockquote>
+<a id="more"></a>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;iostream&gt;</span><br><span class="line">using namespace std;</span><br><span class="line">int main()&#123;</span><br><span class="line">    cout&lt;&lt;&quot;hello world!&quot;&lt;&lt;endl;</span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ol>
+<li>入口函数为main，前面int代表返回类型，return 0 代表程序成功执行</li>
+<li>#include 预处理器指示符</li>
+<li><strong>using namespace std</strong>代表使用std命名空间</li>
+<li>C++ 每一条语句后面都是需要加分号; </li>
+<li>cout 写出到标准输出 cout 是在std 命名空间下的</li>
+</ol>
+<h2 id="编译执行"><a href="#编译执行" class="headerlink" title="编译执行"></a>编译执行</h2><ol>
+<li>编译: g++ -o hello-word hello-world.cpp</li>
+<li>执行程序: ./hello-world 结果如下</li>
+</ol>
+<blockquote>
+<p>hello world!</p>
+</blockquote>
+<h2 id="预处理指示符"><a href="#预处理指示符" class="headerlink" title="预处理指示符"></a>预处理指示符</h2><ol>
+<li><p>使用<strong>#</strong>开头</p>
+</li>
+<li><p>#define </p>
+<ol>
+<li><p>定义常量</p>
+<ol>
+<li>#define XX 1</li>
+</ol>
+</li>
+<li><p>避免include 被重复引入<br> 比如在a.h加入 在首次引入之后A_H就会被定义，第二次引入ifndef A_H 条件就会为false</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">#ifndef A_H</span><br><span class="line">#define A_H</span><br><span class="line">...</span><br><span class="line">#endif</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>其他常量</p>
+<ol>
+<li><strong>LINE</strong> 当前行</li>
+<li><strong>FILE</strong> 当前文件名</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+<h2 id="注释"><a href="#注释" class="headerlink" title="注释"></a>注释</h2><ol>
+<li>注释对 /* */</li>
+<li>行注释 //</li>
+</ol>
+<h2 id="输入输出"><a href="#输入输出" class="headerlink" title="输入输出"></a>输入输出</h2><ol>
+<li><p>iostream 库提供</p>
+<ol>
+<li><a href="http://en.cppreference.com/w/cpp/io/cout" target="_blank" rel="noopener">cout</a> 终端输入：标准输入</li>
+<li><a href="http://en.cppreference.com/w/cpp/io/cin" target="_blank" rel="noopener">cin</a> 终端输出：标准输出 回车,TAB,空格 会被当做结束标识</li>
+<li>cerr 标准错误输出</li>
+</ol>
+</li>
+<li><p>endl 换行符 ‘\n’</p>
+</li>
+<li><p>操作符</p>
+<ol>
+<li><code>&lt;&lt;</code> 将一个值导向输出流cout/cerr</li>
+<li><code>&gt;&gt;</code> 从一个流输出一个变量上</li>
+</ol>
+</li>
+<li><p>文件流操作</p>
+<ol>
+<li><a href="http://en.cppreference.com/w/cpp/io/basic_fstream" target="_blank" rel="noopener">fstream</a> 提供 操作与标准输出类似</li>
+<li>文件输出流 ofstream(“filename”)</li>
+<li>文件输入流 ifstream(“filename”)</li>
+</ol>
+</li>
+</ol>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2020-11-25T01:25:37.665Z" itemprop="dateUpdated">2020-11-25 09:25:37</time>
+</span><br>
+
+
+        
+        转载请注明： <a href="/read-notes/cpp-primer/read-notes-cpp-primer-cpp-primer-1-start/" target="_blank" rel="external">http://devhc.com/read-notes/cpp-primer/read-notes-cpp-primer-cpp-primer-1-start/</a>
+        
+    </div>
+    
+    <footer>
+        <a href="http://devhc.com">
+            <img src="/img/avatar.jpg" alt="all3n">
+            all3n
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/cpp/">cpp</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/cpp-primer/">cpp-primer</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/read-notes/">read-notes</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://devhc.com/read-notes/cpp-primer/read-notes-cpp-primer-cpp-primer-1-start/&title=《cpp-primer-1:cpp quick start》 — all3n's blog&pic=http://devhc.com/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://devhc.com/read-notes/cpp-primer/read-notes-cpp-primer-cpp-primer-1-start/&title=《cpp-primer-1:cpp quick start》 — all3n's blog&source=Start第一个C++ 程序
+hello-world.cpp 
+" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://devhc.com/read-notes/cpp-primer/read-notes-cpp-primer-cpp-primer-1-start/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《cpp-primer-1:cpp quick start》 — all3n's blog&url=http://devhc.com/read-notes/cpp-primer/read-notes-cpp-primer-cpp-primer-1-start/&via=http://devhc.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://devhc.com/read-notes/cpp-primer/read-notes-cpp-primer-cpp-primer-1-start/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/read-notes/cpp-primer/read-notes-cpp-primer-cpp-primer-4-statment/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">cpp-primer-4:statement</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/read-notes/cpp-primer/read-notes-cpp-primer-cpp-primer-2-data-types/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">cpp-primer-2:data-types</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Valine Comments -->
+    <div class="comments vcomment" id="comments"></div>
+    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+    <script src="//unpkg.com/valine@latest/dist/Valine.min.js"></script>
+    <!-- Valine Comments script -->
+    <script>
+        var GUEST_INFO = ['nick','mail','link'];
+        var guest_info = 'nick,mail,link'.split(',').filter(function(item){
+          return GUEST_INFO.indexOf(item) > -1
+        });
+        new Valine({
+            el: '#comments',
+            notify: 'false' == 'true',
+            verify: 'false' == 'true',
+            appId: "Nfv4vGei1mn7VDrtjeUuYmIq-MdYXbMMI",
+            appKey: "WY7KBP7xk3hV9fRfo40y6I1O",
+            avatar: "mm",
+            placeholder: "Just go go",
+            guest_info: guest_info.length == 0 ? GUEST_INFO : guest_info,
+            pageSize: "10"
+        })
+    </script>
+    <!-- Valine Comments end -->
+
+
+
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        谢谢大爷~
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/wechat.png" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
+                data-wechat="/img/wechat.png" data-alipay="/img/alipay.png">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>博客内容遵循 <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>all3n &copy; 2015 - 2020</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://devhc.com/read-notes/cpp-primer/read-notes-cpp-primer-cpp-primer-1-start/&title=《cpp-primer-1:cpp quick start》 — all3n's blog&pic=http://devhc.com/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://devhc.com/read-notes/cpp-primer/read-notes-cpp-primer-cpp-primer-1-start/&title=《cpp-primer-1:cpp quick start》 — all3n's blog&source=Start第一个C++ 程序
+hello-world.cpp 
+" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://devhc.com/read-notes/cpp-primer/read-notes-cpp-primer-cpp-primer-1-start/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《cpp-primer-1:cpp quick start》 — all3n's blog&url=http://devhc.com/read-notes/cpp-primer/read-notes-cpp-primer-cpp-primer-1-start/&via=http://devhc.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://devhc.com/read-notes/cpp-primer/read-notes-cpp-primer-cpp-primer-1-start/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAN4AAADeCAAAAAB3DOFrAAACxUlEQVR42u3a0W7cMAwEwPz/T6dAnlI05+6SUtIC46eD72JpFECUSb69xdf7x/X58+c7z/eT37z/cT3fP3zh4eHhjab+6nrFS57TLtnzQjyzX46Lh4eHd42XD59s3MlyzPb2fM54eHh4/wIv2Zrzk20bTvDw8PD+R167Tc/yA3lAwsPDw/tZXjLM8/a9T1jk417JteDh4eHFvFkB7Gc/X6/v4eHh4S2OtrODb7JlP99J2gv+MhYeHh7eBV7eLDUrTc2aAzYtBdEU8fDw8Ba8NvWQpBjyTT8PDG0C92Xcw8PDwzvKO1sS2weh9gj+xR08PDy8C7xk4LzINAsMm/BQvAbg4eHhXeDNymCb9EG+oJtjOh4eHt5Z3iZJmueJ8zWeJT5eLgoeHh7eBV5+aG63/qjyVpbBZs/Hw8PDO8vbN0K1i5V/m8y2eAPAw8PDu8DLN+K2/XSz9bfpjJdvDHh4eHiHePt0bXvlo7Qp46REh4eHh3eKl4g3A88Cz+yE/MXf4uHh4R3l5a1Us9arfaI2nwMeHh7e9/Dyjbs9ziaJiVPp2ujJeHh4eEd5m4m2IaEtv7XpYzw8PLzv5J06NLdFtfY5dVsDHh4e3lFe/pI/O2pvWrLyQ/bq/4aHh4d3iJe0Pc2aq2ZFtTa9i4eHh3eP127l+bft4bhN1xYJCzw8PLwLvLNtUs9bfDGhFpD8MR4eHt4hXjLFvEyVI2f38zng4eHh3ebN0qb5kHmKYX/4xsPDw7vHey+v2Xk1b5baB5LfnoaHh4d3gTcLHklKouW1gSefAx4eHt4NXtt61aZWc3ze4JU3KODh4eHd483SsnnxLHn+JnbVTVd4eHh4387bl/k3rVrFQuDh4eH9KC8vXOWp2CRJMTtq4+Hh4d3mtdNqmwySibYB40ADAR4eHt6ixNUWwPK07ywwtE0Jh+t7eHh4eF///heVx5xxfkbG3wAAAABJRU5ErkJggg==" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    showProcessingMessages: false, //关闭js加载过程信息
+    messageStyle: "none", //不显示信息
+    extensions: ["tex2jax.js"],
+    jax: ["input/TeX", "output/HTML-CSS"],
+    tex2jax: {
+        inlineMath:  [ ["$", "$"] ], //行内公式选择$
+        displayMath: [ ["$$","$$"] ], //段内公式选择$$
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre','code','a'], //避开某些标签
+        ignoreClass:"comment-content" //避开含该Class的标签
+    },
+    "HTML-CSS": {
+        availableFonts: ["STIX","TeX"], //可选字体
+        showMathMenu: false //关闭右击菜单显示
+    }
+});
+MathJax.Hub.Queue(["Typeset",MathJax.Hub]);
+</script>
+<script src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '死鬼去哪里了！';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '(つェ⊂)咦!又好了!';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+
+
+</body>
+</html>

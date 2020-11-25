@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+    
+
+    
+
+    
+
+
+
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
+    
+    
+    
+    <meta name="baidu-site-verification" content="O0qt9Gkm8L">
+    
+    
+    
+    <title>install kubernetes in china | all3n&#39;s blog | coding like r&amp;b</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="kubernetes">
+    <meta name="description" content="install kubernets in china官方文档 1. 环境相关设置 关闭swap然后需要禁用swap文件，这是Kubernetes的强制步骤。实现它很简单，编辑/etc/fstab文件，注释掉引用swap的行 去掉开机挂载swap如果不重启 可以sudo swapoff -a 可以直接关掉对于禁用swap内存，主要是为了性能考虑，具体原因可以查看Github上的Issue：Kubel">
+<meta name="keywords" content="kubernetes">
+<meta property="og:type" content="article">
+<meta property="og:title" content="install kubernetes in china">
+<meta property="og:url" content="http://devhc.com/container/kubernetes/k8s-install-k8s/index.html">
+<meta property="og:site_name" content="all3n&#39;s blog">
+<meta property="og:description" content="install kubernets in china官方文档 1. 环境相关设置 关闭swap然后需要禁用swap文件，这是Kubernetes的强制步骤。实现它很简单，编辑/etc/fstab文件，注释掉引用swap的行 去掉开机挂载swap如果不重启 可以sudo swapoff -a 可以直接关掉对于禁用swap内存，主要是为了性能考虑，具体原因可以查看Github上的Issue：Kubel">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2020-11-25T01:25:37.665Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="install kubernetes in china">
+<meta name="twitter:description" content="install kubernets in china官方文档 1. 环境相关设置 关闭swap然后需要禁用swap文件，这是Kubernetes的强制步骤。实现它很简单，编辑/etc/fstab文件，注释掉引用swap的行 去掉开机挂载swap如果不重启 可以sudo swapoff -a 可以直接关掉对于禁用swap内存，主要是为了性能考虑，具体原因可以查看Github上的Issue：Kubel">
+    
+        <link rel="alternate" type="application/atom+xml" title="all3n&#39;s blog" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head --><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+    
+
+
+</head>
+
+<body>
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">all3n</h5>
+          <a href="mailto:wanghch8398@163.com" title="wanghch8398@163.com" class="mail">wanghch8398@163.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/resource"  >
+                <i class="icon icon-lg icon-book"></i>
+                Resource
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/all3n" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/about"  >
+                <i class="icon icon-lg icon-link"></i>
+                About Me
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">install kubernetes in china</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">install kubernetes in china</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2019-09-09T02:41:21.000Z" itemprop="datePublished" class="page-time">
+  2019-09-09
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/container/">container</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/container/kubernetes/">kubernetes</a></li></ul></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#install-kubernets-in-china"><span class="post-toc-number">1.</span> <span class="post-toc-text">install kubernets in china</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#1-环境相关设置"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">1. 环境相关设置</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#2-install-docker"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">2. install docker</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#3-install-kubelets-kubeadm-kubectl"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">3. install kubelets kubeadm kubectl</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#4-初始化master节点"><span class="post-toc-number">1.4.</span> <span class="post-toc-text">4. 初始化master节点</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#k8s-gcr-io"><span class="post-toc-number">1.4.1.</span> <span class="post-toc-text">k8s.gcr.io</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#quay-io"><span class="post-toc-number">1.4.2.</span> <span class="post-toc-text">quay.io</span></a></li></ol></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#node"><span class="post-toc-number">2.</span> <span class="post-toc-text">node</span></a></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-k8s-install-k8s"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">install kubernetes in china</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2019-09-09 10:41:21" datetime="2019-09-09T02:41:21.000Z"  itemprop="datePublished">2019-09-09</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/container/">container</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/container/kubernetes/">kubernetes</a></li></ul></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="install-kubernets-in-china"><a href="#install-kubernets-in-china" class="headerlink" title="install kubernets in china"></a>install kubernets in china</h1><p><a href="https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/create-cluster-kubeadm/" target="_blank" rel="noopener">官方文档</a></p>
+<h2 id="1-环境相关设置"><a href="#1-环境相关设置" class="headerlink" title="1. 环境相关设置"></a>1. 环境相关设置</h2><ol>
+<li>关闭swap<br>然后需要禁用swap文件，这是Kubernetes的强制步骤。实现它很简单，编辑/etc/fstab文件，注释掉引用swap的行 去掉开机挂载swap<br>如果不重启 可以sudo swapoff -a 可以直接关掉<br>对于禁用swap内存，主要是为了性能考虑，具体原因可以查看Github上的Issue：Kubelet/Kubernetes should work with Swap Enabled。</li>
+<li>关闭SELinux，修改SELINUX属性</li>
+</ol>
+<p>#setenforce 0<br>#vi /etc/sysconfig/selinux<br>SELINUX=disabled</p>
+<ol start="3">
+<li>设置iptables</li>
+</ol>
+<p>#vi /etc/sysctl.d/k8s.conf<br>net.bridge.bridge-nf-call-ip6tables = 1<br>net.bridge.bridge-nf-call-iptables = 1<br>vm.swappiness=0</p>
+<p>同iptables<br>sysctl –system</p>
+<h2 id="2-install-docker"><a href="#2-install-docker" class="headerlink" title="2. install docker"></a>2. install docker</h2><p><a href="https://yq.aliyun.com/articles/110806" target="_blank" rel="noopener">use aliyun docker repo</a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl -fsSL https://get.docker.com | bash -s docker --mirror Aliyun</span><br></pre></td></tr></table></figure>
+
+<h2 id="3-install-kubelets-kubeadm-kubectl"><a href="#3-install-kubelets-kubeadm-kubectl" class="headerlink" title="3. install kubelets kubeadm kubectl"></a>3. install kubelets kubeadm kubectl</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="title">install_dep</span></span>()&#123;</span><br><span class="line">    cat &lt;&lt;EOF &gt; /etc/yum.repos.d/kubernetes.repo</span><br><span class="line">[kubernetes]</span><br><span class="line">name=Kubernetes</span><br><span class="line">baseurl=https://mirrors.aliyun.com/kubernetes/yum/repos/kubernetes-el7-x86_64/</span><br><span class="line">enabled=1</span><br><span class="line">gpgcheck=1</span><br><span class="line">repo_gpgcheck=1</span><br><span class="line">gpgkey=https://mirrors.aliyun.com/kubernetes/yum/doc/yum-key.gpg https://mirrors.aliyun.com/kubernetes/yum/doc/rpm-package-key.gpg</span><br><span class="line">EOF</span><br><span class="line">    setenforce 0</span><br><span class="line">    yum install -y kubelet kubeadm kubectl</span><br><span class="line">    systemctl <span class="built_in">enable</span> kubelet &amp;&amp; systemctl start kubelet</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="4-初始化master节点"><a href="#4-初始化master节点" class="headerlink" title="4. 初始化master节点"></a>4. 初始化master节点</h2><p>首选配置pod network </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">cat &lt;&lt;EOF&gt; /etc/cni/net.d/10-flannel.conf</span><br><span class="line">&#123;&quot;name&quot;:&quot;cbr0&quot;,&quot;type&quot;:&quot;flannel&quot;,&quot;delegate&quot;: &#123;&quot;isDefaultGateway&quot;: true&#125;&#125;</span><br><span class="line">EOF</span><br><span class="line">mkdir /usr/share/oci-umount/oci-umount.d -p</span><br><span class="line">mkdir /run/flannel/</span><br><span class="line">cat &lt;&lt;EOF&gt; /run/flannel/subnet.env</span><br><span class="line">FLANNEL_NETWORK=10.244.0.0/16</span><br><span class="line">FLANNEL_SUBNET=10.244.0.1/24</span><br><span class="line">FLANNEL_MTU=1450</span><br><span class="line">FLANNEL_IPMASQ=true</span><br><span class="line">EOF</span><br></pre></td></tr></table></figure>
+
+<p>初始化master集群<br>注意在国内一定要设置  –image-repository 不然默认gcr.io 拉不下来<br>推荐azure (支持gcr.io,quay.io)</p>
+<h3 id="k8s-gcr-io"><a href="#k8s-gcr-io" class="headerlink" title="k8s.gcr.io"></a>k8s.gcr.io</h3><p><a href="http://mirror.azure.cn/help/gcr-proxy-cache.html" target="_blank" rel="noopener">微软azure镜像</a><br>= gcr.azk8s.cn/google_containers<br>= registry.aliyuncs.com/google_containers </p>
+<h3 id="quay-io"><a href="#quay-io" class="headerlink" title="quay.io"></a>quay.io</h3><p>quay.azk8s.cn</p>
+<p>gcr.io  镜像有几个 一个是阿里云，还有一个是微软azure(推荐azure)</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">kubeadm init --pod-network-cidr=10.244.0.0/16 --image-repository gcr.azk8s.cn/google_containers --kubernetes-version v1.15.3 </span><br><span class="line"></span><br><span class="line">mkdir -p <span class="variable">$HOME</span>/.kube</span><br><span class="line">sudo cp -i -f /etc/kubernetes/admin.conf <span class="variable">$HOME</span>/.kube/config</span><br><span class="line">sudo chown $(id -u):$(id -g) <span class="variable">$HOME</span>/.kube/config</span><br></pre></td></tr></table></figure>
+
+<p><a href="https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/create-cluster-kubeadm/#pod-network" target="_blank" rel="noopener">安装网络pods 插件</a> 有多种选择 这里使用是flannel</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/62e44c867a2846fefb68bd5f178daf4da3095ccb/Documentation/kube-flannel.yml</span><br></pre></td></tr></table></figure>
+
+<p><a href="https://github.com/kubernetes/dashboard/" target="_blank" rel="noopener">安装dashboard</a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/v1.10.1/src/deploy/recommended/kubernetes-dashboard.yaml</span><br></pre></td></tr></table></figure>
+
+<p>执行完会有一个join的命令用于新node加入集群 可以记下来<br>如果之后忘记可以在master节点<br>执行 kubeadm token create –print-join-command 获得</p>
+<p>执行<br>kubectl get nodes  查看节点是否正常<br>查看日志<br>journalctl -f -u kubelet</p>
+<h1 id="node"><a href="#node" class="headerlink" title="node"></a>node</h1><p>在子节点安装kubeadm,kubectl,kubelet后执行<br>master安装时候出现的join 命令<br>kubeadm join ip:port –token YOU_TOKEN –discovery-token-ca-cert-hash sha256:YOU_TOKEN_HASH</p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2020-11-25T01:25:37.665Z" itemprop="dateUpdated">2020-11-25 09:25:37</time>
+</span><br>
+
+
+        
+        转载请注明： <a href="/container/kubernetes/k8s-install-k8s/" target="_blank" rel="external">http://devhc.com/container/kubernetes/k8s-install-k8s/</a>
+        
+    </div>
+    
+    <footer>
+        <a href="http://devhc.com">
+            <img src="/img/avatar.jpg" alt="all3n">
+            all3n
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/kubernetes/">kubernetes</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://devhc.com/container/kubernetes/k8s-install-k8s/&title=《install kubernetes in china》 — all3n's blog&pic=http://devhc.com/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://devhc.com/container/kubernetes/k8s-install-k8s/&title=《install kubernetes in china》 — all3n's blog&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://devhc.com/container/kubernetes/k8s-install-k8s/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《install kubernetes in china》 — all3n's blog&url=http://devhc.com/container/kubernetes/k8s-install-k8s/&via=http://devhc.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://devhc.com/container/kubernetes/k8s-install-k8s/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/math/calculas/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">微积分</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/linux/ssh/tools-ssh-proxy/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">ssh 跳板机,Socket 代理</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Valine Comments -->
+    <div class="comments vcomment" id="comments"></div>
+    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+    <script src="//unpkg.com/valine@latest/dist/Valine.min.js"></script>
+    <!-- Valine Comments script -->
+    <script>
+        var GUEST_INFO = ['nick','mail','link'];
+        var guest_info = 'nick,mail,link'.split(',').filter(function(item){
+          return GUEST_INFO.indexOf(item) > -1
+        });
+        new Valine({
+            el: '#comments',
+            notify: 'false' == 'true',
+            verify: 'false' == 'true',
+            appId: "Nfv4vGei1mn7VDrtjeUuYmIq-MdYXbMMI",
+            appKey: "WY7KBP7xk3hV9fRfo40y6I1O",
+            avatar: "mm",
+            placeholder: "Just go go",
+            guest_info: guest_info.length == 0 ? GUEST_INFO : guest_info,
+            pageSize: "10"
+        })
+    </script>
+    <!-- Valine Comments end -->
+
+
+
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        谢谢大爷~
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/wechat.png" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
+                data-wechat="/img/wechat.png" data-alipay="/img/alipay.png">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>博客内容遵循 <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>all3n &copy; 2015 - 2020</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://devhc.com/container/kubernetes/k8s-install-k8s/&title=《install kubernetes in china》 — all3n's blog&pic=http://devhc.com/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://devhc.com/container/kubernetes/k8s-install-k8s/&title=《install kubernetes in china》 — all3n's blog&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://devhc.com/container/kubernetes/k8s-install-k8s/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《install kubernetes in china》 — all3n's blog&url=http://devhc.com/container/kubernetes/k8s-install-k8s/&via=http://devhc.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://devhc.com/container/kubernetes/k8s-install-k8s/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMYAAADGCAAAAACs8KCBAAACJ0lEQVR42u3aS07EMBAFQO5/6SCxT3ivnUHEKa9GMOO4smj1x19f8Tp+1tnn5C/5ztffX1oYGBiPZRyXK2Gc7Xa2f85IzoaBgfEeRhsKlx55GV6TYI2BgYHRbpendLNgjYGBgXFvwL3rvxgYGBizIjYPl3lJfB24P1KLY2BgPJCxPhj43Oc/nW9gYGD8S8ZRrtkwYPY6ilNhYGBszbg+1qxZljNuvrqBgYGxNSN5cFte5undXa8DAwNjb8bswlY+epw1/YuRAAYGxtaM9npE+9uWMbwohoGB8QLGrDU2bIqV+w+vWWBgYGzEaJO8tuidpZXJi6uzXQwMjMcykq/ObjW0RWk+DDidxGJgYGzNyAvLWXjNnzJ7oRgYGO9h5GEuzzrzceZKIY2BgfFmxqwmbl/EylWMXzJWDAyMLRgrDa98hDlrz+UjTwwMjDcwkmCaN+BmDbXZszAwMN7AaEvTFrPe9I8uXmBgYGzNyIcBbdBMytT2YkeUFGJgYGzHaBtteXhtf9sWw0V+ioGBsQUjD6Cz9n1SsuZUDAyMtzGS1HB2CWwWstvRQlHEYmBgPJZxlKttiq0MJos9MTAwtmYslY43NeZWimcMDIz3MPKjJAXqym552y4aD2BgYGzHuA6ys7I2v66xEvQxMDAwclKSwOXpYP06MDAwMIJR4jFas1B7WsRiYGBszVhvmSWHS745HHxiYGBszWhDXn70WdG7MlTAwMDYjvENhM9W5Bt1804AAAAASUVORK5CYII=" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    showProcessingMessages: false, //关闭js加载过程信息
+    messageStyle: "none", //不显示信息
+    extensions: ["tex2jax.js"],
+    jax: ["input/TeX", "output/HTML-CSS"],
+    tex2jax: {
+        inlineMath:  [ ["$", "$"] ], //行内公式选择$
+        displayMath: [ ["$$","$$"] ], //段内公式选择$$
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre','code','a'], //避开某些标签
+        ignoreClass:"comment-content" //避开含该Class的标签
+    },
+    "HTML-CSS": {
+        availableFonts: ["STIX","TeX"], //可选字体
+        showMathMenu: false //关闭右击菜单显示
+    }
+});
+MathJax.Hub.Queue(["Typeset",MathJax.Hub]);
+</script>
+<script src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '死鬼去哪里了！';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '(つェ⊂)咦!又好了!';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+
+
+</body>
+</html>

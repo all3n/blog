@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+    
+
+    
+
+    
+
+
+
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
+    
+    
+    
+    <meta name="baidu-site-verification" content="O0qt9Gkm8L">
+    
+    
+    
+    <title>使用mutt + msmtp 配置 发送邮件 | all3n&#39;s blog | coding like r&amp;b</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="mail">
+    <meta name="description" content="msmtp + mutt 是一个非常好用的命令行发邮件工具 mutt 相当于 命令行 命令行 邮件客户端端 真正发送邮件由msmtp发送  msmtp  官方地址：http://sourceforge.jp/projects/sfnet_msmtp/ wget http://nchc.dl.sourceforge.net/sourceforge/msmtp/msmtp-1.4.17.tar.bz2">
+<meta name="keywords" content="mail">
+<meta property="og:type" content="article">
+<meta property="og:title" content="使用mutt + msmtp 配置 发送邮件">
+<meta property="og:url" content="http://devhc.com/linux/tools/tools-mutt-sendmail/index.html">
+<meta property="og:site_name" content="all3n&#39;s blog">
+<meta property="og:description" content="msmtp + mutt 是一个非常好用的命令行发邮件工具 mutt 相当于 命令行 命令行 邮件客户端端 真正发送邮件由msmtp发送  msmtp  官方地址：http://sourceforge.jp/projects/sfnet_msmtp/ wget http://nchc.dl.sourceforge.net/sourceforge/msmtp/msmtp-1.4.17.tar.bz2">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2020-11-25T01:25:37.665Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="使用mutt + msmtp 配置 发送邮件">
+<meta name="twitter:description" content="msmtp + mutt 是一个非常好用的命令行发邮件工具 mutt 相当于 命令行 命令行 邮件客户端端 真正发送邮件由msmtp发送  msmtp  官方地址：http://sourceforge.jp/projects/sfnet_msmtp/ wget http://nchc.dl.sourceforge.net/sourceforge/msmtp/msmtp-1.4.17.tar.bz2">
+    
+        <link rel="alternate" type="application/atom+xml" title="all3n&#39;s blog" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head --><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+    
+
+
+</head>
+
+<body>
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">all3n</h5>
+          <a href="mailto:wanghch8398@163.com" title="wanghch8398@163.com" class="mail">wanghch8398@163.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/resource"  >
+                <i class="icon icon-lg icon-book"></i>
+                Resource
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/all3n" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/about"  >
+                <i class="icon icon-lg icon-link"></i>
+                About Me
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">使用mutt + msmtp 配置 发送邮件</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">使用mutt + msmtp 配置 发送邮件</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2014-11-17T06:11:12.000Z" itemprop="datePublished" class="page-time">
+  2014-11-17
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/linux/">linux</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/linux/tools/">tools</a></li></ul></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+
+<article id="post-tools-mutt-sendmail"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">使用mutt + msmtp 配置 发送邮件</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2014-11-17 14:11:12" datetime="2014-11-17T06:11:12.000Z"  itemprop="datePublished">2014-11-17</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/linux/">linux</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/linux/tools/">tools</a></li></ul></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <p>msmtp + mutt 是一个非常好用的命令行发邮件工具</p>
+<p>mutt 相当于 命令行 命令行 邮件客户端端 真正发送邮件由msmtp发送</p>
+<ol>
+<li>msmtp</li>
+</ol>
+<p>官方地址：<a href="http://sourceforge.jp/projects/sfnet_msmtp/" target="_blank" rel="noopener">http://sourceforge.jp/projects/sfnet_msmtp/</a></p>
+<pre class="lang:sh decode:true">wget http://nchc.dl.sourceforge.net/sourceforge/msmtp/msmtp-1.4.17.tar.bz2 
+tar -jxvf msmtp-1.4.17.tar.bz2 
+cd msmtp-1.4.17 
+./configure --prefix=/usr/local/msmtp 
+make 
+make install 
+cd /usr/local/msmtp/ 
+mkdir etc 
+cd etc</pre>
+<p>vim msmtprc 根据smtp 邮箱 配置</p>
+<pre class="lang:default decode:true">account default
+host smtp.xxxx.com
+port 465  
+timeout 30
+auth on
+user xxx
+password  xxxx
+logfile /var/log/msmtp.log
+auto_from off
+from xxx@xxx.com
+tls on
+tls_starttls off
+tls_certcheck off</pre>
+<p>echo “test” | /usr/local/msmtp/bin/msmtp <a href="mailto:youemail@xxxx.com" target="_blank" rel="noopener">youemail@xxxx.com</a></p>
+<p>测试msmtp  配置 是否正常</p>
+<p>&nbsp;</p>
+<p>安装mutt</p>
+<p>yum install mutt</p>
+<p>vim /etc/Muttrc 其中修改几个地方</p>
+<p>&nbsp;</p>
+<p>set sendmail=”/usr/local/msmtp/bin/msmtp”</p>
+<p>set from=”<a href="mailto:xxx@xxx.com" target="_blank" rel="noopener">xxx@xxx.com</a>“</p>
+<p>这个可以是和 msmtp配置的不一样的</p>
+<p>set realname=”xxx mail”</p>
+<p>可以给from 起名称</p>
+<p>set editor=”vim”</p>
+<p>set charset=”utf-8”</p>
+<p>set rfc2047_parameters=yes</p>
+<p>&nbsp;</p>
+<p>发送带主题和附件的</p>
+<p>echo “test mutt”|mutt -s “test subject 和中文 “ <a href="mailto:xxx@xxx.com" target="_blank" rel="noopener">xxx@xxx.com</a> -a ~attach file</p>
+<p>如果你发送的内容在文件中可以这样</p>
+<p>mutt -s “test subject 和中文 “ <a href="mailto:xxx@xxx.com" target="_blank" rel="noopener">xxx@xxx.com</a> -a ~attach file &lt; mail_content_file</p>
+<p>&nbsp;</p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2020-11-25T01:25:37.665Z" itemprop="dateUpdated">2020-11-25 09:25:37</time>
+</span><br>
+
+
+        
+        转载请注明： <a href="/linux/tools/tools-mutt-sendmail/" target="_blank" rel="external">http://devhc.com/linux/tools/tools-mutt-sendmail/</a>
+        
+    </div>
+    
+    <footer>
+        <a href="http://devhc.com">
+            <img src="/img/avatar.jpg" alt="all3n">
+            all3n
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/mail/">mail</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://devhc.com/linux/tools/tools-mutt-sendmail/&title=《使用mutt + msmtp 配置 发送邮件》 — all3n's blog&pic=http://devhc.com/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://devhc.com/linux/tools/tools-mutt-sendmail/&title=《使用mutt + msmtp 配置 发送邮件》 — all3n's blog&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://devhc.com/linux/tools/tools-mutt-sendmail/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《使用mutt + msmtp 配置 发送邮件》 — all3n's blog&url=http://devhc.com/linux/tools/tools-mutt-sendmail/&via=http://devhc.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://devhc.com/linux/tools/tools-mutt-sendmail/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/java/tools/java-Commons-Daemon/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">使用 commons-daemon 管理daemon 服务</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/php/php-php-curl-votes/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">CURL 投票PHP script</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Valine Comments -->
+    <div class="comments vcomment" id="comments"></div>
+    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+    <script src="//unpkg.com/valine@latest/dist/Valine.min.js"></script>
+    <!-- Valine Comments script -->
+    <script>
+        var GUEST_INFO = ['nick','mail','link'];
+        var guest_info = 'nick,mail,link'.split(',').filter(function(item){
+          return GUEST_INFO.indexOf(item) > -1
+        });
+        new Valine({
+            el: '#comments',
+            notify: 'false' == 'true',
+            verify: 'false' == 'true',
+            appId: "Nfv4vGei1mn7VDrtjeUuYmIq-MdYXbMMI",
+            appKey: "WY7KBP7xk3hV9fRfo40y6I1O",
+            avatar: "mm",
+            placeholder: "Just go go",
+            guest_info: guest_info.length == 0 ? GUEST_INFO : guest_info,
+            pageSize: "10"
+        })
+    </script>
+    <!-- Valine Comments end -->
+
+
+
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        谢谢大爷~
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/wechat.png" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
+                data-wechat="/img/wechat.png" data-alipay="/img/alipay.png">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>博客内容遵循 <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>all3n &copy; 2015 - 2020</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://devhc.com/linux/tools/tools-mutt-sendmail/&title=《使用mutt + msmtp 配置 发送邮件》 — all3n's blog&pic=http://devhc.com/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://devhc.com/linux/tools/tools-mutt-sendmail/&title=《使用mutt + msmtp 配置 发送邮件》 — all3n's blog&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://devhc.com/linux/tools/tools-mutt-sendmail/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《使用mutt + msmtp 配置 发送邮件》 — all3n's blog&url=http://devhc.com/linux/tools/tools-mutt-sendmail/&via=http://devhc.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://devhc.com/linux/tools/tools-mutt-sendmail/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMYAAADGCAAAAACs8KCBAAACNUlEQVR42u3ay66DMAxFUf7/p7njqgL2semV4uyMKlQgi4EVP44Dr/NrXf3n6vf3Xd/X75//wpIhQ8ayjPN2kf/cI6946Sd4+JQyZMjYgMEfTa7cb4XETL43GTJkyLjfdBqCO0dMGTJkyEiPa/1gStJdGTJkyEiT2PRoSApt9+/6SS4uQ4aMBRm86v7/v3/S35AhQ8ZSjE4i2gnW/Z18vEWGDBmjGZ3XkGMiSWtrAVeGDBm7MXjII1tMU820APfCMVGGDBkjGLzE1sk0+fVgPzJkyBjH6Iw+vBVwa094yMVlyJAxiMEDLmkipq+sDXA8fBoZMmQMZZDjFz/YvfW0OHzLkCFjKCM9wHWGtEhAL453yJAhYxsGv63WyExT0yA0y5AhYzSDlOZrwxN8i2lrMxizkCFDxggGCaC83Uju4s/nAxkyZMiYzUiDZho60wJcrRQoQ4aM3Ri1Ax8PrLUE+OgvGTJkLMtIi/Vv5c08iUVBVoYMGaMZvGVIeDzgdg6OaPBChgwZ4xjBWAPeVmdcDHUzrmqHMmTI2IDRGargZTKeh8qQIUNGp9DPAy4J2S80JGTIkDGUcYYrLZal20pHOg5+JpUhQ8ayjLSRiY5o4abTwl9x2EKGDBmLMzoFslrzoNb+RM1LGTJkjGbwwFdrTPaT2AeMDBkyZJQ2QfBpeJUhQ4aM2pwVT01rJTMynCFDhowdGGl7Mk1uObL2UWTIkDGbkYY8PgRGwnStC9nqb8iQIWMlxh/DXiLgCykyagAAAABJRU5ErkJggg==" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    showProcessingMessages: false, //关闭js加载过程信息
+    messageStyle: "none", //不显示信息
+    extensions: ["tex2jax.js"],
+    jax: ["input/TeX", "output/HTML-CSS"],
+    tex2jax: {
+        inlineMath:  [ ["$", "$"] ], //行内公式选择$
+        displayMath: [ ["$$","$$"] ], //段内公式选择$$
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre','code','a'], //避开某些标签
+        ignoreClass:"comment-content" //避开含该Class的标签
+    },
+    "HTML-CSS": {
+        availableFonts: ["STIX","TeX"], //可选字体
+        showMathMenu: false //关闭右击菜单显示
+    }
+});
+MathJax.Hub.Queue(["Typeset",MathJax.Hub]);
+</script>
+<script src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '死鬼去哪里了！';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '(つェ⊂)咦!又好了!';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+
+
+</body>
+</html>

@@ -1,0 +1,650 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>all3n&#39;s blog</title>
+  
+  <subtitle>coding like r&amp;b</subtitle>
+  <link href="/atom.xml" rel="self"/>
+  
+  <link href="http://devhc.com/"/>
+  <updated>2020-11-25T01:25:37.665Z</updated>
+  <id>http://devhc.com/</id>
+  
+  <author>
+    <name>all3n</name>
+    
+  </author>
+  
+  <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>JsonCpp Guide</title>
+    <link href="http://devhc.com/cpp/libs/cpp-libs-jsoncpp/"/>
+    <id>http://devhc.com/cpp/libs/cpp-libs-jsoncpp/</id>
+    <published>2019-10-11T02:06:12.000Z</published>
+    <updated>2020-11-25T01:25:37.665Z</updated>
+    
+    <content type="html"><![CDATA[<p><a href="https://github.com/open-source-parsers/jsoncpp" target="_blank" rel="noopener">Github</a></p><h2 id="Documentation"><a href="#Documentation" class="headerlink" title="Documentation"></a>Documentation</h2><ul><li><a href="http://open-source-parsers.github.io/jsoncpp-docs/doxygen/index.html" target="_blank" rel="noopener">Official ApiDoc</a> 新版用法</li><li><a href="https://en.wikibooks.org/wiki/JsonCpp" target="_blank" rel="noopener">jsoncpp WikiBook</a> 该文档是老版本写法</li></ul><h2 id="Install"><a href="#Install" class="headerlink" title="Install"></a>Install</h2><ol><li><p>Build From Source</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">mkdir build</span><br><span class="line">cd build</span><br><span class="line">cmake -DCMAKE_INSTALL_PREFIX=/opt/cpplibs ..</span><br><span class="line">make</span><br><span class="line">make install</span><br></pre></td></tr></table></figure></li><li><p>使用包管理工具 缺点不能灵活控制版本<br>apt-get install libjsoncpp-dev</p></li></ol><h2 id="Examples"><a href="#Examples" class="headerlink" title="Examples"></a>Examples</h2><figure class="highlight cpp"><figcaption><span>json_v1.cpp</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;json/json.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span>* argv[])</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">string</span> jsonStr = <span class="string">"&#123;\"name\": \"xxx\", \"array\": [\"a\", \"b\", \"c\"], \"obj\": &#123;\"k\" : \"v\"&#125;&#125;"</span>;</span><br><span class="line">    Json::Reader reader;</span><br><span class="line">    Json::Value value;</span><br><span class="line">    <span class="keyword">if</span> (reader.parse(jsonStr, value)) &#123;</span><br><span class="line">        <span class="comment">// read str field</span></span><br><span class="line">        <span class="built_in">cout</span>&lt;&lt;value[<span class="string">"name"</span>].asString()&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">        <span class="comment">// read array field</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; value[<span class="string">"array"</span>].size(); i++)&#123;</span><br><span class="line">            <span class="built_in">cout</span>&lt;&lt;i&lt;&lt;<span class="string">":"</span>&lt;&lt;value[<span class="string">"array"</span>][i].asString()&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// read obj field</span></span><br><span class="line">        <span class="built_in">cout</span>&lt;&lt;value[<span class="string">"obj"</span>][<span class="string">"k"</span>].asString()&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>compile:<br>g++ -I/opt/cpplibs/include/ -o json_v1 json_v1.cpp /opt/cpplibs/lib/libjsoncpp.a &amp;&amp; ./json_v1</p><p>output</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">json_v1.cpp: In function ‘int main(int, char**)’:</span><br><span class="line">json_v1.cpp:20:18: warning: ‘Reader’ is deprecated: Use CharReader and CharReaderBuilder instead [-Wdeprecated-declarations]</span><br><span class="line">     Json::Reader reader;</span><br><span class="line">                  ^~~~~~</span><br><span class="line">In file included from /data/cpplibs/include/jsoncpp/json/json.h:11:0,</span><br><span class="line">                 from json_v1.cpp:10:</span><br><span class="line">/data/cpplibs/include/jsoncpp/json/reader.h:35:83: note: declared here</span><br><span class="line"> class JSONCPP_DEPRECATED(&quot;Use CharReader and CharReaderBuilder instead&quot;) JSON_API Reader &#123;</span><br><span class="line">                                                                                   ^~~~~~</span><br><span class="line">xxx</span><br><span class="line">0:a</span><br><span class="line">1:b</span><br><span class="line">2:c</span><br><span class="line">v</span><br></pre></td></tr></table></figure><p>注意这里使用老版本reader api会引起警告</p><h2 id="Example-New-Api"><a href="#Example-New-Api" class="headerlink" title="Example New Api"></a>Example New Api</h2><figure class="highlight cpp"><figcaption><span>json_v2.cpp</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;json/json.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;memory&gt;</span></span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span>* argv[])</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">string</span> jsonStr = <span class="string">"&#123;\"name\": \"xxx\", \"array\": [\"a\", \"b\", \"c\"], \"obj\": &#123;\"k\" : \"v\"&#125;&#125;"</span>;</span><br><span class="line"></span><br><span class="line">    Json::Value value;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// parse</span></span><br><span class="line">    JSONCPP_STRING errs;</span><br><span class="line">    Json::CharReaderBuilder readerBuilder;</span><br><span class="line">    <span class="function"><span class="built_in">std</span>::<span class="built_in">unique_ptr</span>&lt;Json::CharReader&gt; <span class="keyword">const</span> <span class="title">reader</span><span class="params">(readerBuilder.newCharReader())</span></span>;</span><br><span class="line">    <span class="keyword">bool</span> res = reader-&gt;parse(jsonStr.c_str(), jsonStr.c_str() + jsonStr.length(), &amp;value, &amp;errs);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (res &amp;&amp; errs.empty())</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="comment">// read str field</span></span><br><span class="line">        <span class="built_in">cout</span>&lt;&lt;value[<span class="string">"name"</span>].asString()&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">        <span class="comment">// read array field</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; value[<span class="string">"array"</span>].size(); i++)&#123;</span><br><span class="line">            <span class="built_in">cout</span>&lt;&lt;i&lt;&lt;<span class="string">":"</span>&lt;&lt;value[<span class="string">"array"</span>][i].asString()&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// read obj field</span></span><br><span class="line">        <span class="built_in">cout</span>&lt;&lt;value[<span class="string">"obj"</span>][<span class="string">"k"</span>].asString()&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">    &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">        <span class="built_in">cout</span>&lt;&lt;<span class="string">"json parse fail:"</span>&lt;&lt;errs&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>源码方式<br>g++ -I/opt/cpplibs/include/ -o json_v2 json_v2.cpp /opt/cpplibs/lib/libjsoncpp.a &amp;&amp; ./json_v2</p><p>如果使用包管理<br>共享库方式编译<br>g++ -I/usr/include/jsoncpp -ljsoncpp -o json_v2 json_v2.cpp<br>静态库方式编译<br>g++ -I/usr/include/jsoncpp -ljsoncpp -o json_v2 json_v2.cpp /usr/lib/x86_64-linux-gnu/libjsoncpp.a</p><p>output 已经没有警告了</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">xxx</span><br><span class="line">0:a</span><br><span class="line">1:b</span><br><span class="line">2:c</span><br><span class="line">v</span><br></pre></td></tr></table></figure><h2 id="Json-Value"><a href="#Json-Value" class="headerlink" title="Json::Value"></a><a href="https://github.com/open-source-parsers/jsoncpp/blob/1.9.1/include/json/value.h#L176" target="_blank" rel="noopener">Json::Value</a></h2><ol><li>判断类型 bool isXxx()<ul><li>isNull</li><li>isBool</li><li>isInt</li><li>isInt64</li><li>isNumbeic</li><li>isString</li><li>isObject</li><li>isArray</li></ul></li><li>转换原生类型 asXxx()<ul><li>asInt</li><li>asInt64</li><li>asBool</li><li>asDouble</li></ul></li><li>访问字段<ul><li>[] 方式访问 val[“field”]</li><li>key是否存在 isMember(“field”)</li></ul></li><li>转成格式化字符串<ul><li>String toStyledString()<h2 id="流操作"><a href="#流操作" class="headerlink" title="流操作"></a>流操作</h2></li><li>读取: <a href="http://open-source-parsers.github.io/jsoncpp-docs/doxygen/namespace_json.html#acfebeaf759a841173ddce34c4da22486" target="_blank" rel="noopener">Json::parseFromStream</a></li><li>输出: <a href="http://open-source-parsers.github.io/jsoncpp-docs/doxygen/namespace_json.html#afd767fe4c7e962d0ff3d1a6d1622619f" target="_blank" rel="noopener">writeString</a><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Json::StreamWriterBuilder wbuilder; </span><br><span class="line">wbuilder[<span class="string">"indentation"</span>] = <span class="string">"\t"</span>;</span><br><span class="line"><span class="built_in">std</span>::<span class="built_in">string</span> document = Json::writeString(wbuilder, root);</span><br><span class="line">Json::CharReaderBuilder rbuilder;</span><br><span class="line">rbuilder[<span class="string">"collectComments"</span>] = <span class="literal">false</span>;</span><br><span class="line"><span class="built_in">std</span>::<span class="built_in">string</span> errs;</span><br><span class="line"><span class="keyword">bool</span> ok = Json::parseFromStream(rbuilder, <span class="built_in">std</span>::<span class="built_in">cin</span>, &amp;root, &amp;errs);</span><br></pre></td></tr></table></figure></li></ul></li></ol>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;&lt;a href=&quot;https://github.com/open-source-parsers/jsoncpp&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;Github&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id=&quot;Documentation&quot;&gt;&lt;a href=&quot;#D
+      
+    
+    </summary>
+    
+    
+      <category term="cpp" scheme="http://devhc.com/categories/cpp/"/>
+    
+      <category term="libs" scheme="http://devhc.com/categories/cpp/libs/"/>
+    
+    
+      <category term="cpp" scheme="http://devhc.com/tags/cpp/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Tensorflow print</title>
+    <link href="http://devhc.com/tensorflow/framework/tensorflow-tf-print/"/>
+    <id>http://devhc.com/tensorflow/framework/tensorflow-tf-print/</id>
+    <published>2019-09-27T11:39:10.000Z</published>
+    <updated>2020-11-25T01:25:37.665Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="tf-Print"><a href="#tf-Print" class="headerlink" title="tf.Print"></a><a href="https://www.tensorflow.org/api_docs/python/tf/Print?hl=en" target="_blank" rel="noopener">tf.Print</a></h2><p> 该op已经deprecated,目前已经不建议使用<br> 以前大部分使用tf.Print 打印变量类似一下代码<br> <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">some_op = ...</span><br><span class="line">some_op = tf.Print(some_op, [tf.shape(some_op), <span class="string">"some_op:"</span>])</span><br><span class="line">...</span><br><span class="line">sess.run(some_op)</span><br></pre></td></tr></table></figure></p><p> 这个API已经在新的里面被移除了,使用小写tf.print代替,但是操作方式有点差异</p><h2 id="tf-print"><a href="#tf-print" class="headerlink" title="tf.print"></a><a href="https://www.tensorflow.org/api_docs/python/tf/print?hl=en" target="_blank" rel="noopener">tf.print</a></h2><p>tf.print<br>没有是一个print operation</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">import tensorflow as tf</span><br><span class="line">import sys</span><br><span class="line"></span><br><span class="line">print_ops = []</span><br><span class="line"></span><br><span class="line">def print_op(*inputs , **kwargs):</span><br><span class="line">    print_ops.append(tf.print(*inputs, **kwargs))</span><br><span class="line"></span><br><span class="line">x = tf.range(10)</span><br><span class="line"></span><br><span class="line">print_op(&quot;x&quot;, x)</span><br><span class="line">print_op(&quot;x_no_summarize&quot;, x, summarize = -1)</span><br><span class="line">print_op(&quot;x_output_stream&quot;, x, output_stream = sys.stdout)</span><br><span class="line"></span><br><span class="line"># tf1.13开始支持 文件 file:// 开头</span><br><span class="line">print_op(&quot;x_file&quot;, x, output_stream = &quot;file:///tmp/debug.log&quot;)</span><br><span class="line"></span><br><span class="line">with tf.Session() as sess:</span><br><span class="line">    with tf.control_dependencies(print_ops):</span><br><span class="line">        b = x * 3</span><br><span class="line">    print(sess.run(b))</span><br></pre></td></tr></table></figure><blockquote><p>x [0 1 2 … 7 8 9]<br>x_no_summarize [0 1 2 3 4 5 6 7 8 9]<br>x_output_stream [0 1 2 … 7 8 9]<br>[ 0  3  6  9 12 15 18 21 24 27]</p></blockquote><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cat /tmp/debug.log                                                              </span><br><span class="line">x_file [0 1 2 ... 7 8 9]</span><br></pre></td></tr></table></figure><h2 id="tf-print-eager-模式"><a href="#tf-print-eager-模式" class="headerlink" title="tf.print eager 模式"></a>tf.print eager 模式</h2><ol><li><p>单个tensor</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">tf.compat.v1.enable_eager_execution()</span><br><span class="line">tensor = tf.range(10)</span><br><span class="line">tf.print(tensor, output_stream=sys.stderr)</span><br></pre></td></tr></table></figure></li><li><p>多个tensor</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">tf.compat.v1.enable_eager_execution()</span><br><span class="line">tensor = tf.range(10)</span><br><span class="line">tf.print(&quot;tensors:&quot;, tensor, &#123;2: tensor * 2&#125;, output_stream=sys.stdout)</span><br></pre></td></tr></table></figure></li><li><p>函数内</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">import tensorflow as tf</span><br><span class="line">import sys</span><br><span class="line">tf.enable_eager_execution()</span><br><span class="line"></span><br><span class="line">@tf.contrib.eager.defun</span><br><span class="line">def f():</span><br><span class="line">    tensor = tf.range(10)</span><br><span class="line">    tf.print(&quot;debug:&quot;, tensor, output_stream=sys.stderr)</span><br><span class="line">    return tensor</span><br><span class="line"></span><br><span class="line">range_tensor = f()</span><br></pre></td></tr></table></figure></li></ol>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h2 id=&quot;tf-Print&quot;&gt;&lt;a href=&quot;#tf-Print&quot; class=&quot;headerlink&quot; title=&quot;tf.Print&quot;&gt;&lt;/a&gt;&lt;a href=&quot;https://www.tensorflow.org/api_docs/python/tf/Print?h
+      
+    
+    </summary>
+    
+    
+      <category term="tensorflow" scheme="http://devhc.com/categories/tensorflow/"/>
+    
+      <category term="framework" scheme="http://devhc.com/categories/tensorflow/framework/"/>
+    
+    
+      <category term="tensorflow" scheme="http://devhc.com/tags/tensorflow/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>微积分</title>
+    <link href="http://devhc.com/math/calculas/"/>
+    <id>http://devhc.com/math/calculas/</id>
+    <published>2019-09-26T15:14:54.000Z</published>
+    <updated>2020-11-25T01:25:37.665Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="微积分"><a href="#微积分" class="headerlink" title="微积分"></a><a href="https://zh.wikipedia.org/wiki/%E5%BE%AE%E7%A7%AF%E5%88%86%E5%AD%A6" target="_blank" rel="noopener">微积分</a></h1><h3 id="3Blue1Brown-微积分的本质"><a href="#3Blue1Brown-微积分的本质" class="headerlink" title="3Blue1Brown 微积分的本质"></a>3Blue1Brown 微积分的本质</h3><p><a href="https://www.bilibili.com/video/av24325548/" target="_blank" rel="noopener">bilibili</a></p><h2 id="极限和无穷小"><a href="#极限和无穷小" class="headerlink" title="极限和无穷小"></a><a href="https://zh.wikipedia.org/wiki/%E7%84%A1%E7%AA%AE%E5%B0%8F%E9%87%8F" target="_blank" rel="noopener">极限和无穷小</a></h2><h2 id="导数"><a href="#导数" class="headerlink" title="导数"></a><a href="https://zh.wikipedia.org/wiki/%E5%AF%BC%E6%95%B0" target="_blank" rel="noopener">导数</a></h2><p>一个函数在某一点的导数描述了这个函数在这一点附近的<strong>变化率</strong><br>导数的本质是通过极限的概念对函数进行局部的线性逼近。当函数 ${\displaystyle f}$ 的自变量在一点 ${\displaystyle x_{0}} $上产生一个增量 ${\displaystyle h}$ 时，函数输出值的增量与自变量增量 ${\displaystyle h}$的比值在 ${\displaystyle h}$趋于0时的极限如果存在，即为 ${\displaystyle f}$在 ${\displaystyle x_{0}}$处的导数，记作 ${\displaystyle f’(x_{0})}$、 ${\displaystyle {\frac {\mathrm {d} f}{\mathrm {d} x}}(x_{0})}$或 $\left.{\frac {d f}{d x}}\right|{x=x_{0}}$</p><p>导数的定义：f在x0点的导数<br>$$ f’(x_0)=\lim_{x \to x_0}\frac{f(x)-f(x_0)}{x - x_0} $$</p><p>几何意义：相当于曲线该点切线斜率</p><figure class="image-bubble">                <div class="img-lightbox">                    <div class="overlay"></div>                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/de/Derivative_-_geometric_meaning.svg/600px-Derivative_-_geometric_meaning.svg.png" alt="几何意义" title>                </div>                <div class="image-caption">几何意义</div>            </figure><p>P0点斜率为$\alpha$,在微分中让x变化一个很小的一个值$\Delta x$,y变化了$\Delta y$, 当$\Delta x$变的无穷小时候,$\frac{\Delta y}{\Delta x}$就逼近该点的真实斜率<br>$\tan \alpha=\lim_{\Delta x \to 0} \tan \varphi=\lim_{\Delta x \to 0} \frac{f(x_0 + \Delta x)-f(x_0)}{\Delta x}$<br>$$  \Delta x\to 0，  \varphi \to \alpha $$</p><h2 id="微分"><a href="#微分" class="headerlink" title="微分"></a>微分</h2><p>微分学主要研究的是在函数自变量变化时如何确定函数值的瞬时变化率（导数或微商）。换言之，计算 <em>导数</em> 的方法就叫 <em>微分</em></p><h2 id="积分"><a href="#积分" class="headerlink" title="积分"></a><a href="https://zh.wikipedia.org/wiki/%E7%A7%AF%E5%88%86" target="_blank" rel="noopener">积分</a></h2><p>积分是微分的逆运算，即从导数推算出原函数，又分为定积分与不定积分。</p><ol><li>定积分:<ol><li>几何意义等价函数下方面积 $\int_a^b f(x),\mathrm{d}x$</li></ol></li><li><a href="https://zh.wikipedia.org/wiki/%E4%B8%8D%E5%AE%9A%E7%A7%AF%E5%88%86" target="_blank" rel="noopener">不定积分</a><ol><li>原函数</li></ol></li><li>第一基本定理<br>设 $ a,b\in {\mathbb  {R}}$， $ {\displaystyle f:[a,b]\mapsto \mathbb {R} }$为连续函数，对所有的 $ x\in [a,b]$，定义函数 F 如下：</li></ol><p>${\displaystyle F(x)=\int _{a}^{x}f(t)dt}$<br>则 F 在闭区间 [a,b] 连续，并在开区间 (a, b)可微， 且对所有在开区间 (a, b) 中的 x，有</p><p>$ F’(x)=f(x)$</p><ol start="4"><li>第二基本定理：如果函数 x f是闭区间  [a,b] 上的连续函数，F  是 f 在 [a,b] 上的一个反导函数，那么有<br>${\displaystyle \int _{a}^{b}f(x),\mathrm {d} x=F(b)-F(a)} $</li></ol><figure class="image-bubble">                <div class="img-lightbox">                    <div class="overlay"></div>                    <img src="https://upload.wikimedia.org/wikipedia/commons/2/2f/Fundamental_theorem_of_calculus_%28animation%29.gif" alt="Fundamental_theorem_of_calculus_(animation)" title>                </div>                <div class="image-caption">Fundamental_theorem_of_calculus_(animation)</div>            </figure><h2 id="偏导数"><a href="#偏导数" class="headerlink" title="偏导数"></a><a href="https://zh.wikipedia.org/wiki/%E5%81%8F%E5%AF%BC%E6%95%B0" target="_blank" rel="noopener">偏导数</a></h2><p>一个多变量的函数的偏导数（英语：partial derivative）是它关于其中一个变量的导数，而保持其他变量恒定（相对于全导数，在其中所有变量都允许变化）<br>∂代表偏导符号,是一个弯曲的d，称为偏导数符号。为了把它与字母d区分，∂有时读作“der”、“del”、“dah”或“偏”，而不是“dee”<br>函数f可以解释为y为自变量而x为常数的函数：</p><p>$f(x,y) = f_x(y) = x^2 + xy + y^2$<br>f在y方向上的变化：</p><p>$\frac {\partial f}{\partial y}(x,y)=x+2y$</p><h2 id="符号"><a href="#符号" class="headerlink" title="符号"></a>符号</h2><ul><li>d: 微分学中的符号dx,dy等,是由莱布尼茨首先使用.d源自拉丁语中“差”(Differentia)的第一个字母</li><li>$\int$: 积分符号亦由莱布尼茨所创,它是拉丁语”总和”(Summa)的第一个字母s的伸长(和Σ有相同的意义)</li></ul><h2 id="常见导数"><a href="#常见导数" class="headerlink" title="常见导数"></a>常见导数</h2><ol><li>幂函数的导数：</li></ol><ul><li>$\frac{d}{dx}x^{r}=rx^{r-1}$</li></ul><ol start="2"><li>指数函数导数 是它自</li></ol><ul><li>指数函数:$e^{x}$: $\frac{d}{dx}e^x=e^{x}$</li><li>一般的指数函数:$\frac{d}{dx}a^x = \ln(a)a^x$</li></ul><ol><li>三角函数的导数:仍然是三角函数,或者由三角函数构成</li></ol><ul><li>$ \frac {d}{dx}\sin(x)=\cos(x) $</li><li>$ \frac {d}{dx}\cos(x)=-\sin(x)$</li><li>$ \frac {d}{dx}\tan(x)=\sec ^{2}(x)={\frac {1}{\cos ^{2}(x)}}=1+\tan ^{2}(x)$</li><li>$ \frac {d }{d x}\cot(x)=-\csc ^{2}(x)=-{\frac {1}{\sin ^{2}(x)}} $</li></ul><h2 id="链式法则"><a href="#链式法则" class="headerlink" title="链式法则"></a><a href="https://zh.wikipedia.org/wiki/%E9%93%BE%E5%BC%8F%E6%B3%95%E5%88%99" target="_blank" rel="noopener">链式法则</a></h2><ul><li>$(f\circ g)’(x)=f’(g(x))g’(x).$</li><li>考虑函数z = f(x, y)，其中x = g(t)，y = h(t)，g(t)和h(t)是可微函数，那么：</li><li>${\ dz \over dt}={\partial z \over \partial x}{dx \over dt}+{\partial z \over \partial y}{dy \over dt}.$</li></ul><h2 id="应用"><a href="#应用" class="headerlink" title="应用"></a>应用</h2><p><a href="https://zh.wikipedia.org/wiki/%E6%B3%B0%E5%8B%92%E7%BA%A7%E6%95%B0" target="_blank" rel="noopener">泰勒级数</a><br>$f(x)=f(a)+{\frac  {f’(a)}{1!}}(x-a)+{\frac  {f^2(a)}{2!}}(x-a)^{2}+\cdots +{\frac  {f^(a)}{n!}}(x-a)^{n}+R_{n}(x)$<br>一般在机器学习中用到的是</p><ul><li>一阶展开:(梯度下降)<ul><li>$f(x)=f(a)+f’(a)(x-a)$</li></ul></li><li>二阶展开:(牛顿法)<ul><li>$f(x)=f(a)+f’(a)(x-a)+{\frac  {f^2(a)}{2}}(x-a)^{2}$</li></ul></li></ul><p>泰勒公式的目的是为了用一个多项式逼近一个函数<br>让多项式每一阶导数和函数的导数相同<br>拉格朗日型余项:<br>$R_{n}(x)={\frac  {f^NaN(\theta )}{(n+1)!}}(x-a)^NaN$</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;微积分&quot;&gt;&lt;a href=&quot;#微积分&quot; class=&quot;headerlink&quot; title=&quot;微积分&quot;&gt;&lt;/a&gt;&lt;a href=&quot;https://zh.wikipedia.org/wiki/%E5%BE%AE%E7%A7%AF%E5%88%86%E5%AD%A6&quot; 
+      
+    
+    </summary>
+    
+    
+      <category term="math" scheme="http://devhc.com/categories/math/"/>
+    
+    
+      <category term="math" scheme="http://devhc.com/tags/math/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>install kubernetes in china</title>
+    <link href="http://devhc.com/container/kubernetes/k8s-install-k8s/"/>
+    <id>http://devhc.com/container/kubernetes/k8s-install-k8s/</id>
+    <published>2019-09-09T02:41:21.000Z</published>
+    <updated>2020-11-25T01:25:37.665Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="install-kubernets-in-china"><a href="#install-kubernets-in-china" class="headerlink" title="install kubernets in china"></a>install kubernets in china</h1><p><a href="https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/create-cluster-kubeadm/" target="_blank" rel="noopener">官方文档</a></p><h2 id="1-环境相关设置"><a href="#1-环境相关设置" class="headerlink" title="1. 环境相关设置"></a>1. 环境相关设置</h2><ol><li>关闭swap<br>然后需要禁用swap文件，这是Kubernetes的强制步骤。实现它很简单，编辑/etc/fstab文件，注释掉引用swap的行 去掉开机挂载swap<br>如果不重启 可以sudo swapoff -a 可以直接关掉<br>对于禁用swap内存，主要是为了性能考虑，具体原因可以查看Github上的Issue：Kubelet/Kubernetes should work with Swap Enabled。</li><li>关闭SELinux，修改SELINUX属性</li></ol><p>#setenforce 0<br>#vi /etc/sysconfig/selinux<br>SELINUX=disabled</p><ol start="3"><li>设置iptables</li></ol><p>#vi /etc/sysctl.d/k8s.conf<br>net.bridge.bridge-nf-call-ip6tables = 1<br>net.bridge.bridge-nf-call-iptables = 1<br>vm.swappiness=0</p><p>同iptables<br>sysctl –system</p><h2 id="2-install-docker"><a href="#2-install-docker" class="headerlink" title="2. install docker"></a>2. install docker</h2><p><a href="https://yq.aliyun.com/articles/110806" target="_blank" rel="noopener">use aliyun docker repo</a></p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl -fsSL https://get.docker.com | bash -s docker --mirror Aliyun</span><br></pre></td></tr></table></figure><h2 id="3-install-kubelets-kubeadm-kubectl"><a href="#3-install-kubelets-kubeadm-kubectl" class="headerlink" title="3. install kubelets kubeadm kubectl"></a>3. install kubelets kubeadm kubectl</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="title">install_dep</span></span>()&#123;</span><br><span class="line">    cat &lt;&lt;EOF &gt; /etc/yum.repos.d/kubernetes.repo</span><br><span class="line">[kubernetes]</span><br><span class="line">name=Kubernetes</span><br><span class="line">baseurl=https://mirrors.aliyun.com/kubernetes/yum/repos/kubernetes-el7-x86_64/</span><br><span class="line">enabled=1</span><br><span class="line">gpgcheck=1</span><br><span class="line">repo_gpgcheck=1</span><br><span class="line">gpgkey=https://mirrors.aliyun.com/kubernetes/yum/doc/yum-key.gpg https://mirrors.aliyun.com/kubernetes/yum/doc/rpm-package-key.gpg</span><br><span class="line">EOF</span><br><span class="line">    setenforce 0</span><br><span class="line">    yum install -y kubelet kubeadm kubectl</span><br><span class="line">    systemctl <span class="built_in">enable</span> kubelet &amp;&amp; systemctl start kubelet</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><h2 id="4-初始化master节点"><a href="#4-初始化master节点" class="headerlink" title="4. 初始化master节点"></a>4. 初始化master节点</h2><p>首选配置pod network </p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">cat &lt;&lt;EOF&gt; /etc/cni/net.d/10-flannel.conf</span><br><span class="line">&#123;&quot;name&quot;:&quot;cbr0&quot;,&quot;type&quot;:&quot;flannel&quot;,&quot;delegate&quot;: &#123;&quot;isDefaultGateway&quot;: true&#125;&#125;</span><br><span class="line">EOF</span><br><span class="line">mkdir /usr/share/oci-umount/oci-umount.d -p</span><br><span class="line">mkdir /run/flannel/</span><br><span class="line">cat &lt;&lt;EOF&gt; /run/flannel/subnet.env</span><br><span class="line">FLANNEL_NETWORK=10.244.0.0/16</span><br><span class="line">FLANNEL_SUBNET=10.244.0.1/24</span><br><span class="line">FLANNEL_MTU=1450</span><br><span class="line">FLANNEL_IPMASQ=true</span><br><span class="line">EOF</span><br></pre></td></tr></table></figure><p>初始化master集群<br>注意在国内一定要设置  –image-repository 不然默认gcr.io 拉不下来<br>推荐azure (支持gcr.io,quay.io)</p><h3 id="k8s-gcr-io"><a href="#k8s-gcr-io" class="headerlink" title="k8s.gcr.io"></a>k8s.gcr.io</h3><p><a href="http://mirror.azure.cn/help/gcr-proxy-cache.html" target="_blank" rel="noopener">微软azure镜像</a><br>= gcr.azk8s.cn/google_containers<br>= registry.aliyuncs.com/google_containers </p><h3 id="quay-io"><a href="#quay-io" class="headerlink" title="quay.io"></a>quay.io</h3><p>quay.azk8s.cn</p><p>gcr.io  镜像有几个 一个是阿里云，还有一个是微软azure(推荐azure)</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">kubeadm init --pod-network-cidr=10.244.0.0/16 --image-repository gcr.azk8s.cn/google_containers --kubernetes-version v1.15.3 </span><br><span class="line"></span><br><span class="line">mkdir -p <span class="variable">$HOME</span>/.kube</span><br><span class="line">sudo cp -i -f /etc/kubernetes/admin.conf <span class="variable">$HOME</span>/.kube/config</span><br><span class="line">sudo chown $(id -u):$(id -g) <span class="variable">$HOME</span>/.kube/config</span><br></pre></td></tr></table></figure><p><a href="https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/create-cluster-kubeadm/#pod-network" target="_blank" rel="noopener">安装网络pods 插件</a> 有多种选择 这里使用是flannel</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/62e44c867a2846fefb68bd5f178daf4da3095ccb/Documentation/kube-flannel.yml</span><br></pre></td></tr></table></figure><p><a href="https://github.com/kubernetes/dashboard/" target="_blank" rel="noopener">安装dashboard</a></p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/v1.10.1/src/deploy/recommended/kubernetes-dashboard.yaml</span><br></pre></td></tr></table></figure><p>执行完会有一个join的命令用于新node加入集群 可以记下来<br>如果之后忘记可以在master节点<br>执行 kubeadm token create –print-join-command 获得</p><p>执行<br>kubectl get nodes  查看节点是否正常<br>查看日志<br>journalctl -f -u kubelet</p><h1 id="node"><a href="#node" class="headerlink" title="node"></a>node</h1><p>在子节点安装kubeadm,kubectl,kubelet后执行<br>master安装时候出现的join 命令<br>kubeadm join ip:port –token YOU_TOKEN –discovery-token-ca-cert-hash sha256:YOU_TOKEN_HASH</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;install-kubernets-in-china&quot;&gt;&lt;a href=&quot;#install-kubernets-in-china&quot; class=&quot;headerlink&quot; title=&quot;install kubernets in china&quot;&gt;&lt;/a&gt;install 
+      
+    
+    </summary>
+    
+    
+      <category term="container" scheme="http://devhc.com/categories/container/"/>
+    
+      <category term="kubernetes" scheme="http://devhc.com/categories/container/kubernetes/"/>
+    
+    
+      <category term="kubernetes" scheme="http://devhc.com/tags/kubernetes/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>ssh 跳板机,Socket 代理</title>
+    <link href="http://devhc.com/linux/ssh/tools-ssh-proxy/"/>
+    <id>http://devhc.com/linux/ssh/tools-ssh-proxy/</id>
+    <published>2018-07-15T07:11:55.000Z</published>
+    <updated>2020-11-25T01:25:37.665Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="SSH-Agent-forwarding"><a href="#SSH-Agent-forwarding" class="headerlink" title="SSH Agent forwarding"></a>SSH Agent forwarding</h2><p>ssh -A user@host<br>需要先<br>ssh-add ~/.ssh/id_rsa</p><p>或者修改 ~/.ssh/config</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Host *</span><br><span class="line">    ForwardAgent yes</span><br><span class="line">    ForwardX11 yes</span><br></pre></td></tr></table></figure><p>登录之后目标服务器 env<br>会有SSH_AUTH_SOCK 变量记录与本地key通信的socket</p><a id="more"></a><h2 id="SSH-ProxyCommand-跳板机"><a href="#SSH-ProxyCommand-跳板机" class="headerlink" title="SSH ProxyCommand 跳板机"></a>SSH ProxyCommand 跳板机</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">mkdir -p ~/.ssh/sockets/</span><br><span class="line">ssh-add ~/.ssh/id_rsa</span><br><span class="line">ssh-copy-id 跳板机用户@跳板机服务器</span><br></pre></td></tr></table></figure><p>配置~/.ssh/config</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Host *.xxx.com</span><br><span class="line">  user YOU_SSH_USER</span><br><span class="line">  ForwardAgent yes</span><br><span class="line">  ControlMaster auto</span><br><span class="line">  ControlPath ~/.ssh/sockets/%r@%h-%p</span><br><span class="line">  ControlPersist 600</span><br><span class="line">  ProxyCommand ssh -q -W %h:%p 跳板机用户@跳板机地址</span><br></pre></td></tr></table></figure><h2 id="SSH-Tunnel-Socket5-代理-网页代理"><a href="#SSH-Tunnel-Socket5-代理-网页代理" class="headerlink" title="SSH Tunnel Socket5 代理 网页代理"></a>SSH Tunnel Socket5 代理 网页代理</h2><p>ssh -fTND LOCAL_PROXY_PORT 代理服务器用户@代理服务器地址</p><p>然后 SwitchyOmega 配置 LOCAL_PROXY_PORT socket5 代理服务</p><p>就可以将web 流量通过socket5 转向代理服务器</p><h2 id="SSH-跳板访问mysql等其他服务"><a href="#SSH-跳板访问mysql等其他服务" class="headerlink" title="SSH 跳板访问mysql等其他服务"></a>SSH 跳板访问mysql等其他服务</h2><p>比如mysql 服务器是 1.2.3.4:3306 本地不能 访问<br>但是代理服务器可以访问</p><p>ssh -fN -L3306:1.2.3.4:3306  代理服务器用户@代理服务器地址</p><p>查看端口情况: lsof -i:3306</p><p>host 要写127.0.0.1<br>mysql -P3306 -h127.0.0.1 -uusername -ppassword</p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;SSH-Agent-forwarding&quot;&gt;&lt;a href=&quot;#SSH-Agent-forwarding&quot; class=&quot;headerlink&quot; title=&quot;SSH Agent forwarding&quot;&gt;&lt;/a&gt;SSH Agent forwarding&lt;/h2&gt;&lt;p&gt;ssh -A user@host&lt;br&gt;需要先&lt;br&gt;ssh-add ~/.ssh/id_rsa&lt;/p&gt;
+&lt;p&gt;或者修改 ~/.ssh/config&lt;/p&gt;
+&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;Host *&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    ForwardAgent yes&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    ForwardX11 yes&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+
+&lt;p&gt;登录之后目标服务器 env&lt;br&gt;会有SSH_AUTH_SOCK 变量记录与本地key通信的socket&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="linux" scheme="http://devhc.com/categories/linux/"/>
+    
+      <category term="ssh" scheme="http://devhc.com/categories/linux/ssh/"/>
+    
+    
+      <category term="linux" scheme="http://devhc.com/tags/linux/"/>
+    
+      <category term="ssh" scheme="http://devhc.com/tags/ssh/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>socket http</title>
+    <link href="http://devhc.com/cpp/socket/cpp-socket/"/>
+    <id>http://devhc.com/cpp/socket/cpp-socket/</id>
+    <published>2018-06-25T10:00:11.000Z</published>
+    <updated>2020-11-25T01:25:37.665Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="httpd"><a href="#httpd" class="headerlink" title="httpd"></a>httpd</h1><h2 id="socket"><a href="#socket" class="headerlink" title="socket"></a><a href="http://pubs.opengroup.org/onlinepubs/9699919799/basedefs/sys_socket.h.html" target="_blank" rel="noopener">socket</a></h2><ol><li>server = <a href="http://pubs.opengroup.org/onlinepubs/9699919799/functions/socket.html" target="_blank" rel="noopener">socket</a>(PF_INET, SOCK_STREAM, 0)<ol><li>memset</li><li>struct sockaddr_in name;<ol start="3"><li>name.sin_family  = AF_INET;</li><li>name.sin_port = htons(port);</li><li>name.sin_addr.s_addr = htonl(INADDR_ANY);<ol start="6"><li>setsockopt(httpd, SOL_SOCKET, SO_REUSEADDR, &amp;on, sizeof(on))) &lt; 0<a id="more"></a></li></ol></li></ol></li></ol></li><li>bind(server,(struct sockaddr *)&amp;name, &amp; namelen)<ol><li>port 如果为0 会sin_port 设置随机端口</li></ol></li><li>listen(server,backlog)</li><li>while accept client socket<ol><li>pthread_create client socket processs</li></ol></li><li>close(server)</li></ol><h2 id="http-协议"><a href="#http-协议" class="headerlink" title="http 协议"></a>http 协议</h2><ol><li><a href="https://tools.ietf.org/html/rfc2616" target="_blank" rel="noopener">RFC2616</a></li></ol>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;httpd&quot;&gt;&lt;a href=&quot;#httpd&quot; class=&quot;headerlink&quot; title=&quot;httpd&quot;&gt;&lt;/a&gt;httpd&lt;/h1&gt;&lt;h2 id=&quot;socket&quot;&gt;&lt;a href=&quot;#socket&quot; class=&quot;headerlink&quot; title=&quot;socket&quot;&gt;&lt;/a&gt;&lt;a href=&quot;http://pubs.opengroup.org/onlinepubs/9699919799/basedefs/sys_socket.h.html&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;socket&lt;/a&gt;&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;server = &lt;a href=&quot;http://pubs.opengroup.org/onlinepubs/9699919799/functions/socket.html&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;socket&lt;/a&gt;(PF_INET, SOCK_STREAM, 0)&lt;ol&gt;
+&lt;li&gt;memset&lt;/li&gt;
+&lt;li&gt;struct sockaddr_in name;&lt;ol start=&quot;3&quot;&gt;
+&lt;li&gt;name.sin_family  = AF_INET;&lt;/li&gt;
+&lt;li&gt;name.sin_port = htons(port);&lt;/li&gt;
+&lt;li&gt;name.sin_addr.s_addr = htonl(INADDR_ANY);&lt;ol start=&quot;6&quot;&gt;
+&lt;li&gt;setsockopt(httpd, SOL_SOCKET, SO_REUSEADDR, &amp;amp;on, sizeof(on))) &amp;lt; 0
+    
+    </summary>
+    
+    
+      <category term="cpp" scheme="http://devhc.com/categories/cpp/"/>
+    
+      <category term="socket" scheme="http://devhc.com/categories/cpp/socket/"/>
+    
+    
+      <category term="cpp" scheme="http://devhc.com/tags/cpp/"/>
+    
+      <category term="socket" scheme="http://devhc.com/tags/socket/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>pthread</title>
+    <link href="http://devhc.com/cpp/thread/cpp-pthread/"/>
+    <id>http://devhc.com/cpp/thread/cpp-pthread/</id>
+    <published>2018-06-25T09:12:01.000Z</published>
+    <updated>2020-11-25T01:25:37.665Z</updated>
+    
+    <content type="html"><![CDATA[<p>#pthread</p><h2 id="头文件"><a href="#头文件" class="headerlink" title="头文件"></a>头文件</h2><p>函数声明</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;pthread.h&gt;</span><br><span class="line">int pthread_create(pthread_t *tidp,const pthread_attr_t *attr,</span><br><span class="line">(void*)(*start_rtn)(void*),void *arg);</span><br></pre></td></tr></table></figure><a id="more"></a><p>##编译链接参数<br>-lpthread</p><h2 id="返回值"><a href="#返回值" class="headerlink" title="返回值"></a>返回值</h2><p>若线程创建成功，则返回0。若线程创建失败，则返回出错编号，并且*thread中的内容是未定义的。<br>返回成功时，由tidp指向的内存单元被设置为新创建线程的线程ID。attr参数用于指定各种不同的线程属性。新创建的线程从start_rtn函数的地址开始运行，该函数只有一个万能指针参数arg，如果需要向start_rtn函数传递的参数不止一个，那么需要把这些参数放到一个结构中，然后把这个结构的地址作为arg的参数传入。<br>linux下用C语言开发多线程程序，Linux系统下的多线程遵循POSIX线程接口，称为pthread。</p><h2 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h2><p>第一个参数为指向线程标识符的指针。<br>第二个参数用来设置线程属性。<br>第三个参数是线程运行函数的起始地址。<br>最后一个参数是运行函数的参数。</p><h2 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h2><p>因为pthread并非Linux系统的默认库，而是POSIX线程库。在Linux中将其作为一个库来使用，因此加上 -lpthread（或-pthread）以显式链接该库。函数在执行错误时的错误信息将作为返回值返回，并不修改系统全局变量errno，当然也无法使用perror()打印错误信息。</p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;#pthread&lt;/p&gt;
+&lt;h2 id=&quot;头文件&quot;&gt;&lt;a href=&quot;#头文件&quot; class=&quot;headerlink&quot; title=&quot;头文件&quot;&gt;&lt;/a&gt;头文件&lt;/h2&gt;&lt;p&gt;函数声明&lt;/p&gt;
+&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;#include&amp;lt;pthread.h&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;int pthread_create(pthread_t *tidp,const pthread_attr_t *attr,&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;(void*)(*start_rtn)(void*),void *arg);&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+    
+    </summary>
+    
+    
+      <category term="cpp" scheme="http://devhc.com/categories/cpp/"/>
+    
+      <category term="thread" scheme="http://devhc.com/categories/cpp/thread/"/>
+    
+    
+      <category term="cpp" scheme="http://devhc.com/tags/cpp/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>cpp Compile Issues</title>
+    <link href="http://devhc.com/uncategorized/cpp-cpp-compile-issues/"/>
+    <id>http://devhc.com/uncategorized/cpp-cpp-compile-issues/</id>
+    <published>2018-06-25T08:11:01.000Z</published>
+    <updated>2020-11-25T01:25:37.665Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="cpp-compile-issues"><a href="#cpp-compile-issues" class="headerlink" title="cpp compile issues"></a>cpp compile issues</h1><h2 id="undefined-reference-to-clock-gettime’"><a href="#undefined-reference-to-clock-gettime’" class="headerlink" title="undefined reference to `clock_gettime’"></a>undefined reference to `clock_gettime’</h2><pre><code>1. add -lrt (glibc &lt; 2.17 ldd --version 查看)1. 如果glibc &gt; 2.17 可以省略</code></pre><a id="more"></a>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;cpp-compile-issues&quot;&gt;&lt;a href=&quot;#cpp-compile-issues&quot; class=&quot;headerlink&quot; title=&quot;cpp compile issues&quot;&gt;&lt;/a&gt;cpp compile issues&lt;/h1&gt;&lt;h2 id=&quot;undefined-reference-to-clock-gettime’&quot;&gt;&lt;a href=&quot;#undefined-reference-to-clock-gettime’&quot; class=&quot;headerlink&quot; title=&quot;undefined reference to `clock_gettime’&quot;&gt;&lt;/a&gt;undefined reference to `clock_gettime’&lt;/h2&gt;&lt;pre&gt;&lt;code&gt;1. add -lrt (glibc &amp;lt; 2.17 ldd --version 查看)
+1. 如果glibc &amp;gt; 2.17 可以省略&lt;/code&gt;&lt;/pre&gt;
+    
+    </summary>
+    
+    
+    
+      <category term="cpp" scheme="http://devhc.com/tags/cpp/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Tensorflow Variable 变量</title>
+    <link href="http://devhc.com/tensorflow/framework/tensorflow-tf-val/"/>
+    <id>http://devhc.com/tensorflow/framework/tensorflow-tf-val/</id>
+    <published>2018-06-14T11:14:13.000Z</published>
+    <updated>2020-11-25T01:25:37.665Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="Create"><a href="#Create" class="headerlink" title="Create"></a>Create</h2><ol><li>tf.get_variable  提供名称 和 shape<ol><li>my_variable = tf.get_variable(“my_variable”, [1, 2, 3])</li><li>指定初始化方法<ol><li>my_int_variable = tf.get_variable(“my_int_variable”, [1, 2, 3], dtype=tf.int32,<br>initializer=tf.zeros_initializer)</li></ol></li><li>通过tensor 初始化，不要指定形状<ol><li>other_variable = tf.get_variable(“other_variable”, dtype=tf.int32,<br>initializer=tf.constant([23, 42]))</li></ol></li></ol></li></ol><a id="more"></a><h2 id="变量集合"><a href="#变量集合" class="headerlink" title="变量集合"></a>变量集合</h2><pre><code>1. 程序未链接时候创建 tf.Variable1. collections    1. tf.GraphKeys.GLOBAL_VARIABLES 多个设备共享    1. tf.GraphKeys.TRAINABLE_VARIABLES 将计算梯度的变量    1. 如果不想参加训练 可以以下两种方式        1. my_local = tf.get_variable(&quot;my_local&quot;, shape=(),</code></pre><p>collections=[tf.GraphKeys.LOCAL_VARIABLES])<br>            1. my_non_trainable = tf.get_variable(“my_non_trainable”,<br>                                   shape=(),<br>                                   trainable=False)<br>    1. 添加 不需要显示创建<br>        1. tf.add_to_collection(“my_collection_name”, my_local)<br>    1. 获取集合变量<br>        1. tf.get_collection(“my_collection_name”)</p><h2 id="指定变量放置设备"><a href="#指定变量放置设备" class="headerlink" title="指定变量放置设备"></a>指定变量放置设备</h2><pre><code>1. 放在第2快GPU上<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">with tf.device(&quot;/device:GPU:1&quot;):</span><br><span class="line">    v = tf.get_variable(&quot;v&quot;, [1])</span><br></pre></td></tr></table></figure>1. 分布式<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">cluster_spec = &#123;</span><br><span class="line">    &quot;ps&quot;: [&quot;ps0:2222&quot;, &quot;ps1:2222&quot;],</span><br><span class="line">    &quot;worker&quot;: [&quot;worker0:2222&quot;, &quot;worker1:2222&quot;, &quot;worker2:2222&quot;]</span><br><span class="line">    &#125;</span><br><span class="line">with tf.device(tf.train.replica_device_setter(cluster=cluster_spec)):</span><br><span class="line">    v = tf.get_variable(&quot;v&quot;, shape=[20, 20])</span><br></pre></td></tr></table></figure></code></pre><h2 id="变量初始化"><a href="#变量初始化" class="headerlink" title="变量初始化"></a>变量初始化</h2><ol><li>变量必须初始化才能使用<ol><li>显式初始化(自己创建图和会话)<ol><li>session.run(tf.global_variables_initializer()) 初始化 tf.GraphKeys.GLOBAL_VARIABLES</li></ol></li><li>tf.contrib.slim,tf.estimator.Estimator,Keras 等高级框架会自动初始化</li></ol></li><li>初始化指定变量<ol><li>session.run(my_variable.initializer)</li></ol></li><li>查询未初始化<ol><li>print(session.run(tf.report_uninitialized_variables()))</li></ol></li></ol><h2 id="Variable-amp-amp-get-variable"><a href="#Variable-amp-amp-get-variable" class="headerlink" title="Variable &amp;&amp; get_variable"></a>Variable &amp;&amp; get_variable</h2><ol><li>Variable 会处理冲突，get_variable 不会<br>1 .Variable 每次会重新创建对象 reuse 无关，get_variable 会之前对象返回</li></ol><h2 id="Scope"><a href="#Scope" class="headerlink" title="Scope"></a>Scope</h2><ol><li>tf.variable_scope<ol><li>可以让变量有相同的命名，包括tf.get_variable得到的变量，还有tf.Variable的变量</li></ol></li><li>tf.name_scope<ol><li>为了管理变量</li><li>可以让变量有相同的命名，只是限于tf.Variable的变量</li><li>get_variable 会忽略name_scope</li></ol></li></ol>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;Create&quot;&gt;&lt;a href=&quot;#Create&quot; class=&quot;headerlink&quot; title=&quot;Create&quot;&gt;&lt;/a&gt;Create&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;tf.get_variable  提供名称 和 shape&lt;ol&gt;
+&lt;li&gt;my_variable = tf.get_variable(“my_variable”, [1, 2, 3])&lt;/li&gt;
+&lt;li&gt;指定初始化方法&lt;ol&gt;
+&lt;li&gt;my_int_variable = tf.get_variable(“my_int_variable”, [1, 2, 3], dtype=tf.int32,&lt;br&gt;initializer=tf.zeros_initializer)&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;li&gt;通过tensor 初始化，不要指定形状&lt;ol&gt;
+&lt;li&gt;other_variable = tf.get_variable(“other_variable”, dtype=tf.int32,&lt;br&gt;initializer=tf.constant([23, 42]))&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+    
+    </summary>
+    
+    
+      <category term="tensorflow" scheme="http://devhc.com/categories/tensorflow/"/>
+    
+      <category term="framework" scheme="http://devhc.com/categories/tensorflow/framework/"/>
+    
+    
+      <category term="tensorflow" scheme="http://devhc.com/tags/tensorflow/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Maven 使用技巧</title>
+    <link href="http://devhc.com/java/tools/java-maven-tips/"/>
+    <id>http://devhc.com/java/tools/java-maven-tips/</id>
+    <published>2018-05-30T06:13:55.000Z</published>
+    <updated>2020-11-25T01:25:37.665Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="Maven-使用技巧"><a href="#Maven-使用技巧" class="headerlink" title="Maven 使用技巧"></a>Maven 使用技巧</h1><ol><li>多module,分stage 分开打包<ol><li>目录结构 (a,b 依赖common)<ol><li>assembly</li><li>commont</li><li>a</li><li>b</li><li>pom.xml</li></ol></li><li>assembly/pom.xml 通过参数-Ddeploy.app=a 控制哪个模块<a id="more"></a></li></ol></li></ol><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">  &lt;properties&gt;</span><br><span class="line">      &lt;deploy.app&gt;a&lt;/deploy.app&gt;</span><br><span class="line">      &lt;deploy.stage&gt;test&lt;/deploy.stage&gt;</span><br><span class="line">  &lt;/properties&gt;</span><br><span class="line">  &lt;dependencies&gt;</span><br><span class="line">      &lt;dependency&gt;</span><br><span class="line">        &lt;groupId&gt;com.xxx&lt;/groupId&gt;</span><br><span class="line">        &lt;artifactId&gt;xxxx-$&#123;deploy.app&#125;&lt;/artifactId&gt;</span><br><span class="line">        &lt;version&gt;1.0-SNAPSHOT&lt;/version&gt;</span><br><span class="line">      &lt;/dependency&gt;</span><br><span class="line">  &lt;/dependencies&gt;</span><br><span class="line">    &lt;build&gt;</span><br><span class="line">  &lt;plugins&gt;</span><br><span class="line">    &lt;plugin&gt;</span><br><span class="line">      &lt;groupId&gt;org.apache.maven.plugins&lt;/groupId&gt;</span><br><span class="line">      &lt;artifactId&gt;maven-assembly-plugin&lt;/artifactId&gt;</span><br><span class="line">      &lt;configuration&gt;</span><br><span class="line">        &lt;descriptors&gt;</span><br><span class="line">          &lt;descriptor&gt;src/main/assembly/$&#123;deploy.app&#125;.xml&lt;/descriptor&gt;</span><br><span class="line">        &lt;/descriptors&gt;</span><br><span class="line">        &lt;outputDirectory&gt;$&#123;project.parent.basedir&#125;/target&lt;/outputDirectory&gt;</span><br><span class="line">        &lt;finalName&gt;xxxx-$&#123;deploy.app&#125;-assembly-$&#123;project.parent.version&#125;&lt;/finalName&gt;</span><br><span class="line">      &lt;/configuration&gt;</span><br><span class="line">      &lt;executions&gt;</span><br><span class="line">        &lt;execution&gt;</span><br><span class="line">          &lt;id&gt;assembly-deploy-package&lt;/id&gt;</span><br><span class="line">          &lt;phase&gt;package&lt;/phase&gt;</span><br><span class="line">          &lt;goals&gt;</span><br><span class="line">            &lt;goal&gt;single&lt;/goal&gt;</span><br><span class="line">          &lt;/goals&gt;</span><br><span class="line">        &lt;/execution&gt;</span><br><span class="line">      &lt;/executions&gt;</span><br><span class="line">    &lt;/plugin&gt;</span><br><span class="line">  &lt;/plugins&gt;</span><br><span class="line">&lt;/build&gt;</span><br></pre></td></tr></table></figure><pre><code>1. src/main/assembly/xx.xml</code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line">&lt;assembly&gt;</span><br><span class="line">  &lt;id&gt;deploy&lt;/id&gt;</span><br><span class="line">  &lt;formats&gt;</span><br><span class="line">    &lt;format&gt;tar.gz&lt;/format&gt;</span><br><span class="line">  &lt;/formats&gt;</span><br><span class="line">  &lt;includeBaseDirectory&gt;false&lt;/includeBaseDirectory&gt;</span><br><span class="line">  &lt;dependencySets&gt;</span><br><span class="line">    &lt;dependencySet&gt;</span><br><span class="line">      &lt;useProjectArtifact&gt;true&lt;/useProjectArtifact&gt;</span><br><span class="line">      &lt;includes&gt;</span><br><span class="line">        &lt;include&gt;com.xxxx:xxx-$&#123;deploy.app&#125;&lt;/include&gt;</span><br><span class="line">      &lt;/includes&gt;</span><br><span class="line">    &lt;/dependencySet&gt;</span><br><span class="line">  &lt;/dependencySets&gt;</span><br><span class="line">  &lt;fileSets&gt;</span><br><span class="line">    &lt;fileSet&gt;</span><br><span class="line">      &lt;outputDirectory&gt;conf&lt;/outputDirectory&gt;</span><br><span class="line">      &lt;directory&gt;$&#123;project.parent.basedir&#125;/config/common&lt;/directory&gt;</span><br><span class="line">    &lt;/fileSet&gt;</span><br><span class="line">    &lt;fileSet&gt;</span><br><span class="line">      &lt;outputDirectory&gt;conf&lt;/outputDirectory&gt;</span><br><span class="line">      &lt;directory&gt;$&#123;project.parent.basedir&#125;/config/$&#123;deploy.app&#125;/common&lt;/directory&gt;</span><br><span class="line">    &lt;/fileSet&gt;</span><br><span class="line">    &lt;fileSet&gt;</span><br><span class="line">      &lt;outputDirectory&gt;conf&lt;/outputDirectory&gt;</span><br><span class="line">      &lt;directory&gt;$&#123;project.parent.basedir&#125;/config/$&#123;deploy.app&#125;/$&#123;deploy.stage&#125;&lt;/directory&gt;</span><br><span class="line">    &lt;/fileSet&gt;</span><br><span class="line">    &lt;fileSet&gt;</span><br><span class="line">      &lt;outputDirectory&gt;bin&lt;/outputDirectory&gt;</span><br><span class="line">      &lt;fileMode&gt;0755&lt;/fileMode&gt;</span><br><span class="line">      &lt;directory&gt;$&#123;project.parent.basedir&#125;/$&#123;deploy.app&#125;/src/main/scripts&lt;/directory&gt;</span><br><span class="line">    &lt;/fileSet&gt;</span><br><span class="line">    &lt;fileSet&gt;</span><br><span class="line">      &lt;outputDirectory&gt;/libs&lt;/outputDirectory&gt;</span><br><span class="line">      &lt;directory&gt;$&#123;project.parent.basedir&#125;/$&#123;deploy.app&#125;/target/lib&lt;/directory&gt;</span><br><span class="line">    &lt;/fileSet&gt;</span><br><span class="line">  &lt;/fileSets&gt;</span><br><span class="line">&lt;/assembly&gt;</span><br></pre></td></tr></table></figure><pre><code>1. 需要在module pom.xml plugin 加上</code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">&lt;plugin&gt;</span><br><span class="line">        &lt;groupId&gt;org.apache.maven.plugins&lt;/groupId&gt;</span><br><span class="line">        &lt;artifactId&gt;maven-dependency-plugin&lt;/artifactId&gt;</span><br><span class="line">        &lt;executions&gt;</span><br><span class="line">          &lt;execution&gt;</span><br><span class="line">            &lt;id&gt;copy-dependencies&lt;/id&gt;</span><br><span class="line">            &lt;goals&gt;</span><br><span class="line">              &lt;goal&gt;copy-dependencies&lt;/goal&gt;</span><br><span class="line">            &lt;/goals&gt;</span><br><span class="line">            &lt;phase&gt;prepare-package&lt;/phase&gt;</span><br><span class="line">            &lt;configuration&gt;</span><br><span class="line">              &lt;outputDirectory&gt;$&#123;project.build.directory&#125;/lib&lt;/outputDirectory&gt;</span><br><span class="line">              &lt;includeScope&gt;runtime&lt;/includeScope&gt;</span><br><span class="line">              &lt;excludeScope&gt;test,provided&lt;/excludeScope&gt;</span><br><span class="line">              &lt;overWriteReleases&gt;false&lt;/overWriteReleases&gt;</span><br><span class="line">              &lt;overWriteSnapshots&gt;false&lt;/overWriteSnapshots&gt;</span><br><span class="line">              &lt;overWriteIfNewer&gt;true&lt;/overWriteIfNewer&gt;</span><br><span class="line">            &lt;/configuration&gt;</span><br><span class="line">          &lt;/execution&gt;</span><br><span class="line">        &lt;/executions&gt;</span><br><span class="line">      &lt;/plugin&gt;</span><br></pre></td></tr></table></figure><pre><code>1. 编译a test 包:mvn clean package -am -pl assembly -Ddeploy.app=a -Ddeploy.stage=test1. 编译b prod 包:mvn clean package -am -pl assembly -Ddeploy.app=b -Ddeploy.stage=prod</code></pre>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;Maven-使用技巧&quot;&gt;&lt;a href=&quot;#Maven-使用技巧&quot; class=&quot;headerlink&quot; title=&quot;Maven 使用技巧&quot;&gt;&lt;/a&gt;Maven 使用技巧&lt;/h1&gt;&lt;ol&gt;
+&lt;li&gt;多module,分stage 分开打包&lt;ol&gt;
+&lt;li&gt;目录结构 (a,b 依赖common)&lt;ol&gt;
+&lt;li&gt;assembly&lt;/li&gt;
+&lt;li&gt;commont&lt;/li&gt;
+&lt;li&gt;a&lt;/li&gt;
+&lt;li&gt;b&lt;/li&gt;
+&lt;li&gt;pom.xml&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;li&gt;assembly/pom.xml 通过参数-Ddeploy.app=a 控制哪个模块
+    
+    </summary>
+    
+    
+      <category term="java" scheme="http://devhc.com/categories/java/"/>
+    
+      <category term="tools" scheme="http://devhc.com/categories/java/tools/"/>
+    
+    
+      <category term="maven" scheme="http://devhc.com/tags/maven/"/>
+    
+      <category term="compile" scheme="http://devhc.com/tags/compile/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Linux 使用davmail thunderbird 连接 outlook exchange</title>
+    <link href="http://devhc.com/linux/tools/tools-davmail-setup/"/>
+    <id>http://devhc.com/linux/tools/tools-davmail-setup/</id>
+    <published>2018-05-30T06:01:12.000Z</published>
+    <updated>2020-11-25T01:25:37.665Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="davmail-配置"><a href="#davmail-配置" class="headerlink" title="davmail 配置"></a>davmail 配置</h2><p><a href="http://davmail.sourceforge.net/" target="_blank" rel="noopener">官网</a><br>DavMail 是一个Java 编写Exchange 的代理gateway软件,让一般smtp+imap/pop3 客户端可以通过这个代理收发邮件</p><a id="more"></a><h2 id="davmail-安装"><a href="#davmail-安装" class="headerlink" title="davmail 安装"></a>davmail 安装</h2><p><a href="https://sourceforge.net/projects/davmail/files/davmail/4.8.6/davmail-4.8.6-2600.zip/download" target="_blank" rel="noopener">davmail download</a></p><ol><li>unzip -d davmailxxx.zip -d /opt/davmail</li></ol><h2 id="davmail-配置-1"><a href="#davmail-配置-1" class="headerlink" title="davmail 配置"></a>davmail 配置</h2><ol><li><p>创建/opt/davmail/davmail.properties 拷贝官方实例配置 <a href="http://davmail.sourceforge.net/serversetup.html" target="_blank" rel="noopener">Official Config</a></p></li><li><p>如果是服务器注意修改davmail.url 为内部服务器地址</p></li><li><p>修改davmail.logFilePath=/opt/davmail/davmail.log</p></li><li><p>将davmail 注册到本地服务</p><ol><li><p>useradd davmail</p></li><li><p>sudo chown -R davmail:davmail /opt/davmail</p></li><li><p>sudo vim /lib/systemd/system/davmail.service</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">[Unit]</span><br><span class="line">Description=davmail proxy for exchange</span><br><span class="line">[Service]</span><br><span class="line">User=davmail</span><br><span class="line">Group=davmail</span><br><span class="line">Type=simple</span><br><span class="line">ExecStart=/opt/davmail/davmail.sh /opt/davmail/davmail.properties</span><br><span class="line">PIDFile=/var/run/davmail.pid</span><br><span class="line">[Install]</span><br><span class="line">WantedBy=multi-user.target graphical.target</span><br></pre></td></tr></table></figure></li><li><p>systemctl enable davmail</p></li><li><p>systemctl start davmail</p></li><li><p>ps aux|grep davmail 检查服务是否正常 可以通过直接运行 /opt/davmail/davmail.sh /opt/davmail/davmail.properties 查看错误信息</p></li></ol></li><li><p>修改/opt/davmail/davmail.sh</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">#!/bin/bash</span><br><span class="line">BASE=`dirname $0`</span><br><span class="line">BASE=/opt/davmail</span><br><span class="line">for i in $BASE/lib/*; do export CLASSPATH=$CLASSPATH:$i; done</span><br><span class="line">JAVA=`which java`</span><br><span class="line">$JAVA -Xmx512M -Dsun.net.inetaddr.ttl=60 -cp $BASE/davmail.jar:$CLASSPATH davmail.DavGateway $1</span><br></pre></td></tr></table></figure></li></ol><h2 id="Thunder-bird-配置"><a href="#Thunder-bird-配置" class="headerlink" title="Thunder bird 配置"></a>Thunder bird 配置</h2><ol><li>STMP <ol><li>Server:localhost Port:1025</li><li>UserName: you namee</li><li>Connection security:Non</li><li>Authentication Method:Password ,transmitted insecureity</li></ol></li><li>IMAP:<ol><li>Server:localhost Port:1143</li><li>UserName: you name</li><li>Connection security:None</li><li>Authentication Method:Password ,transmitted insecureity</li></ol></li></ol>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;davmail-配置&quot;&gt;&lt;a href=&quot;#davmail-配置&quot; class=&quot;headerlink&quot; title=&quot;davmail 配置&quot;&gt;&lt;/a&gt;davmail 配置&lt;/h2&gt;&lt;p&gt;&lt;a href=&quot;http://davmail.sourceforge.net/&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;官网&lt;/a&gt;&lt;br&gt;DavMail 是一个Java 编写Exchange 的代理gateway软件,让一般smtp+imap/pop3 客户端可以通过这个代理收发邮件&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="linux" scheme="http://devhc.com/categories/linux/"/>
+    
+      <category term="tools" scheme="http://devhc.com/categories/linux/tools/"/>
+    
+    
+      <category term="linux" scheme="http://devhc.com/tags/linux/"/>
+    
+      <category term="tools" scheme="http://devhc.com/tags/tools/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>使用JRebel 对java 应用热部署开发</title>
+    <link href="http://devhc.com/java/tools/java-jrebel-hot-deploy/"/>
+    <id>http://devhc.com/java/tools/java-jrebel-hot-deploy/</id>
+    <published>2018-05-30T04:01:12.000Z</published>
+    <updated>2020-11-25T01:25:37.665Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="使用JRebel-对java-应用热部署开发"><a href="#使用JRebel-对java-应用热部署开发" class="headerlink" title="使用JRebel 对java 应用热部署开发"></a>使用JRebel 对java 应用热部署开发</h1><ol><li>Java 热更新<br>Java 开发Web Server 相关经常被人吐槽修改代码需要重启服务器，非常不方便,JRebel 是一个非常方便的热更新部署插件.</li></ol><h2 id="JRebel安装"><a href="#JRebel安装" class="headerlink" title="JRebel安装"></a>JRebel安装</h2><ol><li>下载jrebel:<a href="https://zeroturnaround.com/software/jrebel/download/#!/have-license/intellij" target="_blank" rel="noopener">https://zeroturnaround.com/software/jrebel/download/#!/have-license/intellij</a></li><li>unzip -d /opt jrebel-xxxx-nosetup.zip (xxxx 替换下载版本)</li><li>java -jar /opt/jrebel/jrebel.jar -set-remote-password 12345678<a id="more"></a></li></ol><h2 id="Jrebel-激活"><a href="#Jrebel-激活" class="headerlink" title="Jrebel 激活"></a>Jrebel 激活</h2><ol><li>Activate Code:<ol><li>通过Facebook 登录 <a href="https://my.jrebel.com/" target="_blank" rel="noopener">https://my.jrebel.com/</a> 获取</li></ol></li><li>LisenceServer(By iLanyu) <ol><li>docker run -d -p 8888:8888 ilanyu/golang-reverseproxy</li></ol></li></ol><h2 id="IntelJ-Idea"><a href="#IntelJ-Idea" class="headerlink" title="IntelJ Idea"></a>IntelJ Idea</h2><ol><li>安装插件并激活插件<ol><li>jntelj 安装jrebel 插件:File-Setting-Plugins 安装Jrebel(安装慢可以设置代理下载)</li><li>激活Help-&gt;Jrebel-Activation-&gt;LisenceServer</li><li><a href="http://localhost:8888/uuid-your-gen" target="_blank" rel="noopener">http://localhost:8888/uuid-your-gen</a> (uuid 可以<a href="https://www.uuidgenerator.net/" target="_blank" rel="noopener">https://www.uuidgenerator.net/</a> 生成)</li></ol></li><li>配置JRebel插件<ol><li>添加File-Setting-Jrebel-RemoteServer,添加remote server</li><li>点击+,name:model-server,url:<a href="http://localhost:8000" target="_blank" rel="noopener">http://localhost:8000</a></li><li>Server Auth:填写12345678</li><li>打开Views -&gt; TopWindow -&gt;Jrebel 视图,勾上热部署模块</li><li>在启动脚本加上参数<ol><li>类似 java -agentpath:/opt/jrebel/lib/libjrebel64.so -Drebel.remoting_plugin=true -Drebel.remoting_port=8000 foo.bar.MyApp</li></ol></li><li>启动Server,在项目修改代码，编译后会自动加载</li></ol></li><li>配置保存自动编译加载 Auto Compile<ol><li>默认代码保存不会自动加载需要右键编译或者快捷键(Ctrl/Cmd+Shift+F9)</li><li>开启保存编译<a href="https://stackoverflow.com/questions/12744303/intellij-idea-java-classes-not-auto-compiling-on-save" target="_blank" rel="noopener">IntelJ Auto Compile</a></li></ol></li></ol>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;使用JRebel-对java-应用热部署开发&quot;&gt;&lt;a href=&quot;#使用JRebel-对java-应用热部署开发&quot; class=&quot;headerlink&quot; title=&quot;使用JRebel 对java 应用热部署开发&quot;&gt;&lt;/a&gt;使用JRebel 对java 应用热部署开发&lt;/h1&gt;&lt;ol&gt;
+&lt;li&gt;Java 热更新&lt;br&gt;Java 开发Web Server 相关经常被人吐槽修改代码需要重启服务器，非常不方便,JRebel 是一个非常方便的热更新部署插件.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&quot;JRebel安装&quot;&gt;&lt;a href=&quot;#JRebel安装&quot; class=&quot;headerlink&quot; title=&quot;JRebel安装&quot;&gt;&lt;/a&gt;JRebel安装&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;下载jrebel:&lt;a href=&quot;https://zeroturnaround.com/software/jrebel/download/#!/have-license/intellij&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;https://zeroturnaround.com/software/jrebel/download/#!/have-license/intellij&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;unzip -d /opt jrebel-xxxx-nosetup.zip (xxxx 替换下载版本)&lt;/li&gt;
+&lt;li&gt;java -jar /opt/jrebel/jrebel.jar -set-remote-password 12345678
+    
+    </summary>
+    
+    
+      <category term="java" scheme="http://devhc.com/categories/java/"/>
+    
+      <category term="tools" scheme="http://devhc.com/categories/java/tools/"/>
+    
+    
+      <category term="java" scheme="http://devhc.com/tags/java/"/>
+    
+      <category term="hotdeploy" scheme="http://devhc.com/tags/hotdeploy/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>pyspark 解析thrift lzo</title>
+    <link href="http://devhc.com/bigdata/spark/spark-pyspark-process-thrift/"/>
+    <id>http://devhc.com/bigdata/spark/spark-pyspark-process-thrift/</id>
+    <published>2018-05-17T11:12:11.000Z</published>
+    <updated>2020-11-25T01:25:37.665Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="PySpark-解析Thrift-Lzo-类型数据"><a href="#PySpark-解析Thrift-Lzo-类型数据" class="headerlink" title="PySpark 解析Thrift Lzo 类型数据"></a>PySpark 解析Thrift Lzo 类型数据</h1><ol><li>包依赖 libs<ol><li>elephant-bird-core-4.6.jar</li><li>elephant-bird-hadoop-compat-4.6.jar</li><li>libthrift-0.x.x.jar (x.x 换成你的版本)</li></ol></li><li>python依赖 pkg <ol><li>依赖文件<ol><li>gen_py thrift 生成(如果有注释中文需要在生成代码头部加上 <code>#-*- coding: utf-8 -*</code> )</li><li>six.py  (Copy From python site-package)</li><li>thrift   (Copy From python site-package)</li></ol></li><li>将python依赖打成zip 方便加载 zip -r ../pkg.zip .<a id="more"></a></li></ol></li><li>python 脚本<br>利用elephantbird RawMultiInputFormat 获取thrift bytes内容然后通过python thrift deserialize 转换成python 对象</li></ol><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pyspark <span class="keyword">import</span> SparkConf, SparkContext</span><br><span class="line"><span class="keyword">import</span> thrift</span><br><span class="line"><span class="keyword">from</span> gen_py.xxx.ttypes <span class="keyword">import</span> ThriftObj</span><br><span class="line"><span class="keyword">from</span> thrift.TSerialization <span class="keyword">import</span> deserialize</span><br><span class="line">conf = SparkConf()</span><br><span class="line">sc = SparkContext(conf = conf)</span><br><span class="line"></span><br><span class="line">logpath=<span class="string">"/youhdfspath/xxx.thrift.lzo"</span></span><br><span class="line">log = sc.newAPIHadoopFile(logpath,<span class="string">'com.twitter.elephantbird.mapreduce.input.RawMultiInputFormat'</span>,</span><br><span class="line"><span class="string">'org.apache.hadoop.io.LongWritable'</span>,<span class="string">'com.twitter.elephantbird.mapreduce.io.BinaryWritable'</span>)</span><br><span class="line"></span><br><span class="line">rdd = log.map(<span class="keyword">lambda</span> x:deserialize(ThriftObj(),x[<span class="number">1</span>]))</span><br><span class="line">rdd.saveAsTextFile(<span class="string">"testfile"</span>)</span><br></pre></td></tr></table></figure><ol><li>shell 脚本</li></ol><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">export SCRIPT_HOME=$(cd "`dirname $0`/"; pwd)</span><br><span class="line">NAME=test</span><br><span class="line">OUTPUT=testfile</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">LIBS=`ls $SCRIPT_HOME/libs/*`</span><br><span class="line">LIBSTR=""</span><br><span class="line">for lib in $LIBS;do</span><br><span class="line">  LIBSTR="$LIBSTR,$lib"</span><br><span class="line">done</span><br><span class="line"></span><br><span class="line">LIBSTR=$&#123;LIBSTR:1&#125;</span><br><span class="line"></span><br><span class="line">hadoop fs -rm -r -f $OUTPUT</span><br><span class="line">spark-submit \</span><br><span class="line">    --master yarn \</span><br><span class="line">    --deploy-mode cluster \</span><br><span class="line">    --jars $LIBSTR \</span><br><span class="line">    --py-files $SCRIPT_HOME/pkg.zip \</span><br><span class="line">    --name "[pyspark][$NAME]" \</span><br><span class="line">    $NAME.py</span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;PySpark-解析Thrift-Lzo-类型数据&quot;&gt;&lt;a href=&quot;#PySpark-解析Thrift-Lzo-类型数据&quot; class=&quot;headerlink&quot; title=&quot;PySpark 解析Thrift Lzo 类型数据&quot;&gt;&lt;/a&gt;PySpark 解析Thrift Lzo 类型数据&lt;/h1&gt;&lt;ol&gt;
+&lt;li&gt;包依赖 libs&lt;ol&gt;
+&lt;li&gt;elephant-bird-core-4.6.jar&lt;/li&gt;
+&lt;li&gt;elephant-bird-hadoop-compat-4.6.jar&lt;/li&gt;
+&lt;li&gt;libthrift-0.x.x.jar (x.x 换成你的版本)&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;li&gt;python依赖 pkg &lt;ol&gt;
+&lt;li&gt;依赖文件&lt;ol&gt;
+&lt;li&gt;gen_py thrift 生成(如果有注释中文需要在生成代码头部加上 &lt;code&gt;#-*- coding: utf-8 -*&lt;/code&gt; )&lt;/li&gt;
+&lt;li&gt;six.py  (Copy From python site-package)&lt;/li&gt;
+&lt;li&gt;thrift   (Copy From python site-package)&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;li&gt;将python依赖打成zip 方便加载 zip -r ../pkg.zip .
+    
+    </summary>
+    
+    
+      <category term="bigdata" scheme="http://devhc.com/categories/bigdata/"/>
+    
+      <category term="spark" scheme="http://devhc.com/categories/bigdata/spark/"/>
+    
+    
+      <category term="spark" scheme="http://devhc.com/tags/spark/"/>
+    
+      <category term="pyspark" scheme="http://devhc.com/tags/pyspark/"/>
+    
+      <category term="thrift" scheme="http://devhc.com/tags/thrift/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>cpp 常用命令</title>
+    <link href="http://devhc.com/cpp/lang/cpp-cpp-basic/"/>
+    <id>http://devhc.com/cpp/lang/cpp-cpp-basic/</id>
+    <published>2018-04-20T06:22:41.000Z</published>
+    <updated>2020-11-25T01:25:37.665Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="cpp-常用命令"><a href="#cpp-常用命令" class="headerlink" title="cpp 常用命令"></a>cpp 常用命令</h1><h2 id="basic"><a href="#basic" class="headerlink" title="basic"></a>basic</h2><ol><li>compile<ol><li>g++ -c -o a.o a.cpp<ol><li>-I includeDir</li><li>-L libraryDir</li><li>-lxx sharead xx library</li><li>lxx static xx library<a id="more"></a></li></ol></li></ol></li><li>create static library<ol><li>ar ru libxxx.a a.o b.o c.o</li></ol></li><li>create shared library<ol><li>Linux: g++ –shared -fPIC -o libxxx.so a.o b.o c.o</li><li>MacOs: g++ -dynamiclib -fPIC -o libxxx.dylib a.o b.o c.o</li></ol></li><li>show lib dependency<ol><li>Linux:ldd</li><li>MacOs:otool -L</li></ol></li><li>include path:echo | g++ -v -x c++ -E -</li><li>/etc/ld.so.conf</li><li>ldconfig -p</li></ol>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;cpp-常用命令&quot;&gt;&lt;a href=&quot;#cpp-常用命令&quot; class=&quot;headerlink&quot; title=&quot;cpp 常用命令&quot;&gt;&lt;/a&gt;cpp 常用命令&lt;/h1&gt;&lt;h2 id=&quot;basic&quot;&gt;&lt;a href=&quot;#basic&quot; class=&quot;headerlink&quot; title=&quot;basic&quot;&gt;&lt;/a&gt;basic&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;compile&lt;ol&gt;
+&lt;li&gt;g++ -c -o a.o a.cpp&lt;ol&gt;
+&lt;li&gt;-I includeDir&lt;/li&gt;
+&lt;li&gt;-L libraryDir&lt;/li&gt;
+&lt;li&gt;-lxx sharead xx library&lt;/li&gt;
+&lt;li&gt;lxx static xx library
+    
+    </summary>
+    
+    
+      <category term="cpp" scheme="http://devhc.com/categories/cpp/"/>
+    
+      <category term="lang" scheme="http://devhc.com/categories/cpp/lang/"/>
+    
+    
+      <category term="cpp" scheme="http://devhc.com/tags/cpp/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>pig basic</title>
+    <link href="http://devhc.com/bigdata/pig/bigdata-pig-pig-basic/"/>
+    <id>http://devhc.com/bigdata/pig/bigdata-pig-pig-basic/</id>
+    <published>2018-03-18T03:31:22.000Z</published>
+    <updated>2020-11-25T01:25:37.665Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="Pig-Basic"><a href="#Pig-Basic" class="headerlink" title="Pig Basic"></a>Pig Basic</h1><p><a href="http://pig.apache.org/" target="_blank" rel="noopener">Pig 官网</a><br>Apache Pig 是一个高级过程语言，适合于使用 Hadoop 和 MapReduce 平台来查询大型半结构化数据集。<br>通过允许对分布式数据集进行类似 SQL 的查询，Pig 可以简化 Hadoop 的使用<br>pig 语法关键字是不分大小写</p><h2 id="Pig启动模式"><a href="#Pig启动模式" class="headerlink" title="Pig启动模式"></a>Pig启动模式</h2><ol><li>local</li><li>mapreduce</li><li>spark<br>通过 pig -x local xxx.pig 指定</li></ol><h3 id="本地测试"><a href="#本地测试" class="headerlink" title="本地测试"></a>本地测试</h3><p>本地一个目录先创建一个文件比如data.txt</p><figure class="highlight plain"><figcaption><span>data.txt</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">w,10,6</span><br><span class="line">h,12,2</span><br><span class="line">h,14,1</span><br></pre></td></tr></table></figure><p>pig -x local 进入交互模式 (下面省略中间执行日志)</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">grunt&gt; DATA = LOAD &apos;data.txt&apos; USING PigStorage(&apos;,&apos;) AS (name: chararray, age:int, num: float);</span><br><span class="line">grunt&gt; DUMP DATA;</span><br><span class="line">(w,10,6.0)</span><br><span class="line">(h,12,2.0)</span><br><span class="line">(h,14,1.0)</span><br><span class="line">grunt&gt; describe DATA;</span><br><span class="line">DATA: &#123;name: chararray,age: int,num: float&#125;</span><br></pre></td></tr></table></figure><h3 id="执行参数"><a href="#执行参数" class="headerlink" title="执行参数"></a>执行参数</h3><ol><li><a href="http://pig.apache.org/docs/r0.17.0/start.html#properties" target="_blank" rel="noopener">Properties</a><br>通过-D:<br>等价设置环境变量PIG_OPTS, export PIG_OPTS=–Dmapreduce.task.profile=true<br>或者通过文件<br>pig -P mypig.properties</li></ol><p>常见mapreduce参数设置 hadoop相关配置</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pig -Dmapreduce.job.cache.files=<span class="string">"/user/hadoop/dict.txt#dict.txt"</span> xxx.pig</span><br></pre></td></tr></table></figure><ol start="2"><li>变量 -p -param 替换pig文件中变量<br>pig -p INPUT=”data.txt” xx.pig</li></ol><h3 id="log4j-配置"><a href="#log4j-配置" class="headerlink" title="log4j 配置"></a>log4j 配置</h3><p>默认是INFO 日志特别多，可以通过log4j文件改成ERROR</p><figure class="highlight plain"><figcaption><span>pig-log4j.properties</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">log4j.rootLogger=ERROR,stdout</span><br><span class="line">log4j.appender.stdout=org.apache.log4j.ConsoleAppender</span><br><span class="line">log4j.appender.stdout.layout=org.apache.log4j.PatternLayout</span><br><span class="line">log4j.appender.stdout.layout.ConversionPattern=%d %p [%c] - %m%n</span><br></pre></td></tr></table></figure><p>pig -log4jconf ./pig-log4j.properties -x local</p><ol start="2"><li><a href="http://pig.apache.org/docs/r0.17.0/cmds.html#set" target="_blank" rel="noopener">set</a><br>主要用于job名称 job并行度 等job相关设置</li></ol><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">SET job.name &apos;my job&apos;;</span><br><span class="line">SET default_parallel 100;</span><br></pre></td></tr></table></figure><h2 id="PigLatin"><a href="#PigLatin" class="headerlink" title="PigLatin"></a>PigLatin</h2><p>pig 文件是使用PigLatin语法描述<br>注意pig里 字符串都是 单引号</p><h3 id="结构"><a href="#结构" class="headerlink" title="结构"></a>结构</h3><ol><li>tuple<br> 有序字段集合<br> (name, 18)</li><li>bag<br> tuple 的组合</li><li><a href="http://pig.apache.org/docs/r0.17.0/basic.html#map-schema" target="_blank" rel="noopener">map</a><br> key/value pair<br> [ key#value &lt;, key#value …&gt; ]<br> [name#John,phone#5551212]</li></ol><h3 id="引入包"><a href="#引入包" class="headerlink" title="引入包"></a>引入包</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">REGISTER &apos;hdfs://hadoop/piglibs/*.jar&apos;;</span><br></pre></td></tr></table></figure><h3 id="加载数据"><a href="#加载数据" class="headerlink" title="加载数据"></a>加载数据</h3><p>pig记载数据通过<a href="http://pig.apache.org/docs/r0.17.0/func.html#load-store-functions" target="_blank" rel="noopener">Loader</a>方式</p><p>apache内置多种Loader</p><ol><li>TextLoader<br>load 一行为一个字段<br>默认TextLoader是文本TSV分割数据(支持gzip,bzip)<br>TSV: 分割<br>A = LOAD ‘student’ USING PigStorage(‘\t’) AS (name: chararray, age:int, gpa: float);</li><li>JsonLoader 官方这个不是太好用 不支持 深层次json<br>a = load ‘a.json’ using JsonLoader(‘a0:int,a1:{(a10:int,a11:chararray)},a2:(a20:double,a21:bytearray),a3:[chararray]’);  </li></ol><p>第三方Loader<br>twitter elephantbird</p><ol><li>sequenceFileLoader</li></ol><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">pairs = LOAD &apos;$INPUT&apos; USING com.twitter.elephantbird.pig.load.SequenceFileLoader (</span><br><span class="line">&apos;-c com.twitter.elephantbird.pig.util.IntWritableConverter&apos;,</span><br><span class="line">&apos;-c com.twitter.elephantbird.pig.util.TextConverter&apos;</span><br><span class="line">) as (</span><br><span class="line">key: int,</span><br><span class="line">value: chararray</span><br><span class="line">);</span><br></pre></td></tr></table></figure><ol start="2"><li>Thrift Lzo(Block/Base64)</li></ol><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">DATA = LOAD &apos;$INPUT&apos; </span><br><span class="line">  USING com.twitter.elephantbird.pig.load.ThriftPigLoader(&apos;com.xxx.ThriftClasss&apos;);</span><br></pre></td></tr></table></figure><ol start="3"><li>Protobuf</li></ol><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">DATA = LOAD &apos;$INPUT&apos;</span><br><span class="line">  USING com.twitter.elephantbird.pig.load.ProtobufPigLoader(&apos;com.xxx.protobufClass&apos;);</span><br></pre></td></tr></table></figure><ol start="4"><li>Json (elephant 版本支持嵌套)</li></ol><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">DATA = LOAD &apos;$INPUT&apos;</span><br><span class="line">  USING com.twitter.elephantbird.pig.load.JsonLoader(&apos;-nestedLoad&apos;);</span><br></pre></td></tr></table></figure><p>注意 等号 左右 要有一个空格 不然会语法错误</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">INPUT_LOG = LOAD &apos;$XXX_LOG&apos; USING org.apache.parquet.pig.ParquetLoader();</span><br></pre></td></tr></table></figure><h3 id="遍历数据"><a href="#遍历数据" class="headerlink" title="遍历数据"></a>遍历数据</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">INPUT_LOG = FOREACH INPUT_LOG GENERATE time, uid;</span><br></pre></td></tr></table></figure><h3 id="过滤数据"><a href="#过滤数据" class="headerlink" title="过滤数据"></a>过滤数据</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">FILTERED_LOG = FILTER INPUT_LOG BY isValid == 1;</span><br></pre></td></tr></table></figure><h3 id="join-数据"><a href="#join-数据" class="headerlink" title="join 数据"></a>join 数据</h3><ol><li><a href="http://pig.apache.org/docs/r0.17.0/basic.html#join-inner" target="_blank" rel="noopener">inner join</a><br>alias = JOIN alias BY {expression|’(‘expression [, expression …]’)’} (, alias BY {expression|’(‘expression [, expression …]’)’} …) [USING ‘replicated’ | ‘bloom’ | ‘skewed’ | ‘merge’ | ‘merge-sparse’] [PARTITION BY partitioner] [PARALLEL n]; </li></ol><p>inner join 和sql inner join一样只有两边都有 才保留</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">grunt&gt; DATA = LOAD &apos;data.txt&apos; USING PigStorage(&apos;,&apos;) as (name:chararray, age: int);</span><br><span class="line">grunt&gt; DUMP DATA;</span><br><span class="line">(jake,10)</span><br><span class="line">(lily,12)</span><br><span class="line">(john,14)</span><br><span class="line">(kite,13)</span><br><span class="line">grunt&gt; WEIGHT = LOAD &apos;weight.txt&apos; USING PigStorage(&apos;,&apos;) as (name:chararray, weight: int);</span><br><span class="line">grunt&gt; DUMP WEIGHT;</span><br><span class="line">(jake,40)</span><br><span class="line">(lily,42)</span><br><span class="line">(john,54)</span><br><span class="line">(mike,64)</span><br><span class="line">grunt&gt; JOIN_DATA = JOIN DATA BY name,WEIGHT BY name;</span><br><span class="line">grunt&gt; DUMP JOIN_DATA;</span><br><span class="line">(jake,10,jake,40)</span><br><span class="line">(john,14,john,54)</span><br><span class="line">(lily,12,lily,42)</span><br><span class="line">grunt&gt; DESCRIBE JOIN_DATA;</span><br><span class="line">JOIN_DATA: &#123;DATA::name: chararray,DATA::age: int,WEIGHT::name: chararray,WEIGHT::weight: int&#125;</span><br></pre></td></tr></table></figure><ol start="2"><li><a href="http://pig.apache.org/docs/r0.17.0/basic.html#join-outer" target="_blank" rel="noopener">outer join</a><br>alias = JOIN left-alias BY left-alias-column [LEFT|RIGHT|FULL] [OUTER], right-alias BY right-alias-column [USING ‘replicated’ | ‘bloom’ | ‘skewed’ | ‘merge’] [PARTITION BY partitioner] [PARALLEL n]; </li></ol><p>out join和sql outer join概念类似<br>分LEFT,RIGHT,FULL<br>分别是保留左边全部，保留右边全部，保留两边全部<br>LEFT,RIGHT,FULL [OUTER] OUTER 可以省略</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">grunt&gt; JOIN_DATA = JOIN DATA BY name RIGHT, WEIGHT BY name;</span><br><span class="line">grunt&gt; DUMP JOIN_DATA;</span><br><span class="line">(jake,10,jake,40)</span><br><span class="line">(john,14,john,54)</span><br><span class="line">(lily,12,lily,42)</span><br><span class="line">(,,mike,64)</span><br><span class="line"></span><br><span class="line">grunt&gt; JOIN_DATA = JOIN DATA BY name LEFT, WEIGHT BY name;</span><br><span class="line">grunt&gt; DUMP JOIN_DATA;</span><br><span class="line">(jake,10,jake,40)</span><br><span class="line">(john,14,john,54)</span><br><span class="line">(kite,13,,)</span><br><span class="line">(lily,12,lily,42)</span><br><span class="line"></span><br><span class="line">grunt&gt; JOIN_DATA = JOIN DATA BY name FULL, WEIGHT BY name;</span><br><span class="line">grunt&gt; DUMP JOIN_DATA;</span><br><span class="line">(jake,10,jake,40)</span><br><span class="line">(john,14,john,54)</span><br><span class="line">(kite,13,,)</span><br><span class="line">(lily,12,lily,42)</span><br><span class="line">(,,mike,64)</span><br></pre></td></tr></table></figure><h3 id="group-数据"><a href="#group-数据" class="headerlink" title="group 数据"></a>group 数据</h3><p>alias = GROUP alias { ALL | BY expression} [, alias ALL | BY expression …] [USING ‘collected’ | ‘merge’] [PARTITION BY partitioner] [PARALLEL n];</p><ol><li>ALL, group ALL to one group<br>B = GROUP A ALL;</li><li>Field<br>B = GROUP A BY f1;</li><li>Tuple<br>B = GROUP A BY (f1, f2);</li></ol><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">A = load &apos;student&apos; AS (name:chararray,age:int,gpa:float);</span><br><span class="line"></span><br><span class="line">DESCRIBE A;</span><br><span class="line">A: &#123;name: chararray,age: int,gpa: float&#125;</span><br><span class="line"></span><br><span class="line">DUMP A;</span><br><span class="line">(John,18,4.0F)</span><br><span class="line">(Mary,19,3.8F)</span><br><span class="line">(Bill,20,3.9F)</span><br><span class="line">(Joe,18,3.8F)</span><br><span class="line"></span><br><span class="line">B = GROUP A BY age;</span><br><span class="line">DESCRIBE B;</span><br><span class="line">B: &#123;group: int, A: &#123;name: chararray,age: int,gpa: float&#125;&#125;</span><br></pre></td></tr></table></figure><h3 id="存储"><a href="#存储" class="headerlink" title="存储"></a><a href="http://pig.apache.org/docs/r0.17.0/basic.html#store" target="_blank" rel="noopener">存储</a></h3><p>STORE alias INTO ‘directory’ [USING function];<br>和加载数据类似<br>分隔符 tsv: <a href="http://pig.apache.org/docs/r0.17.0/func.html#pigstorage" target="_blank" rel="noopener">PigStorage</a><br><a href="http://pig.apache.org/docs/r0.17.0/func.html#AvroStorage" target="_blank" rel="noopener">AvroStorage</a></p><p>第三方:twitter<br><a href="https://github.com/twitter/elephant-bird/tree/master/pig/src/main/java/com/twitter/elephantbird/pig/store" target="_blank" rel="noopener">elephant bird store</a></p><ul><li>LzoJsonStorage</li><li>SequenceFileStorage</li><li>LzoThriftBlockPigStorage</li><li>LzoThriftB64LinePigStorage</li><li>LzoProtobufBlockPigStorage</li><li>LzoProtobufB64LinePigStorage</li></ul><p>STORE D INTO ‘mysortedcount’ USING PigStorage();</p><h3 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h3><ol><li>查看描述：<br> DESCRIBE DATA; </li><li>打印（只建议在少数据量时候使用，大数据建议先LIMIT再DUMP）<br> DUMP DATA;</li><li>LIMIT<br> alis = LIMIT alias  n;</li><li>排序<br> alias = ORDER alias BY { * [ASC|DESC] | field_alias [ASC|DESC] [, field_alias [ASC|DESC] …] } [PARALLEL n];<br> X = ORDER A BY age DESC;</li><li>采样<br> SAMPLE alias size;<br> size 0~1<br> X = SAMPLE A 0.01;</li></ol><h3 id="常见函数"><a href="#常见函数" class="headerlink" title="常见函数"></a><a href="http://pig.apache.org/docs/r0.17.0/func.html" target="_blank" rel="noopener">常见函数</a></h3><h3 id="UDF-用户自定义函数"><a href="#UDF-用户自定义函数" class="headerlink" title="UDF 用户自定义函数"></a>UDF 用户自定义函数</h3><p>全称 User Defined Functions</p><ol><li>第三方实用 UDF： <a href="http://datafu.apache.org/" target="_blank" rel="noopener">DATAFU</a></li><li><a href="http://pig.apache.org/docs/r0.17.0/udf.html" target="_blank" rel="noopener">自定义UDF</a></li></ol>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;Pig-Basic&quot;&gt;&lt;a href=&quot;#Pig-Basic&quot; class=&quot;headerlink&quot; title=&quot;Pig Basic&quot;&gt;&lt;/a&gt;Pig Basic&lt;/h1&gt;&lt;p&gt;&lt;a href=&quot;http://pig.apache.org/&quot; target=&quot;_
+      
+    
+    </summary>
+    
+    
+      <category term="bigdata" scheme="http://devhc.com/categories/bigdata/"/>
+    
+      <category term="pig" scheme="http://devhc.com/categories/bigdata/pig/"/>
+    
+    
+      <category term="pig" scheme="http://devhc.com/tags/pig/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>cpp-primer-6-function</title>
+    <link href="http://devhc.com/read-notes/cpp-primer/read-notes-cpp-primer-cpp-primer-6-function/"/>
+    <id>http://devhc.com/read-notes/cpp-primer/read-notes-cpp-primer-cpp-primer-6-function/</id>
+    <published>2017-04-20T06:01:00.000Z</published>
+    <updated>2020-11-25T01:25:37.665Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="Function"><a href="#Function" class="headerlink" title="Function"></a>Function</h1><ol><li><p>function</p><ol><li>type funname(type arg1,…)</li></ol></li><li><p>函数指针 函数名就是函数指针</p> <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">int ab(int x);</span><br><span class="line">int (*p)(int) *p = ab;</span><br><span class="line">typedef int (*p_ab)(int);</span><br><span class="line">p(12);</span><br><span class="line">(*p)(12);</span><br></pre></td></tr></table></figure></li></ol><a id="more"></a><ol start="3"><li>函数指针数组  <ol><li>int (*p[5])(int) *parr;  </li></ol></li></ol>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;Function&quot;&gt;&lt;a href=&quot;#Function&quot; class=&quot;headerlink&quot; title=&quot;Function&quot;&gt;&lt;/a&gt;Function&lt;/h1&gt;&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;function&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;type funname(type arg1,…)&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;函数指针 函数名就是函数指针&lt;/p&gt;
+ &lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;int ab(int x);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;int (*p)(int) *p = ab;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;typedef int (*p_ab)(int);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;p(12);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;(*p)(12);&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+
+&lt;/li&gt;
+&lt;/ol&gt;
+    
+    </summary>
+    
+    
+      <category term="read-notes" scheme="http://devhc.com/categories/read-notes/"/>
+    
+      <category term="cpp-primer" scheme="http://devhc.com/categories/read-notes/cpp-primer/"/>
+    
+    
+      <category term="cpp" scheme="http://devhc.com/tags/cpp/"/>
+    
+      <category term="cpp-primer" scheme="http://devhc.com/tags/cpp-primer/"/>
+    
+      <category term="read-notes" scheme="http://devhc.com/tags/read-notes/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>cpp-primer-8:exception</title>
+    <link href="http://devhc.com/read-notes/cpp-primer/read-notes-cpp-primer-cpp-primer-8-exception/"/>
+    <id>http://devhc.com/read-notes/cpp-primer/read-notes-cpp-primer-cpp-primer-8-exception/</id>
+    <published>2017-04-20T06:01:00.000Z</published>
+    <updated>2020-11-25T01:25:37.665Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="exception-异常处理"><a href="#exception-异常处理" class="headerlink" title="exception 异常处理"></a>exception 异常处理</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">try&#123;</span><br><span class="line">    xxxx</span><br><span class="line">    throw X_Exception(&quot;&quot;);</span><br><span class="line">&#125;catch(E_Exception &amp;e)&#123;</span><br><span class="line">    cout&lt;&lt;e.what()&lt;&lt;endl;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><a id="more"></a>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;exception-异常处理&quot;&gt;&lt;a href=&quot;#exception-异常处理&quot; class=&quot;headerlink&quot; title=&quot;exception 异常处理&quot;&gt;&lt;/a&gt;exception 异常处理&lt;/h1&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;try&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    xxxx&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    throw X_Exception(&amp;quot;&amp;quot;);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;catch(E_Exception &amp;amp;e)&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    cout&amp;lt;&amp;lt;e.what()&amp;lt;&amp;lt;endl;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+    
+    </summary>
+    
+    
+      <category term="read-notes" scheme="http://devhc.com/categories/read-notes/"/>
+    
+      <category term="cpp-primer" scheme="http://devhc.com/categories/read-notes/cpp-primer/"/>
+    
+    
+      <category term="cpp" scheme="http://devhc.com/tags/cpp/"/>
+    
+      <category term="cpp-primer" scheme="http://devhc.com/tags/cpp-primer/"/>
+    
+      <category term="read-notes" scheme="http://devhc.com/tags/read-notes/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>cpp-primer-9:template</title>
+    <link href="http://devhc.com/read-notes/cpp-primer/read-notes-cpp-primer-cpp-primer-9-template/"/>
+    <id>http://devhc.com/read-notes/cpp-primer/read-notes-cpp-primer-cpp-primer-9-template/</id>
+    <published>2017-04-20T06:01:00.000Z</published>
+    <updated>2020-11-25T01:25:37.665Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="template"><a href="#template" class="headerlink" title="template"></a>template</h1><ol><li>示例</li></ol><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">template &lt;class TYPE&gt;</span><br><span class="line">TYPE min(TYPE a,TYPE b)&#123;</span><br><span class="line">    return a &lt; b ? a : b;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><a id="more"></a><ol start="2"><li><p>模板参数</p><ol><li><p>模板类型参数</p><ol><li>class 或者typename 加一个标识符</li></ol></li><li><p>模板非类型参数</p><ol><li><p>由普通参数声明构成，代表常量表达式</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">template &lt;typename Type, int size&gt;</span><br><span class="line">Type min(Type (&amp;r_array)[size])&#123;&#125;</span><br></pre></td></tr></table></figure></li></ol></li></ol></li><li><p>显式模板</p><ol><li>vector&lt;int&gt;</li></ol></li></ol>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;template&quot;&gt;&lt;a href=&quot;#template&quot; class=&quot;headerlink&quot; title=&quot;template&quot;&gt;&lt;/a&gt;template&lt;/h1&gt;&lt;ol&gt;
+&lt;li&gt;示例&lt;/li&gt;
+&lt;/ol&gt;
+&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;template &amp;lt;class TYPE&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;TYPE min(TYPE a,TYPE b)&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    return a &amp;lt; b ? a : b;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+    
+    </summary>
+    
+    
+      <category term="read-notes" scheme="http://devhc.com/categories/read-notes/"/>
+    
+      <category term="cpp-primer" scheme="http://devhc.com/categories/read-notes/cpp-primer/"/>
+    
+    
+      <category term="cpp" scheme="http://devhc.com/tags/cpp/"/>
+    
+      <category term="cpp-primer" scheme="http://devhc.com/tags/cpp-primer/"/>
+    
+      <category term="read-notes" scheme="http://devhc.com/tags/read-notes/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>cpp-primer-5:abstract container</title>
+    <link href="http://devhc.com/read-notes/cpp-primer/read-notes-cpp-primer-cpp-primer-5-abstact-container/"/>
+    <id>http://devhc.com/read-notes/cpp-primer/read-notes-cpp-primer-cpp-primer-5-abstact-container/</id>
+    <published>2017-04-20T06:01:00.000Z</published>
+    <updated>2020-11-25T01:25:37.665Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="抽象容器"><a href="#抽象容器" class="headerlink" title="抽象容器"></a>抽象容器</h1><h2 id="list-amp-amp-vector"><a href="#list-amp-amp-vector" class="headerlink" title="list &amp;&amp; vector"></a>list &amp;&amp; vector</h2><ol><li><a href="http://www.cplusplus.com/reference/vector/vector/" target="_blank" rel="noopener">vector</a> 连续内存 顺序容器<ol><li>随机访问快</li></ol></li><li>list 非连续 基于连表<ol><li>删除，插入节点方便</li></ol></li><li>使用</li></ol><a id="more"></a><h2 id="set"><a href="#set" class="headerlink" title="set"></a>set</h2><ol><li>multiset 允许重复</li></ol><h2 id="map"><a href="#map" class="headerlink" title="map"></a>map</h2><ol><li>multimap 允许一个key下多个value</li></ol>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;抽象容器&quot;&gt;&lt;a href=&quot;#抽象容器&quot; class=&quot;headerlink&quot; title=&quot;抽象容器&quot;&gt;&lt;/a&gt;抽象容器&lt;/h1&gt;&lt;h2 id=&quot;list-amp-amp-vector&quot;&gt;&lt;a href=&quot;#list-amp-amp-vector&quot; class=&quot;headerlink&quot; title=&quot;list &amp;amp;&amp;amp; vector&quot;&gt;&lt;/a&gt;list &amp;amp;&amp;amp; vector&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;&lt;a href=&quot;http://www.cplusplus.com/reference/vector/vector/&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;vector&lt;/a&gt; 连续内存 顺序容器&lt;ol&gt;
+&lt;li&gt;随机访问快&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;li&gt;list 非连续 基于连表&lt;ol&gt;
+&lt;li&gt;删除，插入节点方便&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;li&gt;使用&lt;/li&gt;
+&lt;/ol&gt;
+    
+    </summary>
+    
+    
+      <category term="read-notes" scheme="http://devhc.com/categories/read-notes/"/>
+    
+      <category term="cpp-primer" scheme="http://devhc.com/categories/read-notes/cpp-primer/"/>
+    
+    
+      <category term="cpp" scheme="http://devhc.com/tags/cpp/"/>
+    
+      <category term="cpp-primer" scheme="http://devhc.com/tags/cpp-primer/"/>
+    
+      <category term="read-notes" scheme="http://devhc.com/tags/read-notes/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>cpp-primer-7:class</title>
+    <link href="http://devhc.com/read-notes/cpp-primer/read-notes-cpp-primer-cpp-primer-7-classs/"/>
+    <id>http://devhc.com/read-notes/cpp-primer/read-notes-cpp-primer-cpp-primer-7-classs/</id>
+    <published>2017-04-20T06:01:00.000Z</published>
+    <updated>2020-11-25T01:25:37.665Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="类-Class"><a href="#类-Class" class="headerlink" title="类 Class"></a>类 Class</h1><h2 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h2><p>类定义之后必须接一个<strong>分号</strong>或者<strong>声明</strong></p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">class ClassName&#123;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">class ClassName&#123;</span><br><span class="line">&#125; a b;</span><br></pre></td></tr></table></figure><a id="more"></a><h2 id="数据成员"><a href="#数据成员" class="headerlink" title="数据成员"></a>数据成员</h2><p>默认都是非静态，不能显式初始化<br>静态可以初始化(类共享)</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">class A&#123;</span><br><span class="line">    int a;</span><br><span class="line">    string b;</span><br><span class="line">    static const int _SIZE = 100;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure><h2 id="成员函数"><a href="#成员函数" class="headerlink" title="成员函数"></a>成员函数</h2><p>类中定义函数声明，也可以函数定义</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">class A&#123;</span><br><span class="line">    void hello();</span><br><span class="line">    void hello2()&#123;</span><br><span class="line">        cout&lt;&lt;&quot;hello&quot;&lt;&lt;endl;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><h2 id="访问"><a href="#访问" class="headerlink" title="访问"></a>访问</h2><ol><li><p>public</p> <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">A a;</span><br><span class="line">a.name;</span><br><span class="line"></span><br><span class="line">A * pa = new A;</span><br><span class="line">pa-&gt;name;</span><br></pre></td></tr></table></figure></li></ol><pre><code><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">//访问静态</span><br><span class="line">A::static_field;</span><br></pre></td></tr></table></figure></code></pre><ol start="2"><li>private 类私有</li><li>protected  派生类共享</li></ol><h2 id="友元函数"><a href="#友元函数" class="headerlink" title="友元函数"></a>友元函数</h2><ol><li>friend 不受 public,private,protected 影响</li><li>使得某个函数可以访问</li></ol><h2 id="声明"><a href="#声明" class="headerlink" title="声明"></a>声明</h2><ol><li>class A; //只声明没有定义</li></ol><h2 id="构造函数-没有返回类型"><a href="#构造函数-没有返回类型" class="headerlink" title="构造函数 没有返回类型"></a>构造函数 没有返回类型</h2><p>构造函数不能为const或者volatile</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">class Screen&#123;</span><br><span class="line">public:</span><br><span class="line">    Screen(int h=8, int w=12,xx=&quot;afd&quot;):</span><br><span class="line">    _height(h),</span><br><span class="line">    _width(8)&#123;</span><br><span class="line">    </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">使用缺省构造函数不需要括号</span><br><span class="line"></span><br><span class="line">// error Screen a(); 编辑器会认为返回Screen的函数</span><br><span class="line">Screen a;</span><br></pre></td></tr></table></figure><h2 id="const-volatile"><a href="#const-volatile" class="headerlink" title="const volatile"></a>const volatile</h2><ol><li><p>const</p><ol><li><p>定义了就不可以修改</p></li><li><p>类成员函数const 不可以修改成员</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">class A&#123;</span><br><span class="line">    void xxx() const;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></li></ol></li><li><p>volatile 编译器无法控制或者监测的</p></li></ol><h2 id="this-指针"><a href="#this-指针" class="headerlink" title="this 指针"></a>this 指针</h2><ol><li>指向对象本身</li><li>在需要返回对象自身时候使用</li><li>返回引用  return *this;</li><li>返回指针 return this;</li></ol><h2 id="静态成员"><a href="#静态成员" class="headerlink" title="静态成员"></a>静态成员</h2><ol><li>没有this指针</li><li>类定义时候初始化</li><li>A::field 访问</li></ol><h2 id="类成员指针"><a href="#类成员指针" class="headerlink" title="类成员指针"></a>类成员指针</h2><ol><li>指向类成员a的short 指针</li></ol><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">short Screen::* p = &amp;Screen::height;</span><br></pre></td></tr></table></figure><ol><li>静态成员指针 类似普通指针</li></ol><h2 id="union"><a href="#union" class="headerlink" title="union"></a>union</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">union &#123;</span><br><span class="line">    int ival;</span><br><span class="line">    char cval;</span><br><span class="line">&#125; uv;</span><br></pre></td></tr></table></figure><h2 id="嵌套类"><a href="#嵌套类" class="headerlink" title="嵌套类"></a>嵌套类</h2><ol><li>Tree 嵌套Node, Tree::Node</li></ol><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">class Tree&#123;</span><br><span class="line">public:</span><br><span class="line">    class Node&#123;&#125;</span><br><span class="line">    Node * tree;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure><h2 id="拷贝构造函数"><a href="#拷贝构造函数" class="headerlink" title="拷贝构造函数"></a>拷贝构造函数</h2><ol><li>区分普通类型和对象指针类型拷贝</li></ol><h2 id="析构函数"><a href="#析构函数" class="headerlink" title="析构函数"></a>析构函数</h2><ol><li>~ClassName(); 无返回类型</li><li>delete 相关new开辟的空间</li><li>delete 时候不需要判断 是否!=0编辑器隐式执行</li><li>不会删除不指向认为对象的指针</li></ol><h2 id="操作符重载"><a href="#操作符重载" class="headerlink" title="操作符重载"></a>操作符重载</h2><ol><li>istream &amp; operator &gt;&gt; (istream &amp;,string &amp;);</li><li>左值 右值</li><li>类操作符 省略左值</li></ol>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;类-Class&quot;&gt;&lt;a href=&quot;#类-Class&quot; class=&quot;headerlink&quot; title=&quot;类 Class&quot;&gt;&lt;/a&gt;类 Class&lt;/h1&gt;&lt;h2 id=&quot;定义&quot;&gt;&lt;a href=&quot;#定义&quot; class=&quot;headerlink&quot; title=&quot;定义&quot;&gt;&lt;/a&gt;定义&lt;/h2&gt;&lt;p&gt;类定义之后必须接一个&lt;strong&gt;分号&lt;/strong&gt;或者&lt;strong&gt;声明&lt;/strong&gt;&lt;/p&gt;
+&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;class ClassName&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;class ClassName&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125; a b;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+    
+    </summary>
+    
+    
+      <category term="read-notes" scheme="http://devhc.com/categories/read-notes/"/>
+    
+      <category term="cpp-primer" scheme="http://devhc.com/categories/read-notes/cpp-primer/"/>
+    
+    
+      <category term="cpp" scheme="http://devhc.com/tags/cpp/"/>
+    
+      <category term="cpp-primer" scheme="http://devhc.com/tags/cpp-primer/"/>
+    
+      <category term="read-notes" scheme="http://devhc.com/tags/read-notes/"/>
+    
+  </entry>
+  
+</feed>

@@ -1,0 +1,645 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+    
+
+    
+
+    
+
+
+
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
+    
+    
+    
+    <meta name="baidu-site-verification" content="O0qt9Gkm8L">
+    
+    
+    
+    <title>微积分 | all3n&#39;s blog | coding like r&amp;b</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="math">
+    <meta name="description" content="微积分3Blue1Brown 微积分的本质bilibili 极限和无穷小导数一个函数在某一点的导数描述了这个函数在这一点附近的变化率导数的本质是通过极限的概念对函数进行局部的线性逼近。当函数 ${\displaystyle f}$ 的自变量在一点 ${\displaystyle x_{0}} $上产生一个增量 ${\displaystyle h}$ 时，函数输出值的增量与自变量增量 ${\disp">
+<meta name="keywords" content="math">
+<meta property="og:type" content="article">
+<meta property="og:title" content="微积分">
+<meta property="og:url" content="http://devhc.com/math/calculas/index.html">
+<meta property="og:site_name" content="all3n&#39;s blog">
+<meta property="og:description" content="微积分3Blue1Brown 微积分的本质bilibili 极限和无穷小导数一个函数在某一点的导数描述了这个函数在这一点附近的变化率导数的本质是通过极限的概念对函数进行局部的线性逼近。当函数 ${\displaystyle f}$ 的自变量在一点 ${\displaystyle x_{0}} $上产生一个增量 ${\displaystyle h}$ 时，函数输出值的增量与自变量增量 ${\disp">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://upload.wikimedia.org/wikipedia/commons/thumb/d/de/Derivative_-_geometric_meaning.svg/600px-Derivative_-_geometric_meaning.svg.png">
+<meta property="og:image" content="https://upload.wikimedia.org/wikipedia/commons/2/2f/Fundamental_theorem_of_calculus_%28animation%29.gif">
+<meta property="og:updated_time" content="2020-11-25T01:25:37.665Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="微积分">
+<meta name="twitter:description" content="微积分3Blue1Brown 微积分的本质bilibili 极限和无穷小导数一个函数在某一点的导数描述了这个函数在这一点附近的变化率导数的本质是通过极限的概念对函数进行局部的线性逼近。当函数 ${\displaystyle f}$ 的自变量在一点 ${\displaystyle x_{0}} $上产生一个增量 ${\displaystyle h}$ 时，函数输出值的增量与自变量增量 ${\disp">
+<meta name="twitter:image" content="https://upload.wikimedia.org/wikipedia/commons/thumb/d/de/Derivative_-_geometric_meaning.svg/600px-Derivative_-_geometric_meaning.svg.png">
+    
+        <link rel="alternate" type="application/atom+xml" title="all3n&#39;s blog" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head --><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+    
+
+
+</head>
+
+<body>
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">all3n</h5>
+          <a href="mailto:wanghch8398@163.com" title="wanghch8398@163.com" class="mail">wanghch8398@163.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/resource"  >
+                <i class="icon icon-lg icon-book"></i>
+                Resource
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/all3n" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/about"  >
+                <i class="icon icon-lg icon-link"></i>
+                About Me
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">微积分</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">微积分</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2019-09-26T15:14:54.000Z" itemprop="datePublished" class="page-time">
+  2019-09-26
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/math/">math</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#微积分"><span class="post-toc-number">1.</span> <span class="post-toc-text">微积分</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#3Blue1Brown-微积分的本质"><span class="post-toc-number">1.0.1.</span> <span class="post-toc-text">3Blue1Brown 微积分的本质</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#极限和无穷小"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">极限和无穷小</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#导数"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">导数</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#微分"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">微分</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#积分"><span class="post-toc-number">1.4.</span> <span class="post-toc-text">积分</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#偏导数"><span class="post-toc-number">1.5.</span> <span class="post-toc-text">偏导数</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#符号"><span class="post-toc-number">1.6.</span> <span class="post-toc-text">符号</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#常见导数"><span class="post-toc-number">1.7.</span> <span class="post-toc-text">常见导数</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#链式法则"><span class="post-toc-number">1.8.</span> <span class="post-toc-text">链式法则</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#应用"><span class="post-toc-number">1.9.</span> <span class="post-toc-text">应用</span></a></li></ol></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-calculas"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">微积分</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2019-09-26 23:14:54" datetime="2019-09-26T15:14:54.000Z"  itemprop="datePublished">2019-09-26</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/math/">math</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="微积分"><a href="#微积分" class="headerlink" title="微积分"></a><a href="https://zh.wikipedia.org/wiki/%E5%BE%AE%E7%A7%AF%E5%88%86%E5%AD%A6" target="_blank" rel="noopener">微积分</a></h1><h3 id="3Blue1Brown-微积分的本质"><a href="#3Blue1Brown-微积分的本质" class="headerlink" title="3Blue1Brown 微积分的本质"></a>3Blue1Brown 微积分的本质</h3><p><a href="https://www.bilibili.com/video/av24325548/" target="_blank" rel="noopener">bilibili</a></p>
+<h2 id="极限和无穷小"><a href="#极限和无穷小" class="headerlink" title="极限和无穷小"></a><a href="https://zh.wikipedia.org/wiki/%E7%84%A1%E7%AA%AE%E5%B0%8F%E9%87%8F" target="_blank" rel="noopener">极限和无穷小</a></h2><h2 id="导数"><a href="#导数" class="headerlink" title="导数"></a><a href="https://zh.wikipedia.org/wiki/%E5%AF%BC%E6%95%B0" target="_blank" rel="noopener">导数</a></h2><p>一个函数在某一点的导数描述了这个函数在这一点附近的<strong>变化率</strong><br>导数的本质是通过极限的概念对函数进行局部的线性逼近。当函数 ${\displaystyle f}$ 的自变量在一点 ${\displaystyle x_{0}} $上产生一个增量 ${\displaystyle h}$ 时，函数输出值的增量与自变量增量 ${\displaystyle h}$的比值在 ${\displaystyle h}$趋于0时的极限如果存在，即为 ${\displaystyle f}$在 ${\displaystyle x_{0}}$处的导数，记作 ${\displaystyle f’(x_{0})}$、 ${\displaystyle {\frac {\mathrm {d} f}{\mathrm {d} x}}(x_{0})}$或 $\left.{\frac {d f}{d x}}\right|{x=x_{0}}$</p>
+<p>导数的定义：f在x0点的导数<br>$$ f’(x_0)=\lim_{x \to x_0}\frac{f(x)-f(x_0)}{x - x_0} $$</p>
+<p>几何意义：相当于曲线该点切线斜率</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/de/Derivative_-_geometric_meaning.svg/600px-Derivative_-_geometric_meaning.svg.png" alt="几何意义" title>
+                </div>
+                <div class="image-caption">几何意义</div>
+            </figure>
+
+<p>P0点斜率为$\alpha$,在微分中让x变化一个很小的一个值$\Delta x$,y变化了$\Delta y$, 当$\Delta x$变的无穷小时候,$\frac{\Delta y}{\Delta x}$就逼近该点的真实斜率<br>$\tan \alpha=\lim_{\Delta x \to 0} \tan \varphi=\lim_{\Delta x \to 0} \frac{f(x_0 + \Delta x)-f(x_0)}{\Delta x}$<br>$$  \Delta x\to 0，  \varphi \to \alpha $$</p>
+<h2 id="微分"><a href="#微分" class="headerlink" title="微分"></a>微分</h2><p>微分学主要研究的是在函数自变量变化时如何确定函数值的瞬时变化率（导数或微商）。换言之，计算 <em>导数</em> 的方法就叫 <em>微分</em></p>
+<h2 id="积分"><a href="#积分" class="headerlink" title="积分"></a><a href="https://zh.wikipedia.org/wiki/%E7%A7%AF%E5%88%86" target="_blank" rel="noopener">积分</a></h2><p>积分是微分的逆运算，即从导数推算出原函数，又分为定积分与不定积分。</p>
+<ol>
+<li>定积分:<ol>
+<li>几何意义等价函数下方面积 $\int_a^b f(x),\mathrm{d}x$</li>
+</ol>
+</li>
+<li><a href="https://zh.wikipedia.org/wiki/%E4%B8%8D%E5%AE%9A%E7%A7%AF%E5%88%86" target="_blank" rel="noopener">不定积分</a><ol>
+<li>原函数</li>
+</ol>
+</li>
+<li>第一基本定理<br>设 $ a,b\in {\mathbb  {R}}$， $ {\displaystyle f:[a,b]\mapsto \mathbb {R} }$为连续函数，对所有的 $ x\in [a,b]$，定义函数 F 如下：</li>
+</ol>
+<p>${\displaystyle F(x)=\int _{a}^{x}f(t)dt}$<br>则 F 在闭区间 [a,b] 连续，并在开区间 (a, b)可微， 且对所有在开区间 (a, b) 中的 x，有</p>
+<p>$ F’(x)=f(x)$</p>
+<ol start="4">
+<li>第二基本定理：如果函数 x f是闭区间  [a,b] 上的连续函数，F  是 f 在 [a,b] 上的一个反导函数，那么有<br>${\displaystyle \int _{a}^{b}f(x),\mathrm {d} x=F(b)-F(a)} $</li>
+</ol>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/2/2f/Fundamental_theorem_of_calculus_%28animation%29.gif" alt="Fundamental_theorem_of_calculus_(animation)" title>
+                </div>
+                <div class="image-caption">Fundamental_theorem_of_calculus_(animation)</div>
+            </figure>
+
+<h2 id="偏导数"><a href="#偏导数" class="headerlink" title="偏导数"></a><a href="https://zh.wikipedia.org/wiki/%E5%81%8F%E5%AF%BC%E6%95%B0" target="_blank" rel="noopener">偏导数</a></h2><p>一个多变量的函数的偏导数（英语：partial derivative）是它关于其中一个变量的导数，而保持其他变量恒定（相对于全导数，在其中所有变量都允许变化）<br>∂代表偏导符号,是一个弯曲的d，称为偏导数符号。为了把它与字母d区分，∂有时读作“der”、“del”、“dah”或“偏”，而不是“dee”<br>函数f可以解释为y为自变量而x为常数的函数：</p>
+<p>$f(x,y) = f_x(y) = x^2 + xy + y^2$<br>f在y方向上的变化：</p>
+<p>$\frac {\partial f}{\partial y}(x,y)=x+2y$</p>
+<h2 id="符号"><a href="#符号" class="headerlink" title="符号"></a>符号</h2><ul>
+<li>d: 微分学中的符号dx,dy等,是由莱布尼茨首先使用.d源自拉丁语中“差”(Differentia)的第一个字母</li>
+<li>$\int$: 积分符号亦由莱布尼茨所创,它是拉丁语”总和”(Summa)的第一个字母s的伸长(和Σ有相同的意义)</li>
+</ul>
+<h2 id="常见导数"><a href="#常见导数" class="headerlink" title="常见导数"></a>常见导数</h2><ol>
+<li>幂函数的导数：</li>
+</ol>
+<ul>
+<li>$\frac{d}{dx}x^{r}=rx^{r-1}$</li>
+</ul>
+<ol start="2">
+<li>指数函数导数 是它自</li>
+</ol>
+<ul>
+<li>指数函数:$e^{x}$: $\frac{d}{dx}e^x=e^{x}$</li>
+<li>一般的指数函数:$\frac{d}{dx}a^x = \ln(a)a^x$</li>
+</ul>
+<ol>
+<li>三角函数的导数:仍然是三角函数,或者由三角函数构成</li>
+</ol>
+<ul>
+<li>$ \frac {d}{dx}\sin(x)=\cos(x) $</li>
+<li>$ \frac {d}{dx}\cos(x)=-\sin(x)$</li>
+<li>$ \frac {d}{dx}\tan(x)=\sec ^{2}(x)={\frac {1}{\cos ^{2}(x)}}=1+\tan ^{2}(x)$</li>
+<li>$ \frac {d }{d x}\cot(x)=-\csc ^{2}(x)=-{\frac {1}{\sin ^{2}(x)}} $</li>
+</ul>
+<h2 id="链式法则"><a href="#链式法则" class="headerlink" title="链式法则"></a><a href="https://zh.wikipedia.org/wiki/%E9%93%BE%E5%BC%8F%E6%B3%95%E5%88%99" target="_blank" rel="noopener">链式法则</a></h2><ul>
+<li>$(f\circ g)’(x)=f’(g(x))g’(x).$</li>
+<li>考虑函数z = f(x, y)，其中x = g(t)，y = h(t)，g(t)和h(t)是可微函数，那么：</li>
+<li>${\ dz \over dt}={\partial z \over \partial x}{dx \over dt}+{\partial z \over \partial y}{dy \over dt}.$</li>
+</ul>
+<h2 id="应用"><a href="#应用" class="headerlink" title="应用"></a>应用</h2><p><a href="https://zh.wikipedia.org/wiki/%E6%B3%B0%E5%8B%92%E7%BA%A7%E6%95%B0" target="_blank" rel="noopener">泰勒级数</a><br>$f(x)=f(a)+{\frac  {f’(a)}{1!}}(x-a)+{\frac  {f^2(a)}{2!}}(x-a)^{2}+\cdots +{\frac  {f^(a)}{n!}}(x-a)^{n}+R_{n}(x)$<br>一般在机器学习中用到的是</p>
+<ul>
+<li>一阶展开:(梯度下降)<ul>
+<li>$f(x)=f(a)+f’(a)(x-a)$</li>
+</ul>
+</li>
+<li>二阶展开:(牛顿法)<ul>
+<li>$f(x)=f(a)+f’(a)(x-a)+{\frac  {f^2(a)}{2}}(x-a)^{2}$</li>
+</ul>
+</li>
+</ul>
+<p>泰勒公式的目的是为了用一个多项式逼近一个函数<br>让多项式每一阶导数和函数的导数相同<br>拉格朗日型余项:<br>$R_{n}(x)={\frac  {f^NaN(\theta )}{(n+1)!}}(x-a)^NaN$</p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2020-11-25T01:25:37.665Z" itemprop="dateUpdated">2020-11-25 09:25:37</time>
+</span><br>
+
+
+        
+        转载请注明： <a href="/math/calculas/" target="_blank" rel="external">http://devhc.com/math/calculas/</a>
+        
+    </div>
+    
+    <footer>
+        <a href="http://devhc.com">
+            <img src="/img/avatar.jpg" alt="all3n">
+            all3n
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/math/">math</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://devhc.com/math/calculas/&title=《微积分》 — all3n's blog&pic=http://devhc.com/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://devhc.com/math/calculas/&title=《微积分》 — all3n's blog&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://devhc.com/math/calculas/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《微积分》 — all3n's blog&url=http://devhc.com/math/calculas/&via=http://devhc.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://devhc.com/math/calculas/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/tensorflow/framework/tensorflow-tf-print/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">Tensorflow print</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/container/kubernetes/k8s-install-k8s/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">install kubernetes in china</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Valine Comments -->
+    <div class="comments vcomment" id="comments"></div>
+    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+    <script src="//unpkg.com/valine@latest/dist/Valine.min.js"></script>
+    <!-- Valine Comments script -->
+    <script>
+        var GUEST_INFO = ['nick','mail','link'];
+        var guest_info = 'nick,mail,link'.split(',').filter(function(item){
+          return GUEST_INFO.indexOf(item) > -1
+        });
+        new Valine({
+            el: '#comments',
+            notify: 'false' == 'true',
+            verify: 'false' == 'true',
+            appId: "Nfv4vGei1mn7VDrtjeUuYmIq-MdYXbMMI",
+            appKey: "WY7KBP7xk3hV9fRfo40y6I1O",
+            avatar: "mm",
+            placeholder: "Just go go",
+            guest_info: guest_info.length == 0 ? GUEST_INFO : guest_info,
+            pageSize: "10"
+        })
+    </script>
+    <!-- Valine Comments end -->
+
+
+
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        谢谢大爷~
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/wechat.png" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
+                data-wechat="/img/wechat.png" data-alipay="/img/alipay.png">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>博客内容遵循 <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>all3n &copy; 2015 - 2020</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://devhc.com/math/calculas/&title=《微积分》 — all3n's blog&pic=http://devhc.com/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://devhc.com/math/calculas/&title=《微积分》 — all3n's blog&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://devhc.com/math/calculas/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《微积分》 — all3n's blog&url=http://devhc.com/math/calculas/&via=http://devhc.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://devhc.com/math/calculas/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAK4AAACuCAAAAACKZ2kyAAAByUlEQVR42u3aQU4DMQwF0N7/0sOGBRIifDuJqdDLqhqqzCsLy/nO6xWv58v6/iT563q3wwsXF3eb+yxXwl0T189zAy4u7jz3p4qxxq33yb+fGHBxcd+Zu25NqgULFxf3f3D3TyV/UHdxcXFb3Pw16yfV5xfPari4uBvcPKW89/lKvouLi9viPq2V/5hTb/zcExcXd4TbC0OTJiYPW8uNDi4u7ji3ekRJgoxq2PpLEIOLizvIzSOMKj0POKJ/AS4u7mVu3rjkEUZ+hSsJVXFxcee5+SvzgKPXHuUXMnBxcSe5B65MbbQv67cXTmy4uLiHuFs1b6POHGtocHFxj3KTFqQ6IMlB1fAUFxd3hpuHpNXQs0ePSh4uLu5l7roY9S5mNUenSdSCi4s7wu0dQnqHmST4iA5guLi4l7nVLfZz2a2iiYuLO8Kt5pDJFY3q1YpyS4SLi3uZ+xRX9bpG/jMKvRguLu5l7s7QtPr6/SENLi7uJDcpXvkQpdc2FaIWXFzcQW5vBNIbk+RF88dChouL+zbcU1FpUrC2hqy4uLiD3PyIUg1TCoMcXFzcQW7vkkS+Q3VaeiAWwcXF3eD2Bp+9scr+9S9cXNzL3A+kFN1ELxnjdQAAAABJRU5ErkJggg==" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    showProcessingMessages: false, //关闭js加载过程信息
+    messageStyle: "none", //不显示信息
+    extensions: ["tex2jax.js"],
+    jax: ["input/TeX", "output/HTML-CSS"],
+    tex2jax: {
+        inlineMath:  [ ["$", "$"] ], //行内公式选择$
+        displayMath: [ ["$$","$$"] ], //段内公式选择$$
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre','code','a'], //避开某些标签
+        ignoreClass:"comment-content" //避开含该Class的标签
+    },
+    "HTML-CSS": {
+        availableFonts: ["STIX","TeX"], //可选字体
+        showMathMenu: false //关闭右击菜单显示
+    }
+});
+MathJax.Hub.Queue(["Typeset",MathJax.Hub]);
+</script>
+<script src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '死鬼去哪里了！';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '(つェ⊂)咦!又好了!';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+
+
+</body>
+</html>

@@ -1,0 +1,647 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+    
+
+    
+
+    
+
+
+
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
+    
+    
+    
+    <meta name="baidu-site-verification" content="O0qt9Gkm8L">
+    
+    
+    
+    <title>capistrano使用 | all3n&#39;s blog | coding like r&amp;b</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="deploy">
+    <meta name="description" content="先简单介绍下Capistrano Capistrano是一种在多台服务器上运行脚本的开源工具，它主要用于部署web应用。它自动完成多台服务器上新版本的同步更新，包括数据库的改变。Capistrano最初由Jamis Buck用Ruby开发，并用RubyGems部署渠道部署。现在Capistrano不仅限于应用Ruby on Rails的 web应用框架，而且可以用于部署用其他框架的web应用程序，">
+<meta name="keywords" content="deploy">
+<meta property="og:type" content="article">
+<meta property="og:title" content="capistrano使用">
+<meta property="og:url" content="http://devhc.com/tools/tools-Capistrano/index.html">
+<meta property="og:site_name" content="all3n&#39;s blog">
+<meta property="og:description" content="先简单介绍下Capistrano Capistrano是一种在多台服务器上运行脚本的开源工具，它主要用于部署web应用。它自动完成多台服务器上新版本的同步更新，包括数据库的改变。Capistrano最初由Jamis Buck用Ruby开发，并用RubyGems部署渠道部署。现在Capistrano不仅限于应用Ruby on Rails的 web应用框架，而且可以用于部署用其他框架的web应用程序，">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2020-11-25T01:25:37.665Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="capistrano使用">
+<meta name="twitter:description" content="先简单介绍下Capistrano Capistrano是一种在多台服务器上运行脚本的开源工具，它主要用于部署web应用。它自动完成多台服务器上新版本的同步更新，包括数据库的改变。Capistrano最初由Jamis Buck用Ruby开发，并用RubyGems部署渠道部署。现在Capistrano不仅限于应用Ruby on Rails的 web应用框架，而且可以用于部署用其他框架的web应用程序，">
+    
+        <link rel="alternate" type="application/atom+xml" title="all3n&#39;s blog" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head --><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+    
+
+
+</head>
+
+<body>
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">all3n</h5>
+          <a href="mailto:wanghch8398@163.com" title="wanghch8398@163.com" class="mail">wanghch8398@163.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/resource"  >
+                <i class="icon icon-lg icon-book"></i>
+                Resource
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/all3n" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/about"  >
+                <i class="icon icon-lg icon-link"></i>
+                About Me
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">capistrano使用</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">capistrano使用</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2013-11-21T04:12:11.000Z" itemprop="datePublished" class="page-time">
+  2013-11-21
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/tools/">tools</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+
+<article id="post-tools-Capistrano"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">capistrano使用</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2013-11-21 12:12:11" datetime="2013-11-21T04:12:11.000Z"  itemprop="datePublished">2013-11-21</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/tools/">tools</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <p><strong>先简单介绍下Capistrano</strong></p>
+<p>Capistrano是一种在多台服务器上<a href="http://baike.baidu.com/view/513191.htm" target="_blank">运行脚本</a>的开源工具，它主要用于部署web应用。它自动完成多台服务器上新版本的同步更新，包括数据库的改变。Capistrano最初由Jamis Buck用Ruby开发，并用<a href="http://baike.baidu.com/view/1772268.htm" target="_blank">RubyGems</a>部署渠道部署。现在Capistrano不仅限于应用Ruby on Rails的 web应用框架，而且可以用于部署用其他框架的web应用程序，比如用PHP开发的。Capistran最初是用来应用于bash指令行。现在Ruby on Rails框架的用于也可以使用它的新特性，例如，对当前web应用部署改变使其更新版本，或者使其回滚到之前的旧版本。</p>
+<p><strong>如何使用</strong></p>
+<p>Capistrano最新版本是v3，但是v3暂时只支持git协议，如果想使用svn等其他协议可以用v2，所以下面主要是针对v2.</p>
+<p>1.安装：</p>
+<p style="padding-left: 30px;">gem install capistrano（需要先安装ruby）</p>
+<p style="padding-left: 30px;">装完后会有两个工具脚本加入环境变量</p>
+<p style="padding-left: 30px;">1.cap      调用capistrano task</p>
+<p style="padding-left: 30px;">2.capify  初始化目录</p>
+<p style="padding-left: 30px;"><a id="more"></a></p>
+2.初始化部署脚本
+<pre class="lang:sh decode:true" title="init capify">mkdir capProject
+cd capProject
+capify .</pre>
+
+
+<p>Capfile 部署脚本入口文件</p>
+<p>config 配置目录</p>
+<p>&nbsp;</p>
+<p>deploy.rb配置</p>
+<p><a title="Configuration-Variables" href="https://github.com/capistrano/capistrano/wiki/2.x-Significant-Configuration-Variables" target="_blank">https://github.com/capistrano/capistrano/wiki/2.x-Significant-Configuration-Variables</a></p>
+<p><strong>1.配置版本控制</strong><br>使用git管理代码<br>set :scm, :git<br>使用svn管理代码<br>set :scm, :subversion</p>
+<p><strong>2.设置版本控制用户名密码</strong></p>
+<p>set :scm_username,’xx’<br>set :scm_password,’xx’</p>
+<p><strong>3.设置repository地址</strong></p>
+<p>set :repository, “<a href="https://xxxx.git&quot;" target="_blank" rel="noopener">https://xxxx.git&quot;</a></p>
+<p><strong>4.设置web服务器地址 多个逗号分隔，注释掉:role app和:role db在php部署中不需要</strong></p>
+<p>role :web, “devhc.com”</p>
+<p>多台服务器</p>
+<p>role :web, “devhc.com”,”devhc1.com”</p>
+<p><strong>5.设置ssh密码（如果设置sshkey nopassword方式访问则不填写）</strong></p>
+<p>set :username,’xx’<br>set :password,’xx’</p>
+<p><strong>6.设置部署目标位置</strong></p>
+<p>set :deploy_to,”/var/www/#{application}”</p>
+<p>这里是引用了application的名字，若application名称为blog，则部署位置为/var/www/blog</p>
+<p><strong>7.杂项设置（可选）</strong></p>
+<p><span style="color: #ff0000;">非ruby项目该值都设为false，不然会提示public文件夹不存在</span></p>
+<p>set :normalize_asset_timestamps,false</p>
+<p>设置需要共享的目录 默认是： %w(public/system log tmp/pids)</p>
+<p>没有就设空<br>set :shared_children,%w()</p>
+<p>如yii框架中assets和protected/runtime需要共享</p>
+<p>set :shared_children, %w(assets protected/runtime protected/config)</p>
+<p>保持最新release个数</p>
+<p>set :keep_releases,5</p>
+<p>&nbsp;</p>
+<p>设置current_path，即当前版本目录，其实是一个软连接，执行release中最新版本代码,如果是apache为服务器，则为其web目录,默认则为</p>
+<p>deploy_path/current,如果使用默认的话需要改下apache配置指向这里</p>
+<p>set current_path,’/var/www/xxx’</p>
+<p>&nbsp;</p>
+<p>实例配置如下：</p>
+<pre class="lang:ruby decode:true" title="capistrano deploy.rb">set :application, "xxx"
+
+set :repository, "https://xxxx.git"
+
+set :normalize_asset_timestamps,false
+set :deploy_to,"/var/www/#{application}"
+set :scm,:git
+set :username,'xx'
+set :password,'xx'
+set :use_sudo,true
+
+set :keep_releases,5
+set :shared_children, %w(assets protected/runtime)
+
+role :web, "devhc.com"</pre>
+<p>&nbsp;</p>
+<p>部署脚本使用</p>
+<p>cap deploy:setup</p>
+<p>初始化目录 release，shared目录</p>
+<p>&nbsp;</p>
+<p>cap deploy 执行部署</p>
+<p>&nbsp;</p>
+<p>多环境部署</p>
+<p>通常项目部署有sandbox,ready,production等环境，分别一一设置部署比较麻烦，通过capistrano就很方便解决这个问题。</p>
+<p>1.使用Multistage Extension扩展</p>
+<p>通过gem安装<strong>capistrano-ext</strong>扩展</p>
+<p>mkdir config/deploy 新建stages配置目录</p>
+<pre class="wrap:true lang:ruby decode:true" title="cap multi stage">#deploy.rb中引入扩展和配置stages
+set :stages, %w(production sandbox)
+set :default_stage, "sandbox"
+require 'capistrano/ext/multistage'</pre>
+<p>#config/deploy/production.rb</p>
+<pre class="wrap:true lang:ruby decode:true" title="cap multi stage2">role :web, "devhc.com"
+set :deploy_to, "/var/www/#{application}-production/"</pre>
+<p>#config/deploy/sandbox.rb</p>
+<pre class="wrap:true lang:ruby decode:true" title="cap multi stage3">role :web, "sandbox.devhc.com"
+set :deploy_to, "/var/www/#{application}-sandbox/"</pre>
+<p>cap sandbox deploy #部署沙盒<br>cap production deploy #部署线上</p>
+<ol start="2">
+<li>不使用Multistage Extension实现多环境部署<pre class="wrap:true lang:ruby decode:true" title="without multi deploy">set :application, 'example-website'
+
+</pre></li>
+</ol>
+<p>task :production do<br>  role :web, “devhc.com”<br>  set :deploy_to, “/var/www/#{application}-production/“<br>  set :deploy_via, :remote_cache<br>end</p>
+<p>task :sandbox do<br>  role :web, “localhost”<br>  set :deploy_to, “/var/www/#{application}-sandbox/“<br>  set :deploy_via, :copy<br>end<br>&nbsp;</p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2020-11-25T01:25:37.665Z" itemprop="dateUpdated">2020-11-25 09:25:37</time>
+</span><br>
+
+
+        
+        转载请注明： <a href="/tools/tools-Capistrano/" target="_blank" rel="external">http://devhc.com/tools/tools-Capistrano/</a>
+        
+    </div>
+    
+    <footer>
+        <a href="http://devhc.com">
+            <img src="/img/avatar.jpg" alt="all3n">
+            all3n
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/deploy/">deploy</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://devhc.com/tools/tools-Capistrano/&title=《capistrano使用》 — all3n's blog&pic=http://devhc.com/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://devhc.com/tools/tools-Capistrano/&title=《capistrano使用》 — all3n's blog&source=先简单介绍下Capistrano
+Capistrano是一种在多台服务器上运行脚本的开源工具，它主要用于部署web应用。它自动完成多台服务器上新版本的同步..." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://devhc.com/tools/tools-Capistrano/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《capistrano使用》 — all3n's blog&url=http://devhc.com/tools/tools-Capistrano/&via=http://devhc.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://devhc.com/tools/tools-Capistrano/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/linux/shell/linux-shell-tips/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">Shell 实用Tips</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/ios/ios-ios-open-app/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">ios 打开其他应用</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Valine Comments -->
+    <div class="comments vcomment" id="comments"></div>
+    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+    <script src="//unpkg.com/valine@latest/dist/Valine.min.js"></script>
+    <!-- Valine Comments script -->
+    <script>
+        var GUEST_INFO = ['nick','mail','link'];
+        var guest_info = 'nick,mail,link'.split(',').filter(function(item){
+          return GUEST_INFO.indexOf(item) > -1
+        });
+        new Valine({
+            el: '#comments',
+            notify: 'false' == 'true',
+            verify: 'false' == 'true',
+            appId: "Nfv4vGei1mn7VDrtjeUuYmIq-MdYXbMMI",
+            appKey: "WY7KBP7xk3hV9fRfo40y6I1O",
+            avatar: "mm",
+            placeholder: "Just go go",
+            guest_info: guest_info.length == 0 ? GUEST_INFO : guest_info,
+            pageSize: "10"
+        })
+    </script>
+    <!-- Valine Comments end -->
+
+
+
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        谢谢大爷~
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/wechat.png" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
+                data-wechat="/img/wechat.png" data-alipay="/img/alipay.png">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>博客内容遵循 <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>all3n &copy; 2015 - 2020</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://devhc.com/tools/tools-Capistrano/&title=《capistrano使用》 — all3n's blog&pic=http://devhc.com/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://devhc.com/tools/tools-Capistrano/&title=《capistrano使用》 — all3n's blog&source=先简单介绍下Capistrano
+Capistrano是一种在多台服务器上运行脚本的开源工具，它主要用于部署web应用。它自动完成多台服务器上新版本的同步..." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://devhc.com/tools/tools-Capistrano/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《capistrano使用》 — all3n's blog&url=http://devhc.com/tools/tools-Capistrano/&via=http://devhc.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://devhc.com/tools/tools-Capistrano/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAK4AAACuCAAAAACKZ2kyAAABw0lEQVR42u3aS27DMAwFwNz/0u62QGHnPf2SAqNV4NjyWAtCpPh6xeP6M56v//73ec7XjoGLizvNvR7H3dTJnXef8Xzn8xLg4uKe5ObTJR+QX88NuLi4389NQO38uLi4/5H7vB0ZS5lwcXG/mZskP2ObniTwbcnVcHFxJ7h5lXLf7y31XVxc3CHuNTTGEEnJ9c17cXFxj3DboJOEnlWHMbfP4uLibubmhxxtOpS3aBQlWlxc3CPcVYegM+g6XOLi4m7mtlPkhYxkCeriCy4u7oe4q6Jjfoxa3I+Li3uE2040nyblW6W6WwQXF3cDd2z7MpP8LEiBcHFxN3Cfw0cegJJkpm2/qI9ScHFxl3JXvaal1wuEi4t7nJu3R8y0UyTJT90ngouLu5Q7dljSpi7JZ9cFU1xc3G3ctj0iD1h5oCyexcXFPcLNk5mxo5S6RyxJhHBxcTdzr3LkTVTtEgzuxXBxcTdw87EW3W6AcHFxz3OT4DUWdOYbuW6TH1xc3CPc+UAzfxC7OFfDxcU9WBZpWWPB8c0WBxcX92u40RakLJ7WAREXF/cgd23yM1YWKbrJcHFxN3Pzguna6mVbnMXFxT3C/QGSspWMPjK/BAAAAABJRU5ErkJggg==" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    showProcessingMessages: false, //关闭js加载过程信息
+    messageStyle: "none", //不显示信息
+    extensions: ["tex2jax.js"],
+    jax: ["input/TeX", "output/HTML-CSS"],
+    tex2jax: {
+        inlineMath:  [ ["$", "$"] ], //行内公式选择$
+        displayMath: [ ["$$","$$"] ], //段内公式选择$$
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre','code','a'], //避开某些标签
+        ignoreClass:"comment-content" //避开含该Class的标签
+    },
+    "HTML-CSS": {
+        availableFonts: ["STIX","TeX"], //可选字体
+        showMathMenu: false //关闭右击菜单显示
+    }
+});
+MathJax.Hub.Queue(["Typeset",MathJax.Hub]);
+</script>
+<script src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '死鬼去哪里了！';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '(つェ⊂)咦!又好了!';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+
+
+</body>
+</html>

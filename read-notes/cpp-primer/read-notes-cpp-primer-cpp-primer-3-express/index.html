@@ -1,0 +1,777 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+    
+
+    
+
+    
+
+
+
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
+    
+    
+    
+    <meta name="baidu-site-verification" content="O0qt9Gkm8L">
+    
+    
+    
+    <title>cpp-primer-3:expression | all3n&#39;s blog | coding like r&amp;b</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="cpp,cpp-primer,read-notes">
+    <meta name="description" content="表达式定义 由一个或多个操作数构成，应用在操作数是叫做操作符 在一个操作数上交一元操作符（&amp;amp;，*），作用在两个操作数上的叫做2元操作符（+，-）">
+<meta name="keywords" content="cpp,cpp-primer,read-notes">
+<meta property="og:type" content="article">
+<meta property="og:title" content="cpp-primer-3:expression">
+<meta property="og:url" content="http://devhc.com/read-notes/cpp-primer/read-notes-cpp-primer-cpp-primer-3-express/index.html">
+<meta property="og:site_name" content="all3n&#39;s blog">
+<meta property="og:description" content="表达式定义 由一个或多个操作数构成，应用在操作数是叫做操作符 在一个操作数上交一元操作符（&amp;amp;，*），作用在两个操作数上的叫做2元操作符（+，-）">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2020-11-25T01:25:37.665Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="cpp-primer-3:expression">
+<meta name="twitter:description" content="表达式定义 由一个或多个操作数构成，应用在操作数是叫做操作符 在一个操作数上交一元操作符（&amp;amp;，*），作用在两个操作数上的叫做2元操作符（+，-）">
+    
+        <link rel="alternate" type="application/atom+xml" title="all3n&#39;s blog" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head --><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+    
+
+
+</head>
+
+<body>
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">all3n</h5>
+          <a href="mailto:wanghch8398@163.com" title="wanghch8398@163.com" class="mail">wanghch8398@163.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/resource"  >
+                <i class="icon icon-lg icon-book"></i>
+                Resource
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/all3n" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/about"  >
+                <i class="icon icon-lg icon-link"></i>
+                About Me
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">cpp-primer-3:expression</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">cpp-primer-3:expression</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2017-04-20T06:01:00.000Z" itemprop="datePublished" class="page-time">
+  2017-04-20
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/read-notes/">read-notes</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/read-notes/cpp-primer/">cpp-primer</a></li></ul></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#表达式"><span class="post-toc-number">1.</span> <span class="post-toc-text">表达式</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#定义"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">定义</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#算术操作符"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">算术操作符</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#关系操作符"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">关系操作符</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#赋值操作符"><span class="post-toc-number">1.4.</span> <span class="post-toc-text">赋值操作符 =</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#递增-递减-–"><span class="post-toc-number">1.5.</span> <span class="post-toc-text">递增 ++ 递减 –</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#条件操作符"><span class="post-toc-number">1.6.</span> <span class="post-toc-text">条件操作符</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#sizeof-操作符"><span class="post-toc-number">1.7.</span> <span class="post-toc-text">sizeof 操作符</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#new-delete-操作符"><span class="post-toc-number">1.8.</span> <span class="post-toc-text">new/delete 操作符</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#逗号操作符"><span class="post-toc-number">1.9.</span> <span class="post-toc-text">逗号操作符</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#位操作符"><span class="post-toc-number">1.10.</span> <span class="post-toc-text">位操作符</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#类型转换"><span class="post-toc-number">1.11.</span> <span class="post-toc-text">类型转换</span></a></li></ol></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-read-notes-cpp-primer-cpp-primer-3-express"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">cpp-primer-3:expression</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2017-04-20 14:01:00" datetime="2017-04-20T06:01:00.000Z"  itemprop="datePublished">2017-04-20</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/read-notes/">read-notes</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/read-notes/cpp-primer/">cpp-primer</a></li></ul></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="表达式"><a href="#表达式" class="headerlink" title="表达式"></a>表达式</h1><h2 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h2><ol>
+<li>由一个或多个操作数构成，应用在操作数是叫做操作符</li>
+<li>在一个操作数上交一元操作符（&amp;，*），作用在两个操作数上的叫做2元操作符（+，-）</li>
+</ol>
+<a id="more"></a>
+<h2 id="算术操作符"><a href="#算术操作符" class="headerlink" title="算术操作符"></a>算术操作符</h2><table>
+<thead>
+<tr>
+<th>操作符</th>
+<th>功能</th>
+<th>用法</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>*</td>
+<td>乘</td>
+<td>a*b</td>
+</tr>
+<tr>
+<td>/</td>
+<td>除</td>
+<td>a/b</td>
+</tr>
+<tr>
+<td>%</td>
+<td>求余</td>
+<td>a%b</td>
+</tr>
+<tr>
+<td>+</td>
+<td>加</td>
+<td>a+b</td>
+</tr>
+<tr>
+<td>-</td>
+<td>减</td>
+<td>a-b</td>
+</tr>
+</tbody></table>
+<h2 id="关系操作符"><a href="#关系操作符" class="headerlink" title="关系操作符"></a>关系操作符</h2><table>
+<thead>
+<tr>
+<th>操作符</th>
+<th>功能</th>
+<th>用法</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>!</td>
+<td>非</td>
+<td>!a</td>
+</tr>
+<tr>
+<td>&lt;</td>
+<td>小于</td>
+<td>a&lt;b</td>
+</tr>
+<tr>
+<td>&lt;=</td>
+<td>小于等于</td>
+<td>a&lt;=b</td>
+</tr>
+<tr>
+<td>&gt;</td>
+<td>大于</td>
+<td>a&gt;b</td>
+</tr>
+<tr>
+<td>&gt;=</td>
+<td>大于等于</td>
+<td>a&gt;=b</td>
+</tr>
+<tr>
+<td>==</td>
+<td>等于</td>
+<td>a == b</td>
+</tr>
+<tr>
+<td>!=</td>
+<td>不等于</td>
+<td>a!=b</td>
+</tr>
+<tr>
+<td>&amp;&amp;</td>
+<td>逻辑与</td>
+<td>a &amp;&amp; b</td>
+</tr>
+<tr>
+<td>||</td>
+<td>逻辑或</td>
+<td>a||b</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>关系操作符的结果都是布尔值</p>
+</blockquote>
+<h2 id="赋值操作符"><a href="#赋值操作符" class="headerlink" title="赋值操作符 ="></a>赋值操作符 =</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">int a = 123;</span><br><span class="line">a = 5;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>高精度转低精度会进行隐式类型转换，会损失精度<br>复合赋值 a+=b</p>
+</blockquote>
+<h2 id="递增-递减-–"><a href="#递增-递减-–" class="headerlink" title="递增 ++ 递减 –"></a>递增 ++ 递减 –</h2><ol>
+<li>a++  返回a  a值加1 // ++ 在后 返回原结果</li>
+<li>++a 返回a+1 a值加1 // ++ 在前 返回结算后结果</li>
+</ol>
+<h2 id="条件操作符"><a href="#条件操作符" class="headerlink" title="条件操作符"></a>条件操作符</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bool isEqual = !strcmp(str1,str2)? true : false;</span><br></pre></td></tr></table></figure>
+
+<h2 id="sizeof-操作符"><a href="#sizeof-操作符" class="headerlink" title="sizeof 操作符"></a>sizeof 操作符</h2><ol>
+<li><p>返回字节长度</p>
+</li>
+<li><p>用法 object 时候可以省掉括号</p>
+<ol>
+<li>sizeof (type)</li>
+<li>sizeof (object)</li>
+<li>sizeof object</li>
+</ol>
+</li>
+<li><p>示例</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">int ia[] = &#123;0,1,2&#125;;</span><br><span class="line">size_t array_size = sizeof ia;</span><br><span class="line">size_t ele_size = array_size / sizeof(int);</span><br></pre></td></tr></table></figure>
+
+<p> <em>注意:</em> size(ptr) 返回是指针长度 而不是指针指向的长度</p>
+</li>
+<li><p>string 类型 sizeof 与内容无关</p>
+</li>
+</ol>
+<h2 id="new-delete-操作符"><a href="#new-delete-操作符" class="headerlink" title="new/delete 操作符"></a>new/delete 操作符</h2><ol>
+<li><p>系统为每个程序运行时候提供可用的内存池，这个被称为<strong>空闲存储区</strong>(free store)或<strong>堆</strong>(heap)</p>
+</li>
+<li><p>new 分配对象 返回对象指针</p>
+</li>
+<li><p>delete 作用在对象指正上，如果在对数组类型需要加[]</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">int * p = new int[10];</span><br><span class="line">int * pi = new int(100);</span><br><span class="line">delete [] p;</span><br><span class="line">delete pi;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<h2 id="逗号操作符"><a href="#逗号操作符" class="headerlink" title="逗号操作符"></a>逗号操作符</h2><ol>
+<li>从左往右计算</li>
+<li>结果为最右边表达式的值</li>
+</ol>
+<h2 id="位操作符"><a href="#位操作符" class="headerlink" title="位操作符"></a>位操作符</h2><table>
+<thead>
+<tr>
+<th>操作符</th>
+<th>功能</th>
+<th>用法</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>~</td>
+<td>按位非</td>
+<td>~a</td>
+</tr>
+<tr>
+<td>&lt;&lt;</td>
+<td>左移</td>
+<td>a &lt;&lt; b</td>
+</tr>
+<tr>
+<td>&gt;&gt;</td>
+<td>右移</td>
+<td>a &gt;&gt; b</td>
+</tr>
+<tr>
+<td>&amp;</td>
+<td>按位与</td>
+<td>a &amp; b</td>
+</tr>
+<tr>
+<td>|</td>
+<td>按位或</td>
+<td>a | b</td>
+</tr>
+<tr>
+<td>^</td>
+<td>异或</td>
+<td>a == b</td>
+</tr>
+<tr>
+<td>&amp;=</td>
+<td>按位与等于</td>
+<td>a&amp;=b</td>
+</tr>
+<tr>
+<td>|=</td>
+<td>按位或等于</td>
+<td>a |= b</td>
+</tr>
+<tr>
+<td>^=</td>
+<td>按位异或等于</td>
+<td>a^=b</td>
+</tr>
+</tbody></table>
+<h2 id="类型转换"><a href="#类型转换" class="headerlink" title="类型转换"></a>类型转换</h2><ol>
+<li>显式类型转换(强制转换)<ol>
+<li>static_cast<ol>
+<li>int ival = static_cast<int>(4.14)</int></li>
+</ol>
+</li>
+<li>dynamic_cast</li>
+<li>const_cast</li>
+<li>reinterpret_cast</li>
+</ol>
+</li>
+<li>隐式类型转换<ol>
+<li>算术转换<ol>
+<li>小类型可以提升大类型 int-&gt;double</li>
+<li>高精度转低精度 会有警告 不支持舍入 double-&gt;int</li>
+<li>3.14L + ‘a’ // ‘a’会转成asic 码</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2020-11-25T01:25:37.665Z" itemprop="dateUpdated">2020-11-25 09:25:37</time>
+</span><br>
+
+
+        
+        转载请注明： <a href="/read-notes/cpp-primer/read-notes-cpp-primer-cpp-primer-3-express/" target="_blank" rel="external">http://devhc.com/read-notes/cpp-primer/read-notes-cpp-primer-cpp-primer-3-express/</a>
+        
+    </div>
+    
+    <footer>
+        <a href="http://devhc.com">
+            <img src="/img/avatar.jpg" alt="all3n">
+            all3n
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/cpp/">cpp</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/cpp-primer/">cpp-primer</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/read-notes/">read-notes</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://devhc.com/read-notes/cpp-primer/read-notes-cpp-primer-cpp-primer-3-express/&title=《cpp-primer-3:expression》 — all3n's blog&pic=http://devhc.com/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://devhc.com/read-notes/cpp-primer/read-notes-cpp-primer-cpp-primer-3-express/&title=《cpp-primer-3:expression》 — all3n's blog&source=表达式定义
+由一个或多个操作数构成，应用在操作数是叫做操作符
+在一个操作数上交一元操作符（&amp;，*），作用在两个操作数上的叫做2元操作符（+，-）
+" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://devhc.com/read-notes/cpp-primer/read-notes-cpp-primer-cpp-primer-3-express/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《cpp-primer-3:expression》 — all3n's blog&url=http://devhc.com/read-notes/cpp-primer/read-notes-cpp-primer-cpp-primer-3-express/&via=http://devhc.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://devhc.com/read-notes/cpp-primer/read-notes-cpp-primer-cpp-primer-3-express/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/read-notes/cpp-primer/read-notes-cpp-primer-cpp-primer-2-data-types/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">cpp-primer-2:data-types</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/matlab/matlab-matlab-octave/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">matlab 常用命令</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Valine Comments -->
+    <div class="comments vcomment" id="comments"></div>
+    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+    <script src="//unpkg.com/valine@latest/dist/Valine.min.js"></script>
+    <!-- Valine Comments script -->
+    <script>
+        var GUEST_INFO = ['nick','mail','link'];
+        var guest_info = 'nick,mail,link'.split(',').filter(function(item){
+          return GUEST_INFO.indexOf(item) > -1
+        });
+        new Valine({
+            el: '#comments',
+            notify: 'false' == 'true',
+            verify: 'false' == 'true',
+            appId: "Nfv4vGei1mn7VDrtjeUuYmIq-MdYXbMMI",
+            appKey: "WY7KBP7xk3hV9fRfo40y6I1O",
+            avatar: "mm",
+            placeholder: "Just go go",
+            guest_info: guest_info.length == 0 ? GUEST_INFO : guest_info,
+            pageSize: "10"
+        })
+    </script>
+    <!-- Valine Comments end -->
+
+
+
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        谢谢大爷~
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/wechat.png" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
+                data-wechat="/img/wechat.png" data-alipay="/img/alipay.png">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>博客内容遵循 <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>all3n &copy; 2015 - 2020</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://devhc.com/read-notes/cpp-primer/read-notes-cpp-primer-cpp-primer-3-express/&title=《cpp-primer-3:expression》 — all3n's blog&pic=http://devhc.com/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://devhc.com/read-notes/cpp-primer/read-notes-cpp-primer-cpp-primer-3-express/&title=《cpp-primer-3:expression》 — all3n's blog&source=表达式定义
+由一个或多个操作数构成，应用在操作数是叫做操作符
+在一个操作数上交一元操作符（&amp;，*），作用在两个操作数上的叫做2元操作符（+，-）
+" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://devhc.com/read-notes/cpp-primer/read-notes-cpp-primer-cpp-primer-3-express/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《cpp-primer-3:expression》 — all3n's blog&url=http://devhc.com/read-notes/cpp-primer/read-notes-cpp-primer-cpp-primer-3-express/&via=http://devhc.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://devhc.com/read-notes/cpp-primer/read-notes-cpp-primer-cpp-primer-3-express/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAN4AAADeCAAAAAB3DOFrAAACrUlEQVR42u3awW4bMQwE0Pz/T6dATwVaxzOkZLvA88lI7JXeHpbykF9f8ev79+vv93/+5dFnvoPXo+s82sPhFx4eHt5o6/uF2+Xv3TI8PDy81/CS5dsN/XwTZ//N94yHh4f3Cbz24LspJ0lhwMPDw/u/eHnQkBeYnw/leHh4eJ/GS7a1DxGSdd+WteDh4eHFvE3k+q73L+rv4eHh4ZVd9bYZljzWzxaAJ7vFw8PDu8BLFt60smZRQr6TKBTGw8PDu8ZLwoX8Z39SGPLi0Q54/aMw4OHh4V3jbX7jzwYO9qXoyWfw8PDwjvI2ZWBTMPZDWsne8PDw8G7wNs3+pEnWDhyc3Q8eHh7eDd6TR2oc2m4aY5vj9fBIjYeHh7fgtQ/9Nn5tj79tqJG33/Dw8PBO8VYt+SACzstGC0i+i4eHh3eD1440tdFqfpguthvvCg8PD+81vHwsoFhgNHYwK1R4eHh4r+e1F203mmNmh+/VkRoPDw+v5CWxadsqy79VtLLaCQE8PDy8o7z9pfOFz96mqHjg4eHhvYTXXmI2dLUJbYsBBTw8PLxrvOgnfflwb1tcs3GEJ5/Bw8PDu8DLw4h2meThnvA2TTI8PDy8G7z8+Nu2wWbbmsUWw/gaDw8Pb8SbRQ9tC/9UNDyLKvDw8PDO8tqx1Jy3OS4fuwV4eHh4l3l5s79tRyUjBTmvKDZ4eHh4F3ib+LU9rc8KRptJ1+kLHh4eXsmbhQh5vJuvkm+9KGZ4eHh4F3izztE+wkhaXO1AwyosxsPDwyt5mxZXfoU2btgc3PHw8PBew9uErflhNykzh7MWPDw8vLfy8vLQlpM6b84/j4eHh/cBvLw9tomD2wGCA0dqPDw8vJK3CSNaahvd5kMJ9QABHh4e3og3a4DNNrRvfa1GBPDw8PC2vF9377tgwDPsdwAAAABJRU5ErkJggg==" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    showProcessingMessages: false, //关闭js加载过程信息
+    messageStyle: "none", //不显示信息
+    extensions: ["tex2jax.js"],
+    jax: ["input/TeX", "output/HTML-CSS"],
+    tex2jax: {
+        inlineMath:  [ ["$", "$"] ], //行内公式选择$
+        displayMath: [ ["$$","$$"] ], //段内公式选择$$
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre','code','a'], //避开某些标签
+        ignoreClass:"comment-content" //避开含该Class的标签
+    },
+    "HTML-CSS": {
+        availableFonts: ["STIX","TeX"], //可选字体
+        showMathMenu: false //关闭右击菜单显示
+    }
+});
+MathJax.Hub.Queue(["Typeset",MathJax.Hub]);
+</script>
+<script src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '死鬼去哪里了！';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '(つェ⊂)咦!又好了!';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+
+
+</body>
+</html>

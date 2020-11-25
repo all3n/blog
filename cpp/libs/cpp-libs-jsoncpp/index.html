@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+    
+
+    
+
+    
+
+
+
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
+    
+    
+    
+    <meta name="baidu-site-verification" content="O0qt9Gkm8L">
+    
+    
+    
+    <title>JsonCpp Guide | all3n&#39;s blog | coding like r&amp;b</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="cpp">
+    <meta name="description" content="Github Documentation Official ApiDoc 新版用法 jsoncpp WikiBook 该文档是老版本写法  Install Build From Source 12345mkdir buildcd buildcmake -DCMAKE_INSTALL_PREFIX=/opt/cpplibs ..makemake install  使用包管理工具 缺点不能灵活控制版本">
+<meta name="keywords" content="cpp">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JsonCpp Guide">
+<meta property="og:url" content="http://devhc.com/cpp/libs/cpp-libs-jsoncpp/index.html">
+<meta property="og:site_name" content="all3n&#39;s blog">
+<meta property="og:description" content="Github Documentation Official ApiDoc 新版用法 jsoncpp WikiBook 该文档是老版本写法  Install Build From Source 12345mkdir buildcd buildcmake -DCMAKE_INSTALL_PREFIX=/opt/cpplibs ..makemake install  使用包管理工具 缺点不能灵活控制版本">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2020-11-25T01:25:37.665Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="JsonCpp Guide">
+<meta name="twitter:description" content="Github Documentation Official ApiDoc 新版用法 jsoncpp WikiBook 该文档是老版本写法  Install Build From Source 12345mkdir buildcd buildcmake -DCMAKE_INSTALL_PREFIX=/opt/cpplibs ..makemake install  使用包管理工具 缺点不能灵活控制版本">
+    
+        <link rel="alternate" type="application/atom+xml" title="all3n&#39;s blog" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head --><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+    
+
+
+</head>
+
+<body>
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">all3n</h5>
+          <a href="mailto:wanghch8398@163.com" title="wanghch8398@163.com" class="mail">wanghch8398@163.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/resource"  >
+                <i class="icon icon-lg icon-book"></i>
+                Resource
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/all3n" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/about"  >
+                <i class="icon icon-lg icon-link"></i>
+                About Me
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">JsonCpp Guide</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">JsonCpp Guide</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2019-10-11T02:06:12.000Z" itemprop="datePublished" class="page-time">
+  2019-10-11
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/cpp/">cpp</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/cpp/libs/">libs</a></li></ul></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Documentation"><span class="post-toc-number">1.</span> <span class="post-toc-text">Documentation</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Install"><span class="post-toc-number">2.</span> <span class="post-toc-text">Install</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Examples"><span class="post-toc-number">3.</span> <span class="post-toc-text">Examples</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Example-New-Api"><span class="post-toc-number">4.</span> <span class="post-toc-text">Example New Api</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Json-Value"><span class="post-toc-number">5.</span> <span class="post-toc-text">Json::Value</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#流操作"><span class="post-toc-number">6.</span> <span class="post-toc-text">流操作</span></a></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-cpp-libs-jsoncpp"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">JsonCpp Guide</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2019-10-11 10:06:12" datetime="2019-10-11T02:06:12.000Z"  itemprop="datePublished">2019-10-11</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/cpp/">cpp</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/cpp/libs/">libs</a></li></ul></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <p><a href="https://github.com/open-source-parsers/jsoncpp" target="_blank" rel="noopener">Github</a></p>
+<h2 id="Documentation"><a href="#Documentation" class="headerlink" title="Documentation"></a>Documentation</h2><ul>
+<li><a href="http://open-source-parsers.github.io/jsoncpp-docs/doxygen/index.html" target="_blank" rel="noopener">Official ApiDoc</a> 新版用法</li>
+<li><a href="https://en.wikibooks.org/wiki/JsonCpp" target="_blank" rel="noopener">jsoncpp WikiBook</a> 该文档是老版本写法</li>
+</ul>
+<h2 id="Install"><a href="#Install" class="headerlink" title="Install"></a>Install</h2><ol>
+<li><p>Build From Source</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">mkdir build</span><br><span class="line">cd build</span><br><span class="line">cmake -DCMAKE_INSTALL_PREFIX=/opt/cpplibs ..</span><br><span class="line">make</span><br><span class="line">make install</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>使用包管理工具 缺点不能灵活控制版本<br>apt-get install libjsoncpp-dev</p>
+</li>
+</ol>
+<h2 id="Examples"><a href="#Examples" class="headerlink" title="Examples"></a>Examples</h2><figure class="highlight cpp"><figcaption><span>json_v1.cpp</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;json/json.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span>* argv[])</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">string</span> jsonStr = <span class="string">"&#123;\"name\": \"xxx\", \"array\": [\"a\", \"b\", \"c\"], \"obj\": &#123;\"k\" : \"v\"&#125;&#125;"</span>;</span><br><span class="line">    Json::Reader reader;</span><br><span class="line">    Json::Value value;</span><br><span class="line">    <span class="keyword">if</span> (reader.parse(jsonStr, value)) &#123;</span><br><span class="line">        <span class="comment">// read str field</span></span><br><span class="line">        <span class="built_in">cout</span>&lt;&lt;value[<span class="string">"name"</span>].asString()&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">        <span class="comment">// read array field</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; value[<span class="string">"array"</span>].size(); i++)&#123;</span><br><span class="line">            <span class="built_in">cout</span>&lt;&lt;i&lt;&lt;<span class="string">":"</span>&lt;&lt;value[<span class="string">"array"</span>][i].asString()&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// read obj field</span></span><br><span class="line">        <span class="built_in">cout</span>&lt;&lt;value[<span class="string">"obj"</span>][<span class="string">"k"</span>].asString()&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>compile:<br>g++ -I/opt/cpplibs/include/ -o json_v1 json_v1.cpp /opt/cpplibs/lib/libjsoncpp.a &amp;&amp; ./json_v1</p>
+<p>output</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">json_v1.cpp: In function ‘int main(int, char**)’:</span><br><span class="line">json_v1.cpp:20:18: warning: ‘Reader’ is deprecated: Use CharReader and CharReaderBuilder instead [-Wdeprecated-declarations]</span><br><span class="line">     Json::Reader reader;</span><br><span class="line">                  ^~~~~~</span><br><span class="line">In file included from /data/cpplibs/include/jsoncpp/json/json.h:11:0,</span><br><span class="line">                 from json_v1.cpp:10:</span><br><span class="line">/data/cpplibs/include/jsoncpp/json/reader.h:35:83: note: declared here</span><br><span class="line"> class JSONCPP_DEPRECATED(&quot;Use CharReader and CharReaderBuilder instead&quot;) JSON_API Reader &#123;</span><br><span class="line">                                                                                   ^~~~~~</span><br><span class="line">xxx</span><br><span class="line">0:a</span><br><span class="line">1:b</span><br><span class="line">2:c</span><br><span class="line">v</span><br></pre></td></tr></table></figure>
+
+<p>注意这里使用老版本reader api会引起警告</p>
+<h2 id="Example-New-Api"><a href="#Example-New-Api" class="headerlink" title="Example New Api"></a>Example New Api</h2><figure class="highlight cpp"><figcaption><span>json_v2.cpp</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;json/json.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;memory&gt;</span></span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span>* argv[])</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">string</span> jsonStr = <span class="string">"&#123;\"name\": \"xxx\", \"array\": [\"a\", \"b\", \"c\"], \"obj\": &#123;\"k\" : \"v\"&#125;&#125;"</span>;</span><br><span class="line"></span><br><span class="line">    Json::Value value;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// parse</span></span><br><span class="line">    JSONCPP_STRING errs;</span><br><span class="line">    Json::CharReaderBuilder readerBuilder;</span><br><span class="line">    <span class="function"><span class="built_in">std</span>::<span class="built_in">unique_ptr</span>&lt;Json::CharReader&gt; <span class="keyword">const</span> <span class="title">reader</span><span class="params">(readerBuilder.newCharReader())</span></span>;</span><br><span class="line">    <span class="keyword">bool</span> res = reader-&gt;parse(jsonStr.c_str(), jsonStr.c_str() + jsonStr.length(), &amp;value, &amp;errs);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (res &amp;&amp; errs.empty())</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="comment">// read str field</span></span><br><span class="line">        <span class="built_in">cout</span>&lt;&lt;value[<span class="string">"name"</span>].asString()&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">        <span class="comment">// read array field</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; value[<span class="string">"array"</span>].size(); i++)&#123;</span><br><span class="line">            <span class="built_in">cout</span>&lt;&lt;i&lt;&lt;<span class="string">":"</span>&lt;&lt;value[<span class="string">"array"</span>][i].asString()&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// read obj field</span></span><br><span class="line">        <span class="built_in">cout</span>&lt;&lt;value[<span class="string">"obj"</span>][<span class="string">"k"</span>].asString()&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">    &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">        <span class="built_in">cout</span>&lt;&lt;<span class="string">"json parse fail:"</span>&lt;&lt;errs&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>源码方式<br>g++ -I/opt/cpplibs/include/ -o json_v2 json_v2.cpp /opt/cpplibs/lib/libjsoncpp.a &amp;&amp; ./json_v2</p>
+<p>如果使用包管理<br>共享库方式编译<br>g++ -I/usr/include/jsoncpp -ljsoncpp -o json_v2 json_v2.cpp<br>静态库方式编译<br>g++ -I/usr/include/jsoncpp -ljsoncpp -o json_v2 json_v2.cpp /usr/lib/x86_64-linux-gnu/libjsoncpp.a</p>
+<p>output 已经没有警告了</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">xxx</span><br><span class="line">0:a</span><br><span class="line">1:b</span><br><span class="line">2:c</span><br><span class="line">v</span><br></pre></td></tr></table></figure>
+
+<h2 id="Json-Value"><a href="#Json-Value" class="headerlink" title="Json::Value"></a><a href="https://github.com/open-source-parsers/jsoncpp/blob/1.9.1/include/json/value.h#L176" target="_blank" rel="noopener">Json::Value</a></h2><ol>
+<li>判断类型 bool isXxx()<ul>
+<li>isNull</li>
+<li>isBool</li>
+<li>isInt</li>
+<li>isInt64</li>
+<li>isNumbeic</li>
+<li>isString</li>
+<li>isObject</li>
+<li>isArray</li>
+</ul>
+</li>
+<li>转换原生类型 asXxx()<ul>
+<li>asInt</li>
+<li>asInt64</li>
+<li>asBool</li>
+<li>asDouble</li>
+</ul>
+</li>
+<li>访问字段<ul>
+<li>[] 方式访问 val[“field”]</li>
+<li>key是否存在 isMember(“field”)</li>
+</ul>
+</li>
+<li>转成格式化字符串<ul>
+<li>String toStyledString()<h2 id="流操作"><a href="#流操作" class="headerlink" title="流操作"></a>流操作</h2></li>
+<li>读取: <a href="http://open-source-parsers.github.io/jsoncpp-docs/doxygen/namespace_json.html#acfebeaf759a841173ddce34c4da22486" target="_blank" rel="noopener">Json::parseFromStream</a></li>
+<li>输出: <a href="http://open-source-parsers.github.io/jsoncpp-docs/doxygen/namespace_json.html#afd767fe4c7e962d0ff3d1a6d1622619f" target="_blank" rel="noopener">writeString</a><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Json::StreamWriterBuilder wbuilder; </span><br><span class="line">wbuilder[<span class="string">"indentation"</span>] = <span class="string">"\t"</span>;</span><br><span class="line"><span class="built_in">std</span>::<span class="built_in">string</span> document = Json::writeString(wbuilder, root);</span><br><span class="line">Json::CharReaderBuilder rbuilder;</span><br><span class="line">rbuilder[<span class="string">"collectComments"</span>] = <span class="literal">false</span>;</span><br><span class="line"><span class="built_in">std</span>::<span class="built_in">string</span> errs;</span><br><span class="line"><span class="keyword">bool</span> ok = Json::parseFromStream(rbuilder, <span class="built_in">std</span>::<span class="built_in">cin</span>, &amp;root, &amp;errs);</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+</ol>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2020-11-25T01:25:37.665Z" itemprop="dateUpdated">2020-11-25 09:25:37</time>
+</span><br>
+
+
+        
+        转载请注明： <a href="/cpp/libs/cpp-libs-jsoncpp/" target="_blank" rel="external">http://devhc.com/cpp/libs/cpp-libs-jsoncpp/</a>
+        
+    </div>
+    
+    <footer>
+        <a href="http://devhc.com">
+            <img src="/img/avatar.jpg" alt="all3n">
+            all3n
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/cpp/">cpp</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://devhc.com/cpp/libs/cpp-libs-jsoncpp/&title=《JsonCpp Guide》 — all3n's blog&pic=http://devhc.com/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://devhc.com/cpp/libs/cpp-libs-jsoncpp/&title=《JsonCpp Guide》 — all3n's blog&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://devhc.com/cpp/libs/cpp-libs-jsoncpp/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《JsonCpp Guide》 — all3n's blog&url=http://devhc.com/cpp/libs/cpp-libs-jsoncpp/&via=http://devhc.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://devhc.com/cpp/libs/cpp-libs-jsoncpp/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between flex-row-reverse">
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/tensorflow/framework/tensorflow-tf-print/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">Tensorflow print</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Valine Comments -->
+    <div class="comments vcomment" id="comments"></div>
+    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+    <script src="//unpkg.com/valine@latest/dist/Valine.min.js"></script>
+    <!-- Valine Comments script -->
+    <script>
+        var GUEST_INFO = ['nick','mail','link'];
+        var guest_info = 'nick,mail,link'.split(',').filter(function(item){
+          return GUEST_INFO.indexOf(item) > -1
+        });
+        new Valine({
+            el: '#comments',
+            notify: 'false' == 'true',
+            verify: 'false' == 'true',
+            appId: "Nfv4vGei1mn7VDrtjeUuYmIq-MdYXbMMI",
+            appKey: "WY7KBP7xk3hV9fRfo40y6I1O",
+            avatar: "mm",
+            placeholder: "Just go go",
+            guest_info: guest_info.length == 0 ? GUEST_INFO : guest_info,
+            pageSize: "10"
+        })
+    </script>
+    <!-- Valine Comments end -->
+
+
+
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        谢谢大爷~
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/wechat.png" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
+                data-wechat="/img/wechat.png" data-alipay="/img/alipay.png">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>博客内容遵循 <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>all3n &copy; 2015 - 2020</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://devhc.com/cpp/libs/cpp-libs-jsoncpp/&title=《JsonCpp Guide》 — all3n's blog&pic=http://devhc.com/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://devhc.com/cpp/libs/cpp-libs-jsoncpp/&title=《JsonCpp Guide》 — all3n's blog&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://devhc.com/cpp/libs/cpp-libs-jsoncpp/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《JsonCpp Guide》 — all3n's blog&url=http://devhc.com/cpp/libs/cpp-libs-jsoncpp/&via=http://devhc.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://devhc.com/cpp/libs/cpp-libs-jsoncpp/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMYAAADGCAAAAACs8KCBAAACJklEQVR42u3aQY6EMAwFUe5/aeYAiKa+HUbCqaxGzRDysrBix8eBx3kZd7/fjd8zX2c73hgyZMj4LIN8/veyyFvXRZP/CbZGhgwZGzBIKCQRj/BIzORrkyFDhgxygOMBl2yQDBkyZKxldIIpP1zKkCFDBk9iyVu1p6QAtywXlyFDxgcZvOr+/3+/cr8hQ4aMTzHOcPBjXG1ZZ2nIkCFjNiMt+qcpa62popgSy5AhYzQjLeJ3lthJYuNjogwZMkYwau0RvPhVK8DFl50yZMjYhsFT0P7TNOA+xFgZMmSMZqTNELWyWhqaW7PJkCFjHKN1IAOxjgdc3oLWyr9lyJDxcUanVWtVo0YxrZUhQ8ZoRlogq30yLc+lgViGDBmzGWRx/AjIry1JU0VwaSFDhowNGP0Ly9p21Jo5bu83ZMiQMZpRC6mrFvr7l2LPiAwZMsYx+ikoaf/iM6CmChkyZGzJqDVerAqv/CsPSawMGTLGMWrhMr1Q5Ee9VmlPhgwZmzEOMHiRjhf9+QwPRTcZMmQMZZDWijcuBggMba4MGTI2YKRhNA24QfME3m4ZMmTswDjD0SmicQZJemXIkLEPg4/+pLUrgXRrZMiQMZXBgyxPOEmZjDd5oK/IkCFjAwYPfGkI5kkvD/3BAxkyZGzJ6ATfNFUuVg1lyJCxPaOWmq5q7Hi4HpAhQ8ZoRqflIn2LX5Hy4p0MGTJmM9LUMV1WulA+pwwZMjZg/AEJS/oI4Ec1twAAAABJRU5ErkJggg==" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    showProcessingMessages: false, //关闭js加载过程信息
+    messageStyle: "none", //不显示信息
+    extensions: ["tex2jax.js"],
+    jax: ["input/TeX", "output/HTML-CSS"],
+    tex2jax: {
+        inlineMath:  [ ["$", "$"] ], //行内公式选择$
+        displayMath: [ ["$$","$$"] ], //段内公式选择$$
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre','code','a'], //避开某些标签
+        ignoreClass:"comment-content" //避开含该Class的标签
+    },
+    "HTML-CSS": {
+        availableFonts: ["STIX","TeX"], //可选字体
+        showMathMenu: false //关闭右击菜单显示
+    }
+});
+MathJax.Hub.Queue(["Typeset",MathJax.Hub]);
+</script>
+<script src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '死鬼去哪里了！';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '(つェ⊂)咦!又好了!';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+
+
+</body>
+</html>

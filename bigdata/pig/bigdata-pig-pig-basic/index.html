@@ -1,0 +1,672 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+    
+
+    
+
+    
+
+
+
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
+    
+    
+    
+    <meta name="baidu-site-verification" content="O0qt9Gkm8L">
+    
+    
+    
+    <title>pig basic | all3n&#39;s blog | coding like r&amp;b</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="pig">
+    <meta name="description" content="Pig BasicPig 官网Apache Pig 是一个高级过程语言，适合于使用 Hadoop 和 MapReduce 平台来查询大型半结构化数据集。通过允许对分布式数据集进行类似 SQL 的查询，Pig 可以简化 Hadoop 的使用pig 语法关键字是不分大小写 Pig启动模式 local mapreduce spark通过 pig -x local xxx.pig 指定  本地测试本地一个">
+<meta name="keywords" content="pig">
+<meta property="og:type" content="article">
+<meta property="og:title" content="pig basic">
+<meta property="og:url" content="http://devhc.com/bigdata/pig/bigdata-pig-pig-basic/index.html">
+<meta property="og:site_name" content="all3n&#39;s blog">
+<meta property="og:description" content="Pig BasicPig 官网Apache Pig 是一个高级过程语言，适合于使用 Hadoop 和 MapReduce 平台来查询大型半结构化数据集。通过允许对分布式数据集进行类似 SQL 的查询，Pig 可以简化 Hadoop 的使用pig 语法关键字是不分大小写 Pig启动模式 local mapreduce spark通过 pig -x local xxx.pig 指定  本地测试本地一个">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2020-11-25T01:25:37.665Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="pig basic">
+<meta name="twitter:description" content="Pig BasicPig 官网Apache Pig 是一个高级过程语言，适合于使用 Hadoop 和 MapReduce 平台来查询大型半结构化数据集。通过允许对分布式数据集进行类似 SQL 的查询，Pig 可以简化 Hadoop 的使用pig 语法关键字是不分大小写 Pig启动模式 local mapreduce spark通过 pig -x local xxx.pig 指定  本地测试本地一个">
+    
+        <link rel="alternate" type="application/atom+xml" title="all3n&#39;s blog" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head --><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+    
+
+
+</head>
+
+<body>
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">all3n</h5>
+          <a href="mailto:wanghch8398@163.com" title="wanghch8398@163.com" class="mail">wanghch8398@163.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/resource"  >
+                <i class="icon icon-lg icon-book"></i>
+                Resource
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/all3n" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/about"  >
+                <i class="icon icon-lg icon-link"></i>
+                About Me
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">pig basic</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">pig basic</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2018-03-18T03:31:22.000Z" itemprop="datePublished" class="page-time">
+  2018-03-18
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/bigdata/">bigdata</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/bigdata/pig/">pig</a></li></ul></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#Pig-Basic"><span class="post-toc-number">1.</span> <span class="post-toc-text">Pig Basic</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Pig启动模式"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">Pig启动模式</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#本地测试"><span class="post-toc-number">1.1.1.</span> <span class="post-toc-text">本地测试</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#执行参数"><span class="post-toc-number">1.1.2.</span> <span class="post-toc-text">执行参数</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#log4j-配置"><span class="post-toc-number">1.1.3.</span> <span class="post-toc-text">log4j 配置</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#PigLatin"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">PigLatin</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#结构"><span class="post-toc-number">1.2.1.</span> <span class="post-toc-text">结构</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#引入包"><span class="post-toc-number">1.2.2.</span> <span class="post-toc-text">引入包</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#加载数据"><span class="post-toc-number">1.2.3.</span> <span class="post-toc-text">加载数据</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#遍历数据"><span class="post-toc-number">1.2.4.</span> <span class="post-toc-text">遍历数据</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#过滤数据"><span class="post-toc-number">1.2.5.</span> <span class="post-toc-text">过滤数据</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#join-数据"><span class="post-toc-number">1.2.6.</span> <span class="post-toc-text">join 数据</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#group-数据"><span class="post-toc-number">1.2.7.</span> <span class="post-toc-text">group 数据</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#存储"><span class="post-toc-number">1.2.8.</span> <span class="post-toc-text">存储</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#其他"><span class="post-toc-number">1.2.9.</span> <span class="post-toc-text">其他</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#常见函数"><span class="post-toc-number">1.2.10.</span> <span class="post-toc-text">常见函数</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#UDF-用户自定义函数"><span class="post-toc-number">1.2.11.</span> <span class="post-toc-text">UDF 用户自定义函数</span></a></li></ol></li></ol></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-bigdata-pig-pig-basic"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">pig basic</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2018-03-18 11:31:22" datetime="2018-03-18T03:31:22.000Z"  itemprop="datePublished">2018-03-18</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/bigdata/">bigdata</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/bigdata/pig/">pig</a></li></ul></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="Pig-Basic"><a href="#Pig-Basic" class="headerlink" title="Pig Basic"></a>Pig Basic</h1><p><a href="http://pig.apache.org/" target="_blank" rel="noopener">Pig 官网</a><br>Apache Pig 是一个高级过程语言，适合于使用 Hadoop 和 MapReduce 平台来查询大型半结构化数据集。<br>通过允许对分布式数据集进行类似 SQL 的查询，Pig 可以简化 Hadoop 的使用<br>pig 语法关键字是不分大小写</p>
+<h2 id="Pig启动模式"><a href="#Pig启动模式" class="headerlink" title="Pig启动模式"></a>Pig启动模式</h2><ol>
+<li>local</li>
+<li>mapreduce</li>
+<li>spark<br>通过 pig -x local xxx.pig 指定</li>
+</ol>
+<h3 id="本地测试"><a href="#本地测试" class="headerlink" title="本地测试"></a>本地测试</h3><p>本地一个目录先创建一个文件比如data.txt</p>
+<figure class="highlight plain"><figcaption><span>data.txt</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">w,10,6</span><br><span class="line">h,12,2</span><br><span class="line">h,14,1</span><br></pre></td></tr></table></figure>
+
+<p>pig -x local 进入交互模式 (下面省略中间执行日志)</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">grunt&gt; DATA = LOAD &apos;data.txt&apos; USING PigStorage(&apos;,&apos;) AS (name: chararray, age:int, num: float);</span><br><span class="line">grunt&gt; DUMP DATA;</span><br><span class="line">(w,10,6.0)</span><br><span class="line">(h,12,2.0)</span><br><span class="line">(h,14,1.0)</span><br><span class="line">grunt&gt; describe DATA;</span><br><span class="line">DATA: &#123;name: chararray,age: int,num: float&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="执行参数"><a href="#执行参数" class="headerlink" title="执行参数"></a>执行参数</h3><ol>
+<li><a href="http://pig.apache.org/docs/r0.17.0/start.html#properties" target="_blank" rel="noopener">Properties</a><br>通过-D:<br>等价设置环境变量PIG_OPTS, export PIG_OPTS=–Dmapreduce.task.profile=true<br>或者通过文件<br>pig -P mypig.properties</li>
+</ol>
+<p>常见mapreduce参数设置 hadoop相关配置</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pig -Dmapreduce.job.cache.files=<span class="string">"/user/hadoop/dict.txt#dict.txt"</span> xxx.pig</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>变量 -p -param 替换pig文件中变量<br>pig -p INPUT=”data.txt” xx.pig</li>
+</ol>
+<h3 id="log4j-配置"><a href="#log4j-配置" class="headerlink" title="log4j 配置"></a>log4j 配置</h3><p>默认是INFO 日志特别多，可以通过log4j文件改成ERROR</p>
+<figure class="highlight plain"><figcaption><span>pig-log4j.properties</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">log4j.rootLogger=ERROR,stdout</span><br><span class="line">log4j.appender.stdout=org.apache.log4j.ConsoleAppender</span><br><span class="line">log4j.appender.stdout.layout=org.apache.log4j.PatternLayout</span><br><span class="line">log4j.appender.stdout.layout.ConversionPattern=%d %p [%c] - %m%n</span><br></pre></td></tr></table></figure>
+
+<p>pig -log4jconf ./pig-log4j.properties -x local</p>
+<ol start="2">
+<li><a href="http://pig.apache.org/docs/r0.17.0/cmds.html#set" target="_blank" rel="noopener">set</a><br>主要用于job名称 job并行度 等job相关设置</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">SET job.name &apos;my job&apos;;</span><br><span class="line">SET default_parallel 100;</span><br></pre></td></tr></table></figure>
+
+<h2 id="PigLatin"><a href="#PigLatin" class="headerlink" title="PigLatin"></a>PigLatin</h2><p>pig 文件是使用PigLatin语法描述<br>注意pig里 字符串都是 单引号</p>
+<h3 id="结构"><a href="#结构" class="headerlink" title="结构"></a>结构</h3><ol>
+<li>tuple<br> 有序字段集合<br> (name, 18)</li>
+<li>bag<br> tuple 的组合</li>
+<li><a href="http://pig.apache.org/docs/r0.17.0/basic.html#map-schema" target="_blank" rel="noopener">map</a><br> key/value pair<br> [ key#value &lt;, key#value …&gt; ]<br> [name#John,phone#5551212]</li>
+</ol>
+<h3 id="引入包"><a href="#引入包" class="headerlink" title="引入包"></a>引入包</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">REGISTER &apos;hdfs://hadoop/piglibs/*.jar&apos;;</span><br></pre></td></tr></table></figure>
+
+<h3 id="加载数据"><a href="#加载数据" class="headerlink" title="加载数据"></a>加载数据</h3><p>pig记载数据通过<a href="http://pig.apache.org/docs/r0.17.0/func.html#load-store-functions" target="_blank" rel="noopener">Loader</a>方式</p>
+<p>apache内置多种Loader</p>
+<ol>
+<li>TextLoader<br>load 一行为一个字段<br>默认TextLoader是文本TSV分割数据(支持gzip,bzip)<br>TSV: 分割<br>A = LOAD ‘student’ USING PigStorage(‘\t’) AS (name: chararray, age:int, gpa: float);</li>
+<li>JsonLoader 官方这个不是太好用 不支持 深层次json<br>a = load ‘a.json’ using JsonLoader(‘a0:int,a1:{(a10:int,a11:chararray)},a2:(a20:double,a21:bytearray),a3:[chararray]’);  </li>
+</ol>
+<p>第三方Loader<br>twitter elephantbird</p>
+<ol>
+<li>sequenceFileLoader</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">pairs = LOAD &apos;$INPUT&apos; USING com.twitter.elephantbird.pig.load.SequenceFileLoader (</span><br><span class="line">&apos;-c com.twitter.elephantbird.pig.util.IntWritableConverter&apos;,</span><br><span class="line">&apos;-c com.twitter.elephantbird.pig.util.TextConverter&apos;</span><br><span class="line">) as (</span><br><span class="line">key: int,</span><br><span class="line">value: chararray</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>Thrift Lzo(Block/Base64)</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">DATA = LOAD &apos;$INPUT&apos; </span><br><span class="line">  USING com.twitter.elephantbird.pig.load.ThriftPigLoader(&apos;com.xxx.ThriftClasss&apos;);</span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li>Protobuf</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">DATA = LOAD &apos;$INPUT&apos;</span><br><span class="line">  USING com.twitter.elephantbird.pig.load.ProtobufPigLoader(&apos;com.xxx.protobufClass&apos;);</span><br></pre></td></tr></table></figure>
+
+<ol start="4">
+<li>Json (elephant 版本支持嵌套)</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">DATA = LOAD &apos;$INPUT&apos;</span><br><span class="line">  USING com.twitter.elephantbird.pig.load.JsonLoader(&apos;-nestedLoad&apos;);</span><br></pre></td></tr></table></figure>
+
+<p>注意 等号 左右 要有一个空格 不然会语法错误</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">INPUT_LOG = LOAD &apos;$XXX_LOG&apos; USING org.apache.parquet.pig.ParquetLoader();</span><br></pre></td></tr></table></figure>
+
+<h3 id="遍历数据"><a href="#遍历数据" class="headerlink" title="遍历数据"></a>遍历数据</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">INPUT_LOG = FOREACH INPUT_LOG GENERATE time, uid;</span><br></pre></td></tr></table></figure>
+
+<h3 id="过滤数据"><a href="#过滤数据" class="headerlink" title="过滤数据"></a>过滤数据</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">FILTERED_LOG = FILTER INPUT_LOG BY isValid == 1;</span><br></pre></td></tr></table></figure>
+
+<h3 id="join-数据"><a href="#join-数据" class="headerlink" title="join 数据"></a>join 数据</h3><ol>
+<li><a href="http://pig.apache.org/docs/r0.17.0/basic.html#join-inner" target="_blank" rel="noopener">inner join</a><br>alias = JOIN alias BY {expression|’(‘expression [, expression …]’)’} (, alias BY {expression|’(‘expression [, expression …]’)’} …) [USING ‘replicated’ | ‘bloom’ | ‘skewed’ | ‘merge’ | ‘merge-sparse’] [PARTITION BY partitioner] [PARALLEL n]; </li>
+</ol>
+<p>inner join 和sql inner join一样只有两边都有 才保留</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">grunt&gt; DATA = LOAD &apos;data.txt&apos; USING PigStorage(&apos;,&apos;) as (name:chararray, age: int);</span><br><span class="line">grunt&gt; DUMP DATA;</span><br><span class="line">(jake,10)</span><br><span class="line">(lily,12)</span><br><span class="line">(john,14)</span><br><span class="line">(kite,13)</span><br><span class="line">grunt&gt; WEIGHT = LOAD &apos;weight.txt&apos; USING PigStorage(&apos;,&apos;) as (name:chararray, weight: int);</span><br><span class="line">grunt&gt; DUMP WEIGHT;</span><br><span class="line">(jake,40)</span><br><span class="line">(lily,42)</span><br><span class="line">(john,54)</span><br><span class="line">(mike,64)</span><br><span class="line">grunt&gt; JOIN_DATA = JOIN DATA BY name,WEIGHT BY name;</span><br><span class="line">grunt&gt; DUMP JOIN_DATA;</span><br><span class="line">(jake,10,jake,40)</span><br><span class="line">(john,14,john,54)</span><br><span class="line">(lily,12,lily,42)</span><br><span class="line">grunt&gt; DESCRIBE JOIN_DATA;</span><br><span class="line">JOIN_DATA: &#123;DATA::name: chararray,DATA::age: int,WEIGHT::name: chararray,WEIGHT::weight: int&#125;</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li><a href="http://pig.apache.org/docs/r0.17.0/basic.html#join-outer" target="_blank" rel="noopener">outer join</a><br>alias = JOIN left-alias BY left-alias-column [LEFT|RIGHT|FULL] [OUTER], right-alias BY right-alias-column [USING ‘replicated’ | ‘bloom’ | ‘skewed’ | ‘merge’] [PARTITION BY partitioner] [PARALLEL n]; </li>
+</ol>
+<p>out join和sql outer join概念类似<br>分LEFT,RIGHT,FULL<br>分别是保留左边全部，保留右边全部，保留两边全部<br>LEFT,RIGHT,FULL [OUTER] OUTER 可以省略</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">grunt&gt; JOIN_DATA = JOIN DATA BY name RIGHT, WEIGHT BY name;</span><br><span class="line">grunt&gt; DUMP JOIN_DATA;</span><br><span class="line">(jake,10,jake,40)</span><br><span class="line">(john,14,john,54)</span><br><span class="line">(lily,12,lily,42)</span><br><span class="line">(,,mike,64)</span><br><span class="line"></span><br><span class="line">grunt&gt; JOIN_DATA = JOIN DATA BY name LEFT, WEIGHT BY name;</span><br><span class="line">grunt&gt; DUMP JOIN_DATA;</span><br><span class="line">(jake,10,jake,40)</span><br><span class="line">(john,14,john,54)</span><br><span class="line">(kite,13,,)</span><br><span class="line">(lily,12,lily,42)</span><br><span class="line"></span><br><span class="line">grunt&gt; JOIN_DATA = JOIN DATA BY name FULL, WEIGHT BY name;</span><br><span class="line">grunt&gt; DUMP JOIN_DATA;</span><br><span class="line">(jake,10,jake,40)</span><br><span class="line">(john,14,john,54)</span><br><span class="line">(kite,13,,)</span><br><span class="line">(lily,12,lily,42)</span><br><span class="line">(,,mike,64)</span><br></pre></td></tr></table></figure>
+
+<h3 id="group-数据"><a href="#group-数据" class="headerlink" title="group 数据"></a>group 数据</h3><p>alias = GROUP alias { ALL | BY expression} [, alias ALL | BY expression …] [USING ‘collected’ | ‘merge’] [PARTITION BY partitioner] [PARALLEL n];</p>
+<ol>
+<li>ALL, group ALL to one group<br>B = GROUP A ALL;</li>
+<li>Field<br>B = GROUP A BY f1;</li>
+<li>Tuple<br>B = GROUP A BY (f1, f2);</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">A = load &apos;student&apos; AS (name:chararray,age:int,gpa:float);</span><br><span class="line"></span><br><span class="line">DESCRIBE A;</span><br><span class="line">A: &#123;name: chararray,age: int,gpa: float&#125;</span><br><span class="line"></span><br><span class="line">DUMP A;</span><br><span class="line">(John,18,4.0F)</span><br><span class="line">(Mary,19,3.8F)</span><br><span class="line">(Bill,20,3.9F)</span><br><span class="line">(Joe,18,3.8F)</span><br><span class="line"></span><br><span class="line">B = GROUP A BY age;</span><br><span class="line">DESCRIBE B;</span><br><span class="line">B: &#123;group: int, A: &#123;name: chararray,age: int,gpa: float&#125;&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="存储"><a href="#存储" class="headerlink" title="存储"></a><a href="http://pig.apache.org/docs/r0.17.0/basic.html#store" target="_blank" rel="noopener">存储</a></h3><p>STORE alias INTO ‘directory’ [USING function];<br>和加载数据类似<br>分隔符 tsv: <a href="http://pig.apache.org/docs/r0.17.0/func.html#pigstorage" target="_blank" rel="noopener">PigStorage</a><br><a href="http://pig.apache.org/docs/r0.17.0/func.html#AvroStorage" target="_blank" rel="noopener">AvroStorage</a></p>
+<p>第三方:twitter<br><a href="https://github.com/twitter/elephant-bird/tree/master/pig/src/main/java/com/twitter/elephantbird/pig/store" target="_blank" rel="noopener">elephant bird store</a></p>
+<ul>
+<li>LzoJsonStorage</li>
+<li>SequenceFileStorage</li>
+<li>LzoThriftBlockPigStorage</li>
+<li>LzoThriftB64LinePigStorage</li>
+<li>LzoProtobufBlockPigStorage</li>
+<li>LzoProtobufB64LinePigStorage</li>
+</ul>
+<p>STORE D INTO ‘mysortedcount’ USING PigStorage();</p>
+<h3 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h3><ol>
+<li>查看描述：<br> DESCRIBE DATA; </li>
+<li>打印（只建议在少数据量时候使用，大数据建议先LIMIT再DUMP）<br> DUMP DATA;</li>
+<li>LIMIT<br> alis = LIMIT alias  n;</li>
+<li>排序<br> alias = ORDER alias BY { * [ASC|DESC] | field_alias [ASC|DESC] [, field_alias [ASC|DESC] …] } [PARALLEL n];<br> X = ORDER A BY age DESC;</li>
+<li>采样<br> SAMPLE alias size;<br> size 0~1<br> X = SAMPLE A 0.01;</li>
+</ol>
+<h3 id="常见函数"><a href="#常见函数" class="headerlink" title="常见函数"></a><a href="http://pig.apache.org/docs/r0.17.0/func.html" target="_blank" rel="noopener">常见函数</a></h3><h3 id="UDF-用户自定义函数"><a href="#UDF-用户自定义函数" class="headerlink" title="UDF 用户自定义函数"></a>UDF 用户自定义函数</h3><p>全称 User Defined Functions</p>
+<ol>
+<li>第三方实用 UDF： <a href="http://datafu.apache.org/" target="_blank" rel="noopener">DATAFU</a></li>
+<li><a href="http://pig.apache.org/docs/r0.17.0/udf.html" target="_blank" rel="noopener">自定义UDF</a></li>
+</ol>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2020-11-25T01:25:37.665Z" itemprop="dateUpdated">2020-11-25 09:25:37</time>
+</span><br>
+
+
+        
+        转载请注明： <a href="/bigdata/pig/bigdata-pig-pig-basic/" target="_blank" rel="external">http://devhc.com/bigdata/pig/bigdata-pig-pig-basic/</a>
+        
+    </div>
+    
+    <footer>
+        <a href="http://devhc.com">
+            <img src="/img/avatar.jpg" alt="all3n">
+            all3n
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/pig/">pig</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://devhc.com/bigdata/pig/bigdata-pig-pig-basic/&title=《pig basic》 — all3n's blog&pic=http://devhc.com/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://devhc.com/bigdata/pig/bigdata-pig-pig-basic/&title=《pig basic》 — all3n's blog&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://devhc.com/bigdata/pig/bigdata-pig-pig-basic/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《pig basic》 — all3n's blog&url=http://devhc.com/bigdata/pig/bigdata-pig-pig-basic/&via=http://devhc.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://devhc.com/bigdata/pig/bigdata-pig-pig-basic/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/cpp/lang/cpp-cpp-basic/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">cpp 常用命令</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/read-notes/cpp-primer/read-notes-cpp-primer-cpp-primer-6-function/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">cpp-primer-6-function</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Valine Comments -->
+    <div class="comments vcomment" id="comments"></div>
+    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+    <script src="//unpkg.com/valine@latest/dist/Valine.min.js"></script>
+    <!-- Valine Comments script -->
+    <script>
+        var GUEST_INFO = ['nick','mail','link'];
+        var guest_info = 'nick,mail,link'.split(',').filter(function(item){
+          return GUEST_INFO.indexOf(item) > -1
+        });
+        new Valine({
+            el: '#comments',
+            notify: 'false' == 'true',
+            verify: 'false' == 'true',
+            appId: "Nfv4vGei1mn7VDrtjeUuYmIq-MdYXbMMI",
+            appKey: "WY7KBP7xk3hV9fRfo40y6I1O",
+            avatar: "mm",
+            placeholder: "Just go go",
+            guest_info: guest_info.length == 0 ? GUEST_INFO : guest_info,
+            pageSize: "10"
+        })
+    </script>
+    <!-- Valine Comments end -->
+
+
+
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        谢谢大爷~
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/wechat.png" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
+                data-wechat="/img/wechat.png" data-alipay="/img/alipay.png">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>博客内容遵循 <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>all3n &copy; 2015 - 2020</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://devhc.com/bigdata/pig/bigdata-pig-pig-basic/&title=《pig basic》 — all3n's blog&pic=http://devhc.com/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://devhc.com/bigdata/pig/bigdata-pig-pig-basic/&title=《pig basic》 — all3n's blog&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://devhc.com/bigdata/pig/bigdata-pig-pig-basic/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《pig basic》 — all3n's blog&url=http://devhc.com/bigdata/pig/bigdata-pig-pig-basic/&via=http://devhc.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://devhc.com/bigdata/pig/bigdata-pig-pig-basic/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMYAAADGCAAAAACs8KCBAAACJ0lEQVR42u3awW7DIBAE0P7/T7vXSkmd2SGtFHicqsSxeT5MYdmvr3hcP0byyePn3T3fPDAwMD6Wcd2O+yneT+uRkV+Tzw0DA+Mcxm/Tur/mPjrzV5Dc58WcMTAwMIKQfW9wY2BgYKwwBrcOpp4vEzEwMDCSoMwfnEy9C+g37MUxMDA+kJFX3f//7z8538DAwPgoxjUcXcjmEXlVAwMDY29GHnDTJVp+VNAFLgYGBkbXGHFfXMsLZ9PmDAwMjL0ZkbJqv8gj+A1lPgwMjAMY05aILiKTV5PE/ZNvMTAwjmTkBbXphjZfOA5aQDAwMLZmdK0S08PIlSOEQYMFBgbGpoxBTS5eCHYFuO6o4Mn/DQwMjK0Z0wC9n27XZtG9GgwMjBMYeXmru7IryQ3KcBgYGAcwuk1sUlZbX2hGxTgMDIwDGOvHkNNlX14rG/eMYGBgbM1YKdxP47s7sBz0a2BgYGzE6JaD+dItD9Ppb1+sczEwMDZldO0OedE/36x221oMDIyTGd2WdVp6my5Sx4GLgYGxBWNwZFiV2KLC2cpzMTAwDmOsNHjli7/pQemLX2FgYGzKuIZj5Uiyy8nouRgYGFszuq1pvvVdP86cLigxMDB2ZUxDNo/aroWinAMGBsYBjKRk1qV195rGxUEMDAyMeLOaT2494jEwMDBWmiSm2+D8QPTXl4iBgXEAI4m/vyux5QGNgYFxJmMaeV0rxsr165GNgYHxsYxv4lF0cv2n14UAAAAASUVORK5CYII=" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    showProcessingMessages: false, //关闭js加载过程信息
+    messageStyle: "none", //不显示信息
+    extensions: ["tex2jax.js"],
+    jax: ["input/TeX", "output/HTML-CSS"],
+    tex2jax: {
+        inlineMath:  [ ["$", "$"] ], //行内公式选择$
+        displayMath: [ ["$$","$$"] ], //段内公式选择$$
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre','code','a'], //避开某些标签
+        ignoreClass:"comment-content" //避开含该Class的标签
+    },
+    "HTML-CSS": {
+        availableFonts: ["STIX","TeX"], //可选字体
+        showMathMenu: false //关闭右击菜单显示
+    }
+});
+MathJax.Hub.Queue(["Typeset",MathJax.Hub]);
+</script>
+<script src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '死鬼去哪里了！';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '(つェ⊂)咦!又好了!';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+
+
+</body>
+</html>

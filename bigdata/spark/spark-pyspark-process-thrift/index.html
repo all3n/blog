@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+    
+
+    
+
+    
+
+
+
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
+    
+    
+    
+    <meta name="baidu-site-verification" content="O0qt9Gkm8L">
+    
+    
+    
+    <title>pyspark 解析thrift lzo | all3n&#39;s blog | coding like r&amp;b</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="spark,pyspark,thrift">
+    <meta name="description" content="PySpark 解析Thrift Lzo 类型数据 包依赖 libs elephant-bird-core-4.6.jar elephant-bird-hadoop-compat-4.6.jar libthrift-0.x.x.jar (x.x 换成你的版本)   python依赖 pkg  依赖文件 gen_py thrift 生成(如果有注释中文需要在生成代码头部加上 #-*- coding:">
+<meta name="keywords" content="spark,pyspark,thrift">
+<meta property="og:type" content="article">
+<meta property="og:title" content="pyspark 解析thrift lzo">
+<meta property="og:url" content="http://devhc.com/bigdata/spark/spark-pyspark-process-thrift/index.html">
+<meta property="og:site_name" content="all3n&#39;s blog">
+<meta property="og:description" content="PySpark 解析Thrift Lzo 类型数据 包依赖 libs elephant-bird-core-4.6.jar elephant-bird-hadoop-compat-4.6.jar libthrift-0.x.x.jar (x.x 换成你的版本)   python依赖 pkg  依赖文件 gen_py thrift 生成(如果有注释中文需要在生成代码头部加上 #-*- coding:">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2020-11-25T01:25:37.665Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="pyspark 解析thrift lzo">
+<meta name="twitter:description" content="PySpark 解析Thrift Lzo 类型数据 包依赖 libs elephant-bird-core-4.6.jar elephant-bird-hadoop-compat-4.6.jar libthrift-0.x.x.jar (x.x 换成你的版本)   python依赖 pkg  依赖文件 gen_py thrift 生成(如果有注释中文需要在生成代码头部加上 #-*- coding:">
+    
+        <link rel="alternate" type="application/atom+xml" title="all3n&#39;s blog" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head --><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+    
+
+
+</head>
+
+<body>
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">all3n</h5>
+          <a href="mailto:wanghch8398@163.com" title="wanghch8398@163.com" class="mail">wanghch8398@163.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/resource"  >
+                <i class="icon icon-lg icon-book"></i>
+                Resource
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/all3n" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/about"  >
+                <i class="icon icon-lg icon-link"></i>
+                About Me
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">pyspark 解析thrift lzo</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">pyspark 解析thrift lzo</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2018-05-17T11:12:11.000Z" itemprop="datePublished" class="page-time">
+  2018-05-17
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/bigdata/">bigdata</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/bigdata/spark/">spark</a></li></ul></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#PySpark-解析Thrift-Lzo-类型数据"><span class="post-toc-number">1.</span> <span class="post-toc-text">PySpark 解析Thrift Lzo 类型数据</span></a></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-spark-pyspark-process-thrift"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">pyspark 解析thrift lzo</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2018-05-17 19:12:11" datetime="2018-05-17T11:12:11.000Z"  itemprop="datePublished">2018-05-17</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/bigdata/">bigdata</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/bigdata/spark/">spark</a></li></ul></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="PySpark-解析Thrift-Lzo-类型数据"><a href="#PySpark-解析Thrift-Lzo-类型数据" class="headerlink" title="PySpark 解析Thrift Lzo 类型数据"></a>PySpark 解析Thrift Lzo 类型数据</h1><ol>
+<li>包依赖 libs<ol>
+<li>elephant-bird-core-4.6.jar</li>
+<li>elephant-bird-hadoop-compat-4.6.jar</li>
+<li>libthrift-0.x.x.jar (x.x 换成你的版本)</li>
+</ol>
+</li>
+<li>python依赖 pkg <ol>
+<li>依赖文件<ol>
+<li>gen_py thrift 生成(如果有注释中文需要在生成代码头部加上 <code>#-*- coding: utf-8 -*</code> )</li>
+<li>six.py  (Copy From python site-package)</li>
+<li>thrift   (Copy From python site-package)</li>
+</ol>
+</li>
+<li>将python依赖打成zip 方便加载 zip -r ../pkg.zip .<a id="more"></a></li>
+</ol>
+</li>
+<li>python 脚本<br>利用elephantbird RawMultiInputFormat 获取thrift bytes内容然后通过python thrift deserialize 转换成python 对象</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pyspark <span class="keyword">import</span> SparkConf, SparkContext</span><br><span class="line"><span class="keyword">import</span> thrift</span><br><span class="line"><span class="keyword">from</span> gen_py.xxx.ttypes <span class="keyword">import</span> ThriftObj</span><br><span class="line"><span class="keyword">from</span> thrift.TSerialization <span class="keyword">import</span> deserialize</span><br><span class="line">conf = SparkConf()</span><br><span class="line">sc = SparkContext(conf = conf)</span><br><span class="line"></span><br><span class="line">logpath=<span class="string">"/youhdfspath/xxx.thrift.lzo"</span></span><br><span class="line">log = sc.newAPIHadoopFile(logpath,<span class="string">'com.twitter.elephantbird.mapreduce.input.RawMultiInputFormat'</span>,</span><br><span class="line"><span class="string">'org.apache.hadoop.io.LongWritable'</span>,<span class="string">'com.twitter.elephantbird.mapreduce.io.BinaryWritable'</span>)</span><br><span class="line"></span><br><span class="line">rdd = log.map(<span class="keyword">lambda</span> x:deserialize(ThriftObj(),x[<span class="number">1</span>]))</span><br><span class="line">rdd.saveAsTextFile(<span class="string">"testfile"</span>)</span><br></pre></td></tr></table></figure>
+
+<ol>
+<li>shell 脚本</li>
+</ol>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">export SCRIPT_HOME=$(cd "`dirname $0`/"; pwd)</span><br><span class="line">NAME=test</span><br><span class="line">OUTPUT=testfile</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">LIBS=`ls $SCRIPT_HOME/libs/*`</span><br><span class="line">LIBSTR=""</span><br><span class="line">for lib in $LIBS;do</span><br><span class="line">  LIBSTR="$LIBSTR,$lib"</span><br><span class="line">done</span><br><span class="line"></span><br><span class="line">LIBSTR=$&#123;LIBSTR:1&#125;</span><br><span class="line"></span><br><span class="line">hadoop fs -rm -r -f $OUTPUT</span><br><span class="line">spark-submit \</span><br><span class="line">    --master yarn \</span><br><span class="line">    --deploy-mode cluster \</span><br><span class="line">    --jars $LIBSTR \</span><br><span class="line">    --py-files $SCRIPT_HOME/pkg.zip \</span><br><span class="line">    --name "[pyspark][$NAME]" \</span><br><span class="line">    $NAME.py</span><br></pre></td></tr></table></figure>
+
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2020-11-25T01:25:37.665Z" itemprop="dateUpdated">2020-11-25 09:25:37</time>
+</span><br>
+
+
+        
+        转载请注明： <a href="/bigdata/spark/spark-pyspark-process-thrift/" target="_blank" rel="external">http://devhc.com/bigdata/spark/spark-pyspark-process-thrift/</a>
+        
+    </div>
+    
+    <footer>
+        <a href="http://devhc.com">
+            <img src="/img/avatar.jpg" alt="all3n">
+            all3n
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/pyspark/">pyspark</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/spark/">spark</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/thrift/">thrift</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://devhc.com/bigdata/spark/spark-pyspark-process-thrift/&title=《pyspark 解析thrift lzo》 — all3n's blog&pic=http://devhc.com/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://devhc.com/bigdata/spark/spark-pyspark-process-thrift/&title=《pyspark 解析thrift lzo》 — all3n's blog&source=PySpark 解析Thrift Lzo 类型数据
+包依赖 libs
+elephant-bird-core-4.6.jar
+elephant-bird-h..." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://devhc.com/bigdata/spark/spark-pyspark-process-thrift/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《pyspark 解析thrift lzo》 — all3n's blog&url=http://devhc.com/bigdata/spark/spark-pyspark-process-thrift/&via=http://devhc.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://devhc.com/bigdata/spark/spark-pyspark-process-thrift/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/java/tools/java-jrebel-hot-deploy/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">使用JRebel 对java 应用热部署开发</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/cpp/lang/cpp-cpp-basic/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">cpp 常用命令</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Valine Comments -->
+    <div class="comments vcomment" id="comments"></div>
+    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+    <script src="//unpkg.com/valine@latest/dist/Valine.min.js"></script>
+    <!-- Valine Comments script -->
+    <script>
+        var GUEST_INFO = ['nick','mail','link'];
+        var guest_info = 'nick,mail,link'.split(',').filter(function(item){
+          return GUEST_INFO.indexOf(item) > -1
+        });
+        new Valine({
+            el: '#comments',
+            notify: 'false' == 'true',
+            verify: 'false' == 'true',
+            appId: "Nfv4vGei1mn7VDrtjeUuYmIq-MdYXbMMI",
+            appKey: "WY7KBP7xk3hV9fRfo40y6I1O",
+            avatar: "mm",
+            placeholder: "Just go go",
+            guest_info: guest_info.length == 0 ? GUEST_INFO : guest_info,
+            pageSize: "10"
+        })
+    </script>
+    <!-- Valine Comments end -->
+
+
+
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        谢谢大爷~
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/wechat.png" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
+                data-wechat="/img/wechat.png" data-alipay="/img/alipay.png">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>博客内容遵循 <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>all3n &copy; 2015 - 2020</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://devhc.com/bigdata/spark/spark-pyspark-process-thrift/&title=《pyspark 解析thrift lzo》 — all3n's blog&pic=http://devhc.com/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://devhc.com/bigdata/spark/spark-pyspark-process-thrift/&title=《pyspark 解析thrift lzo》 — all3n's blog&source=PySpark 解析Thrift Lzo 类型数据
+包依赖 libs
+elephant-bird-core-4.6.jar
+elephant-bird-h..." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://devhc.com/bigdata/spark/spark-pyspark-process-thrift/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《pyspark 解析thrift lzo》 — all3n's blog&url=http://devhc.com/bigdata/spark/spark-pyspark-process-thrift/&via=http://devhc.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://devhc.com/bigdata/spark/spark-pyspark-process-thrift/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMYAAADGCAAAAACs8KCBAAACKUlEQVR42u3aQZKDMAwF0dz/0uQABKq/BKmy3F6lEsb2Y6GRJX8+eByncf71/CSfM/3b4pAhQ8ayjON23DPulyQzX72IdAYZMmTswLjaBHmGL8zZfG8yZMiQcfVMLYwSkgwZMmT0GSSJ7CeUMmTIkFE7xJLi2rMH1FfO4jJkyFiQwavu///8Sn9DhgwZSzGOcHS29VQ74ceuZMiQMZrBAxy/GEG+5+U2vh8ZMmRMZfDiPgmg5CBKNs1fVtyjkCFDxrIMcnDlCR8JtTwQo0KeDBkytmTwqWtpIm+gol9lyJAxmlG74NUJl2kwDcK3DBkyNmDw6frpIEk9+TwyZMiYzaiFv/fCMX+5l4dYGTJkDGX0L0mkSH7ZAv0bkCFDxjYMfm0rTRw7JbxioU2GDBnjGGk6mF7OIC8iuFrROYXLkCFjKKOzGE89+ffBWVyGDBnjGKRMlqZ05OpY2jwo3teQIUPGsgxeOCPLPNWw7DdHZciQsRvjqStfaeLYKgjKkCFjHIOkX5yXbpSkjAgjQ4aMjRmkKJY2L3niWGxkypAhYyiDtB77bcs0ZAeryJAhYyjjCEctsPL2Q/H8LUOGjNGMWk+ws1iaJvJ2qQwZMmYzOm0AXibjb/GVnoYMGTJGMNLAl7YkgxI/CP0yZMiQQdKy4mIg0NdaBTJkyJDRaU+mFy/IToJOrAwZMgYx0qNp2trkwZQcfWXIkLEboxbyeLDmG+0ckmXIkDGU8QVR9NE/liQxjQAAAABJRU5ErkJggg==" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    showProcessingMessages: false, //关闭js加载过程信息
+    messageStyle: "none", //不显示信息
+    extensions: ["tex2jax.js"],
+    jax: ["input/TeX", "output/HTML-CSS"],
+    tex2jax: {
+        inlineMath:  [ ["$", "$"] ], //行内公式选择$
+        displayMath: [ ["$$","$$"] ], //段内公式选择$$
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre','code','a'], //避开某些标签
+        ignoreClass:"comment-content" //避开含该Class的标签
+    },
+    "HTML-CSS": {
+        availableFonts: ["STIX","TeX"], //可选字体
+        showMathMenu: false //关闭右击菜单显示
+    }
+});
+MathJax.Hub.Queue(["Typeset",MathJax.Hub]);
+</script>
+<script src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '死鬼去哪里了！';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '(つェ⊂)咦!又好了!';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+
+
+</body>
+</html>
